@@ -1,3 +1,8 @@
+<strong>v0.7.6: </strong>
+Bugfixes:
+May not crash when talking to cats
+
+
 <strong>v0.7.5: </strong>
 
 New Features:
