@@ -4117,8 +4117,12 @@ def abbrev_addons(t_c, r_c, cluster, x, rel, r):
         cluster and rel are booleans for if the addons are present.
     """
 
-    rc_skillpath1 = str(r_c.skills.primary.path) if r_c.skills.primary else None
-    rc_skillpath2 = str(r_c.skills.secondary.path) if r_c.skills.secondary else None
+    if hasattr(r_c, 'skills'):
+        rc_skillpath1 = str(r_c.skills.primary.path) if r_c.skills.primary else None
+        rc_skillpath2 = str(r_c.skills.secondary.path) if r_c.skills.secondary else None
+    else:
+        rc_skillpath1 = None
+        rc_skillpath2 = None
 
     if rc_skillpath1:
         rc_skill1 = rc_skillpath1.split(".")[1].lower()
