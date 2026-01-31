@@ -89,19 +89,6 @@ jobs:
             -F 'fileBundle=@Lifegen_Linux64_glibc2.31+.tar.xz' \
             -F 'fileBundle=@Lifegen_Linux64_glibc2.31+.tar.xz.sig' \
             --http1.1
-      - name: Set up butler
-        uses: thlumyn/setup-butler@clangen
-      - name: Upload build to itch.io
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        if: startsWith(github.ref, 'refs/tags/') && env.BUTLER_API_KEY != ''
-        run: butler push Lifegen_Linux64_glibc2.31+.tar.xz sablesteel/clan-gen-fan-edit:linux64_glibc_231 --userversion "${{ env.VERSION_NUMBER }}"
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: Lifegen_Linux64_glibc2.31+.tar.xz
-
   build_ubuntu_22_04:
     runs-on: ubuntu-22.04
     if: ${{ !startsWith(github.ref, 'ref/heads/release') }}
