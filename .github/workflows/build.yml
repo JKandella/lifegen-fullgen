@@ -651,13 +651,6 @@ jobs:
             -F 'fileBundle=@Lifegen_macOS64.dmg.zip;type=application/zip' \
             -F 'fileBundle=@Lifegen_macOS64.dmg.zip.sig' \
             --http1.1
-      - name: Set up butler
-        uses: thlumyn/setup-butler@clangen
-      - name: Upload build to itch.io
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        if: startsWith(github.ref, 'refs/tags/') && env.BUTLER_API_KEY != ''
-        run: butler push Lifegen_macOS64.dmg sablesteel/clan-gen-fan-edit:osx64 --userversion "${{ env.VERSION_NUMBER }}"
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
