@@ -4133,14 +4133,12 @@ def abbrev_addons(t_c, r_c, cluster, x, rel, r):
     else:
         rc_skill2 = "any"
 
-    if (
-        cluster and (
-            x not in get_cluster(r_c.personality.trait) and
+    if cluster and hasattr(r_c, 'personality'):
+        if (x not in get_cluster(r_c.personality.trait) and
             x != r_c.personality.trait and
-            x not in [rc_skill1, rc_skill2])
-        ):
-        return False
-    
+            x not in [rc_skill1, rc_skill2]):
+            return False
+                
     if (
             (
             rel and (
