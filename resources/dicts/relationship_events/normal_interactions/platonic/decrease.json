@@ -106,10 +106,10 @@
 		"main_status_constraint": [
 			"apprentice",
 			"mediator apprentice",
-			"healer apprentice"
+			"medicine cat apprentice"
 		],
 		"random_status_constraint": [
-			"healer apprentice",
+			"medicine cat apprentice",
 			"apprentice",
 			"mediator apprentice"
 		]
@@ -129,7 +129,7 @@
 			"apprentice"
 		],
 		"random_status_constraint": [
-			"healer apprentice"
+			"medicine cat apprentice"
 		],
 		"reaction_random_cat": {
 			"platonic": "decrease"
@@ -166,8 +166,8 @@
 			"m_c tells r_c if {PRONOUN/r_c/subject} {VERB/r_c/don't/doesn't} stay away from the medicine den {PRONOUN/m_c/subject} will feed {PRONOUN/r_c/object} nasty tasting herbs!"
 		],
 		"main_status_constraint": [
-			"healer",
-			"healer apprentice"
+			"medicine cat",
+			"medicine cat apprentice"
 		],
 		"main_trait_constraint": [
 			"cold",

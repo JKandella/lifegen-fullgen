@@ -445,7 +445,7 @@ class PatrolOutcome:
             ]:
                 continue
 
-            if "healer" in self.can_have_stat and kitty.status not in [
+            if "medicine cat" in self.can_have_stat and kitty.status not in [
                 "medicine cat",
                 "medicine cat apprentice",
             ]:

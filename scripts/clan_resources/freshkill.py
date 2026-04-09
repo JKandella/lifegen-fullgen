@@ -142,7 +142,7 @@ class FreshkillPile:
         # all normal status cats calculation
         needed_prey = sum(
             [
-                PREY_REQUIREMENT[cat.status]
+                PREY_REQUIREMENT[self._prey_status(cat.status)]
                 for cat in living_cats
                 if cat.status not in ["newborn", "kitten", "exiled", "loner", "rogue", "kittypet", "former Clancat", ""] and not cat.outside
             ]
@@ -161,7 +161,7 @@ class FreshkillPile:
         )
         # increase the number of prey for kits, which are not taken care by a queen
         needed_prey += sum(
-            [PREY_REQUIREMENT[cat.status] for cat in living_kits if not cat.outside]
+            [PREY_REQUIREMENT[self._prey_status(cat.status)] for cat in living_kits if not cat.outside]
         )
 
         self.needed_prey = needed_prey
@@ -288,7 +288,7 @@ class FreshkillPile:
                 relevant_group = relevant_queens + pregnant_cats
             else:
                 relevant_group = [
-                    cat for cat in living_cats if str(cat.status) == feeding_status
+                    cat for cat in living_cats if self._prey_status(str(cat.status)) == feeding_status
                 ]
                 # remove all cats, which are also queens / pregnant
                 relevant_group = [
@@ -370,7 +370,7 @@ class FreshkillPile:
         # first feed the cats with the lowest nutrition
         for cat_id, v in sorted_nutrition.items():
             cat = Cat.all_cats[cat_id]
-            status = str(cat.status)
+            status = self._prey_status(str(cat.status))
             # check if this is a kit: if so, check if they are fed by the mother
             if status in ["newborn", "kitten"] and cat in fed_kits:
                 continue
@@ -489,7 +489,7 @@ class FreshkillPile:
         for cat in group:
             if cat in self.already_fed:
                 continue
-            status = str(cat.status)
+            status = self._prey_status(str(cat.status))
             # check if this is a kit: if so, check if they are fed by the mother
             if status in ["newborn", "kitten"] and fed_kits and cat in fed_kits:
                 continue
@@ -563,7 +563,7 @@ class FreshkillPile:
             elif amount > actual_needed:
                 self.nutrition_info[cat.ID].current_score += amount - actual_needed
         elif ration and cat.status == "warrior" and actual_needed != 0:
-            feeding_amount = PREY_REQUIREMENT[cat.status]
+            feeding_amount = PREY_REQUIREMENT[self._prey_status(cat.status)]
             feeding_amount = feeding_amount / 2
             self.nutrition_info[cat.ID].current_score -= feeding_amount
 
@@ -617,13 +617,13 @@ class FreshkillPile:
         queen_dict, kits = get_alive_clan_queens(self.living_cats)
 
         for cat in living_cats:
-            if str(cat.status) not in PREY_REQUIREMENT:
+            if self._prey_status(str(cat.status)) not in PREY_REQUIREMENT:
                 continue
             # update the nutrition_info
             if cat.ID in old_nutrition_info:
                 self.nutrition_info[cat.ID] = old_nutrition_info[cat.ID]
                 factor = 3
-                status_ = str(cat.status)
+                status_ = self._prey_status(str(cat.status))
                 if str(cat.status) in ["newborn", "kitten"] or (
                     cat.moons > 114 and str(cat.status) == "elder"
                 ):
@@ -656,7 +656,7 @@ class FreshkillPile:
             factor = 2
 
         queen_dict, kits = get_alive_clan_queens(self.living_cats)
-        prey_status = str(cat.status)
+        prey_status = self._prey_status(str(cat.status))
         if cat.ID in queen_dict.keys() or "pregnant" in cat.injuries:
             prey_status = "queen/pregnant"
         max_score = PREY_REQUIREMENT[prey_status] * factor
@@ -676,6 +676,10 @@ class FreshkillPile:
 
         self.nutrition_info[cat.ID] = nutrition
 
+    @staticmethod
+    def _prey_status(status: str) -> str:
+        return status
+
 
 # ---------------------------------------------------------------------------- #
 #                                LOAD RESOURCES                                #
@@ -684,6 +688,7 @@ class FreshkillPile:
 
 ADDITIONAL_PREY = game.prey_config["additional_prey"]
 PREY_REQUIREMENT = game.prey_config["prey_requirement"]
+
 CONDITION_INCREASE = game.prey_config["condition_increase"]
 FEEDING_ORDER = game.prey_config["feeding_order"]
 HUNTER_BONUS = game.prey_config["hunter_bonus"]

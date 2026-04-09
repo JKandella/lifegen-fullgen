@@ -719,7 +719,7 @@
             "Asks r_c to construct a myriad of fake omens and signs to keep {PRONOUN/m_c/object} in power"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "random_living_status": [
             "living"

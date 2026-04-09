@@ -460,7 +460,7 @@
             "warrior",
             "mediator",
             "queen",
-            "healer",
+            "medicine cat",
             "deputy",
             "assertive",
             "trust",
@@ -481,7 +481,7 @@
             "warrior",
             "mediator",
             "queen",
-            "healer",
+            "medicine cat",
             "deputy",
             "assertive",
             "trust",
@@ -631,7 +631,7 @@
             "assertive",
             "deputy",
             "warrior",
-            "healer",
+            "medicine cat",
             "queen",
             "trust",
             "comfort",
@@ -649,7 +649,7 @@
     "assertive_elder_21": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "you_blind",
             "they_blind"
         ],
@@ -748,7 +748,7 @@
     ],
     "assertivewarrior_med7": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "platonic_like",
             "assertive",
@@ -768,7 +768,7 @@
     ],
     "assertive_med6": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "assertive",
             "you_blind"
@@ -785,7 +785,7 @@
     ],
     "assertivewarrior_med5": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "mediator_apprentice",
             "mediator",
@@ -805,7 +805,7 @@
     "assertiveapp_medapp1": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "platonic_like",
             "assertive",
             "unabashed",
@@ -1282,7 +1282,7 @@
     "brooding_deputy16": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "brooding",
@@ -1299,7 +1299,7 @@
     "brooding_deputy17": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "brooding",
@@ -1333,7 +1333,7 @@
     ],
     "brooding_leader1": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "you_blind",
             "they_blind"
@@ -1346,7 +1346,7 @@
     ],
     "brooding_leader2": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "dislike",
             "you_blind",
@@ -1575,7 +1575,7 @@
     "sweet_leader_11": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet"
@@ -1589,7 +1589,7 @@
     "sweet_leader_12": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet"
@@ -1621,7 +1621,7 @@
     ],
     "sweet_leader_14": [
         [
-            "healer",
+            "medicine cat",
             "sweet"
         ],
         [

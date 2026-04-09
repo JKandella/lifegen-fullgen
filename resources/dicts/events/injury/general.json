@@ -1410,10 +1410,10 @@
             "status": [
                 "apprentice",
                 "mediator apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "warrior",
                 "mediator",
-                "healer",
+                "medicine cat",
                 "deputy",
                 "leader",
                 "elder"
@@ -6302,8 +6302,8 @@
                 "warrior",
                 "mediator",
                 "mediator apprentice",
-                "healer",
-                "healer apprentice"
+                "medicine cat",
+                "medicine cat apprentice"
             ],
             "not_trait": [
                 "loyal",
@@ -6396,8 +6396,8 @@
                 "warrior",
                 "mediator",
                 "mediator apprentice",
-                "healer",
-                "healer apprentice"
+                "medicine cat",
+                "medicine cat apprentice"
             ],
             "not_trait": [
                 "loyal"
@@ -6688,8 +6688,8 @@
                 "deputy",
                 "leader",
                 "warrior",
-                "healer",
-                "healer apprentice"
+                "medicine cat",
+                "medicine cat apprentice"
             ]
         },
         "injury": [
@@ -6742,8 +6742,8 @@
                 "warrior",
                 "leader",
                 "deputy",
-                "healer",
-                "healer apprentice"
+                "medicine cat",
+                "medicine cat apprentice"
             ]
         },
         "injury": [
@@ -6793,8 +6793,8 @@
                 "warrior",
                 "mediator",
                 "mediator apprentice",
-                "healer",
-                "healer apprentice"
+                "medicine cat",
+                "medicine cat apprentice"
             ]
         },
         "injury": [
@@ -6981,8 +6981,8 @@
             "status": [
                 "apprentice",
                 "warrior",
-                "healer",
-                "healer apprentice",
+                "medicine cat",
+                "medicine cat apprentice",
                 "leader",
                 "deputy"
             ],

@@ -171,7 +171,7 @@
     ],
     "introspective_warrior_4": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "introspective",
             "you_blind"
@@ -486,7 +486,7 @@
     "assertive_medapp1": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "assertive",
             "unlawful",
             "silly",
@@ -672,7 +672,7 @@
     "assertive_13": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "assertive",
             "you_blind",
             "they_went_blind"
@@ -880,7 +880,7 @@
     ],
     "assertivewarrior_med7": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "platonic_like",
             "assertive",
@@ -900,7 +900,7 @@
     ],
     "assertive_med6": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "assertive",
             "you_blind"
@@ -917,7 +917,7 @@
     ],
     "assertivewarrior_med5": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "mediator_apprentice",
             "mediator",
@@ -937,7 +937,7 @@
     "assertiveapp_medapp1": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "platonic_like",
             "assertive",
             "unabashed",
@@ -1111,7 +1111,7 @@
     "sweet_warrior_11": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -1127,7 +1127,7 @@
     "sweet_warrior_12": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -1153,7 +1153,7 @@
     ],
     "sweet_warrior_14": [
         [
-            "healer",
+            "medicine cat",
             "sweet",
             "you_blind",
             "they_blind"
@@ -1582,7 +1582,7 @@
     "upstanding_warrior4": [
         [
             "upstanding",
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "you_blind",
             "they_blind",
@@ -1781,7 +1781,7 @@
         [
             "upstanding",
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "you_blind",
@@ -1796,7 +1796,7 @@
     "upstanding_warrior13": [
         [
             "upstanding",
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "leafbare",
             "they_blind"
@@ -3111,7 +3111,7 @@
     "stable_mate_16": [
         [
             "from_mate",
-            "healer",
+            "medicine cat",
             "you_pregnant",
             "stable",
             "you_blind",
@@ -3129,7 +3129,7 @@
     "stable_mate_17": [
         [
             "from_mate",
-            "healer",
+            "medicine cat",
             "they_pregnant",
             "stable"
         ],

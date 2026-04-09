@@ -2696,7 +2696,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -2834,7 +2834,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -2976,7 +2976,7 @@
                 -1,
                 -1
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -3110,7 +3110,7 @@
                 -1,
                 -1
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],

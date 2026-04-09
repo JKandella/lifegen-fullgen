@@ -268,9 +268,9 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer",
+                "medicine cat",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]
@@ -311,9 +311,9 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer",
+                "medicine cat",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]
@@ -354,9 +354,9 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer",
+                "medicine cat",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]
@@ -537,7 +537,7 @@
                 "warrior",
                 "deputy",
                 "leader",
-                "healer"
+                "medicine cat"
             ]
         },
         "new_cat": [
@@ -571,7 +571,7 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer"
+                "medicine cat"
             ]
         },
         "new_cat": [
@@ -750,7 +750,7 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer"
+                "medicine cat"
             ]
         },
         "new_cat": [
@@ -783,7 +783,7 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer"
+                "medicine cat"
             ]
         },
         "new_cat": [
@@ -892,7 +892,7 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer"
+                "medicine cat"
             ]
         },
         "new_cat": [
@@ -925,7 +925,7 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer"
+                "medicine cat"
             ]
         },
         "new_cat": [
@@ -992,12 +992,12 @@
         "event_text": "m_c meets an injured warrior from o_c_n who asks to join the Clan, in exchange for healing.",
         "m_c": {
             "status": [
-                "healer",
+                "medicine cat",
                 "leader",
                 "warrior",
                 "deputy",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]
@@ -1046,9 +1046,9 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer",
+                "medicine cat",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]
@@ -1085,9 +1085,9 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer",
+                "medicine cat",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]
@@ -1124,9 +1124,9 @@
                 "leader",
                 "deputy",
                 "warrior",
-                "healer",
+                "medicine cat",
                 "apprentice",
-                "healer apprentice",
+                "medicine cat apprentice",
                 "mediator",
                 "mediator apprentice"
             ]

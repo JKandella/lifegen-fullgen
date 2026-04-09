@@ -201,7 +201,7 @@ class AchievementScreen(Screens):
             achievements.add('13')
         if you.status == 'warrior':
             achievements.add('14')
-        elif you.status == 'healer':
+        elif you.status == 'medicine cat':
             achievements.add('15')
         elif you.status == 'mediator':
             achievements.add('16')

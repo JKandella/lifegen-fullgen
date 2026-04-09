@@ -1983,9 +1983,9 @@ class PickPath(UIWindow):
                 if event.ui_element == self.begin_anew_button:
                     game.switches['window_open'] = False
                     if game.clan.your_cat.moons < 12:
-                        status = 'healer apprentice'
+                        status = 'medicine cat apprentice'
                     else:
-                        status = 'healer'
+                        status = 'medicine cat'
                 elif event.ui_element == self.not_yet_button:
                     game.switches['window_open'] = False
                     if game.clan.your_cat.moons < 12:
@@ -2007,9 +2007,9 @@ class PickPath(UIWindow):
                 elif event.ui_element == self.random_button:
                     game.switches['window_open'] = False
                     if game.clan.your_cat.moons < 12:
-                        status = random.choice(['mediator apprentice','apprentice','healer apprentice', "queen's apprentice"])
+                        status = random.choice(['mediator apprentice','apprentice','medicine cat apprentice', "queen's apprentice"])
                     else:
-                        status = random.choice(['mediator','warrior','healer', "queen"])
+                        status = random.choice(['mediator','warrior','medicine cat', "queen"])
                 
                 if status:
                     game.clan.your_cat.status_change(status)

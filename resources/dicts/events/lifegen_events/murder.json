@@ -927,7 +927,7 @@
             "any"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -1124,7 +1124,7 @@
     },
     "murder_event_ant4": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "any"
@@ -1142,7 +1142,7 @@
     },
     "murder_event63": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "any"
@@ -1159,7 +1159,7 @@
     },
     "murder_event64": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "any"
@@ -1176,7 +1176,7 @@
     },
     "murder_event65": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "any"
@@ -1193,7 +1193,7 @@
     },
     "murder_event66": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "any"
@@ -1213,7 +1213,7 @@
     },
     "murder_event67": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "any"
@@ -1230,7 +1230,7 @@
     },
     "murder_event68": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "any"
@@ -1448,7 +1448,7 @@
             "kitten"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -1466,7 +1466,7 @@
             "kitten"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -1885,7 +1885,7 @@
             "apprentice"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -1908,7 +1908,7 @@
             "apprentice"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -1926,7 +1926,7 @@
             "apprentice"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -2056,7 +2056,7 @@
             "apprentice"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -2074,7 +2074,7 @@
             "apprentice"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -2211,7 +2211,7 @@
     },
     "murder_event129": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "kitten"
@@ -2230,7 +2230,7 @@
     },
     "murder_event130": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "apprentice"
@@ -2251,10 +2251,10 @@
     },
     "murder_event131": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -2271,7 +2271,7 @@
     },
     "murder_event132": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "mediator apprentice"
@@ -2288,7 +2288,7 @@
     },
     "murder_event133": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "mediator apprentice"
@@ -2306,7 +2306,7 @@
     },
     "murder_event134": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [],
         "relationship": [],
@@ -2322,7 +2322,7 @@
     },
     "murder_event135": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [],
         "relationship": [],
@@ -2338,10 +2338,10 @@
     },
     "murder_event136": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -2357,7 +2357,7 @@
     },
     "murder_event137": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "mediator"
@@ -2375,7 +2375,7 @@
     },
     "murder_event138": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "deputy"
@@ -2394,7 +2394,7 @@
     },
     "murder_event139": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "deputy"
@@ -2412,7 +2412,7 @@
     },
     "murder_event140": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "leader"
@@ -2431,7 +2431,7 @@
     },
     "murder_event141": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "leader"
@@ -2451,7 +2451,7 @@
     },
     "murder_event142": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "leader"
@@ -2469,7 +2469,7 @@
     },
     "murder_event143": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "elder"
@@ -2488,7 +2488,7 @@
     },
     "murder_event144": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "elder"
@@ -2506,7 +2506,7 @@
     },
     "murder_event145": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "elder"
@@ -2524,7 +2524,7 @@
     },
     "murder_event_ant15": {
         "your_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "victim_status": [
             "queen's apprentice"
@@ -2623,7 +2623,7 @@
             "mediator apprentice"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -2641,7 +2641,7 @@
             "mediator apprentice"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -2709,7 +2709,7 @@
             "mediator apprentice"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -2727,7 +2727,7 @@
             "mediator apprentice"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3275,7 +3275,7 @@
     "murder_event196": {
         "your_status": [],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3291,7 +3291,7 @@
     "murder_event197": {
         "your_status": [],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3307,7 +3307,7 @@
     "murder_event198": {
         "your_status": [],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3323,7 +3323,7 @@
     "murder_event199": {
         "your_status": [],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3586,7 +3586,7 @@
     },
     "murder_event215": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "kitten"
@@ -3605,7 +3605,7 @@
     },
     "murder_event216": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "kitten"
@@ -3622,7 +3622,7 @@
     },
     "murder_event217": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "kitten"
@@ -3640,7 +3640,7 @@
     },
     "murder_event218": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "kitten"
@@ -3657,7 +3657,7 @@
     },
     "murder_event219": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "kitten"
@@ -3676,10 +3676,10 @@
     },
     "murder_event220": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -3693,7 +3693,7 @@
     },
     "murder_event222": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [],
         "relationship": [],
@@ -3710,10 +3710,10 @@
     },
     "murder_event224": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3728,10 +3728,10 @@
     },
     "murder_event225": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3746,10 +3746,10 @@
     },
     "murder_event226": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -3764,7 +3764,7 @@
     },
     "murder_event227": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "mediator"
@@ -3781,7 +3781,7 @@
     },
     "murder_event228": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "mediator",
@@ -3801,7 +3801,7 @@
     },
     "murder_event229": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "deputy"
@@ -3818,7 +3818,7 @@
     },
     "murder_event230": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "leader"
@@ -3838,7 +3838,7 @@
     },
     "murder_event231": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "elder"
@@ -3856,7 +3856,7 @@
     },
     "murder_event232": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
             "elder"
@@ -4254,7 +4254,7 @@
             "deputy"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -4389,7 +4389,7 @@
             "deputy"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [],
@@ -4404,7 +4404,7 @@
             "deputy"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -4706,7 +4706,7 @@
             "leader"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -4724,7 +4724,7 @@
             "leader"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -4741,7 +4741,7 @@
             "leader"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -4922,7 +4922,7 @@
             "leader"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -4940,7 +4940,7 @@
             "leader"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -5283,7 +5283,7 @@
             "elder"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -5300,7 +5300,7 @@
             "elder"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -5319,7 +5319,7 @@
             "elder"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "relationship": [],
         "strategy": [
@@ -6190,7 +6190,7 @@
             "warrior"
         ],
         "victim_status": [
-            "healer"
+            "medicine cat"
         ],
         "strategy": [
             "poison",
@@ -6210,10 +6210,10 @@
     },
     "murder_TBS16": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "strategy": [
             "poison",
@@ -6414,10 +6414,10 @@
     },
     "murder_event_ant18": {
         "your_status": [
-            "healer"
+            "medicine cat"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -6478,7 +6478,7 @@
             "apprentice"
         ],
         "victim_status": [
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "relationship": [],
         "strategy": [
@@ -6553,7 +6553,7 @@
         "victim_status": [
             "warrior",
             "queen",
-            "healer",
+            "medicine cat",
             "mediator"
         ],
         "relationship": [
@@ -6577,13 +6577,13 @@
         "your_status": [
             "warrior",
             "queen",
-            "healer",
+            "medicine cat",
             "mediator"
         ],
         "victim_status": [
             "apprentice",
             "queen's apprentice",
-            "healer apprentice",
+            "medicine cat apprentice",
             "mediator apprentice"
         ],
         "relationship": [
@@ -6606,13 +6606,13 @@
         "your_status": [
             "warrior",
             "queen",
-            "healer",
+            "medicine cat",
             "mediator"
         ],
         "victim_status": [
             "apprentice",
             "queen's apprentice",
-            "healer apprentice",
+            "medicine cat apprentice",
             "mediator apprentice"
         ],
         "relationship": [

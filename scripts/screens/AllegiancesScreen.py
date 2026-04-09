@@ -169,13 +169,13 @@ class AllegiancesScreen(Screens):
         living_kits = []
         living_elders = []
         for cat in living_cats:
-            if cat.status == "healer":
+            if cat.status == "medicine cat":
                 living_meds.append(cat)
             elif cat.status == "warrior":
                 living_warriors.append(cat)
             elif cat.status == "mediator":
                 living_mediators.append(cat)
-            elif cat.status in ["apprentice", "healer apprentice", "mediator apprentice"]:
+            elif cat.status in ["apprentice", "medicine cat apprentice", "mediator apprentice"]:
                 living_apprentices.append(cat)
             elif cat.status in ["kitten", "newborn"]:
                 living_kits.append(cat)
@@ -183,7 +183,7 @@ class AllegiancesScreen(Screens):
                 living_elders.append(cat)
         if not len(living_meds):
             for cat in living_apprentices:
-                if cat.status == "healer apprentice":
+                if cat.status == "medicine cat apprentice":
                     living_meds.append(cat)
                     living_apprentices.remove(cat)
         if not len(living_mediators):

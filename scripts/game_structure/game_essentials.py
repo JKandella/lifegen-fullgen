@@ -85,7 +85,7 @@ class Game:
         "clan_name": "",
         "leader": None,
         "deputy": None,
-        "healer": None,
+        "medicine cat": None,
         "members": [],
         "re_roll": False,
         "roll_count": 0,

@@ -17,7 +17,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -129,7 +129,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -1629,11 +1629,11 @@
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],

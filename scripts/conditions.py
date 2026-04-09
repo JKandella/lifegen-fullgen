@@ -25,10 +25,10 @@ def medical_cats_condition_fulfilled(all_cats,
     
     medical_cats = [i for i in all_cats if not i.dead and not i.outside and not
                                             i.not_working() and i.status in 
-                                            ["healer", 
-                                             "healer apprentice"]]
-    full_med = [i for i in medical_cats if i.status == "healer"]
-    apprentices = [i for i in medical_cats if i.status == "healer apprentice"]
+                                            ["medicine cat", 
+                                             "medicine cat apprentice"]]
+    full_med = [i for i in medical_cats if i.status == "medicine cat"]
+    apprentices = [i for i in medical_cats if i.status == "medicine cat apprentice"]
     
     total_exp = 0
     for cat in medical_cats:

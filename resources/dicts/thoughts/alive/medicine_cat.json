@@ -275,7 +275,7 @@
         ],
         "random_status_constraint": [
             "apprentice",
-            "healer apprentice",
+            "medicine cat apprentice",
             "mediator apprentice",
             "queen's apprentice"
         ]
@@ -534,8 +534,8 @@
             "Is sure that {PRONOUN/m_c/subject} saw r_c appear in the forest today... why?"
         ],
         "main_status_constraint": [
-            "healer",
-            "healer apprentice"
+            "medicine cat",
+            "medicine cat apprentice"
         ],
         "random_living_status": [
             "starclan"

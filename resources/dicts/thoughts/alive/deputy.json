@@ -633,7 +633,7 @@
             "HEALER,1"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "random_living_status": [
             "living"

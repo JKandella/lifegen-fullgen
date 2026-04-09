@@ -162,7 +162,7 @@
 			"m_c thinks that r_c gave {PRONOUN/m_c/object} the wrong herbs."
 		],
 		"random_status_constraint": [
-			"healer"
+			"medicine cat"
 		]
 	},
 	{
@@ -177,7 +177,7 @@
 			"elder"
 		],
 		"random_status_constraint": [
-			"healer"
+			"medicine cat"
 		]
 	},
 	{
@@ -191,7 +191,7 @@
 			"m_c wouldn't be surprised if r_c faked signs from StarClan..."
 		],
 		"random_status_constraint": [
-			"healer"
+			"medicine cat"
 		],
 		"random_trait_constraint": [
 			"cold",
@@ -210,7 +210,7 @@
 			"m_c complains that r_c never takes {PRONOUN/r_c/poss} role of healer seriously."
 		],
 		"random_status_constraint": [
-			"healer"
+			"medicine cat"
 		],
 		"random_trait_constraint": [
 			"oblivious",

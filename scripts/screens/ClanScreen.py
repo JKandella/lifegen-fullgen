@@ -475,7 +475,7 @@ class ClanScreen(Screens):
                 Cat.all_cats[x].placement = self.choose_nonoverlapping_positions(
                     first_choices, all_dens, [60, 8, 1, 1, 1, 1, 1]
                 )
-            elif Cat.all_cats[x].status in ["healer apprentice", "healer"]:
+            elif Cat.all_cats[x].status in ["medicine cat apprentice", "medicine cat"]:
                 Cat.all_cats[x].placement = self.choose_nonoverlapping_positions(
                     first_choices, all_dens, [20, 20, 20, 400, 1, 1, 1]
                 )

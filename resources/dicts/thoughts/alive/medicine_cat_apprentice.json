@@ -62,7 +62,7 @@
         "random_status_constraint": [
             "apprentice",
             "mediator apprentice",
-            "healer apprentice"
+            "medicine cat apprentice"
         ],
         "random_living_status": [
             "starclan"
@@ -157,7 +157,7 @@
             "Wonders if r_c would ever allow {PRONOUN/m_c/object} to experiment with different plants to see if they have herb affects"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "random_living_status": [
             "living"
@@ -437,7 +437,7 @@
             "fierce"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "random_living_status": [
             "living"
@@ -462,7 +462,7 @@
             "fierce"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "main_trait_constraint": [
             "bloodthirsty",
@@ -492,7 +492,7 @@
             "sincere"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "main_trait_constraint": [
             "bloodthirsty",
@@ -581,7 +581,7 @@
         "random_status_constraint": [
             "apprentice",
             "mediator apprentice",
-            "healer apprentice",
+            "medicine cat apprentice",
             "queen's apprentice"
         ],
         "random_living_status": [

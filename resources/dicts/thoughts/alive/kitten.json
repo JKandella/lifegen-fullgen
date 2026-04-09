@@ -167,8 +167,8 @@
             "Won't stay still while r_c tries to treat {PRONOUN/m_c/object}"
         ],
         "random_status_constraint": [
-            "healer",
-            "healer apprentice"
+            "medicine cat",
+            "medicine cat apprentice"
         ],
         "random_living_status": [
             "living"
@@ -249,10 +249,10 @@
         ],
         "random_status_constraint": [
             "apprentice",
-            "healer apprentice",
+            "medicine cat apprentice",
             "mediator apprentice",
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "deputy",
             "leader",
@@ -1036,7 +1036,7 @@
             "Wonders if {PRONOUN/m_c/subject} should be a healer like r_c"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "relationship_constraint": [
             "child/parent"

@@ -1475,7 +1475,7 @@
         "max_cats": 1,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer": [1, 6],
+            "medicine cat": [1, 6],
             "healer cats": [1, 6],
             "all apprentices": [-1, -1],
             "normal adult": [-1, -1]
@@ -1558,7 +1558,7 @@
         "max_cats": 1,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer": [1, 6],
+            "medicine cat": [1, 6],
             "healer cats": [1, 6],
             "all apprentices": [-1, -1],
             "normal adult": [-1, -1]
@@ -1651,7 +1651,7 @@
         "max_cats": 1,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer apprentice": [1, 6],
+            "medicine cat apprentice": [1, 6],
             "healer cats": [1, 6],
             "normal adult": [-1, -1]
         },
@@ -1740,7 +1740,7 @@
         "max_cats": 1,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer apprentice": [1, 6],
+            "medicine cat apprentice": [1, 6],
             "healer cats": [1, 6],
             "normal adult": [-1, -1]
         },

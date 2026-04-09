@@ -65,7 +65,7 @@ class RoleScreen(Screens):
                 self.the_cat.status_change("warrior", resort=True)
                 self.update_selected_cat()
             elif event.ui_element == self.switch_med_cat:
-                self.the_cat.status_change("healer", resort=True)
+                self.the_cat.status_change("medicine cat", resort=True)
                 self.update_selected_cat()
             elif event.ui_element == self.retire:
                 self.the_cat.status_change("elder", resort=True)
@@ -79,7 +79,7 @@ class RoleScreen(Screens):
                 self.the_cat.status_change("apprentice", resort=True)
                 self.update_selected_cat()
             elif event.ui_element == self.switch_med_app:
-                self.the_cat.status_change("healer apprentice", resort=True)
+                self.the_cat.status_change("medicine cat apprentice", resort=True)
                 self.update_selected_cat()
             elif event.ui_element == self.switch_mediator_app:
                 self.the_cat.status_change("mediator apprentice", resort=True)
@@ -316,8 +316,8 @@ class RoleScreen(Screens):
         paths = {
             "leader": "leader_icon.png",
             "deputy": "deputy_icon.png",
-            "healer": "medic_icon.png",
-            "healer apprentice": "medic_app_icon.png",
+            "medicine cat": "medic_icon.png",
+            "medicine cat apprentice": "medic_app_icon.png",
             "mediator": "mediator_icon.png",
             "mediator apprentice": "mediator_app_icon.png",
             "queen": "elder_icon.png",
@@ -432,7 +432,7 @@ class RoleScreen(Screens):
             self.switch_mediator_app.disable()
             self.switch_queen_app.disable()
 
-        elif self.the_cat.status == "healer":
+        elif self.the_cat.status == "medicine cat":
             self.promote_leader.disable()
             self.promote_deputy.disable()
 
@@ -508,7 +508,7 @@ class RoleScreen(Screens):
             self.switch_mediator_app.disable()
             self.switch_queen_app.disable()
 
-        elif self.the_cat.status == "healer apprentice":
+        elif self.the_cat.status == "medicine cat apprentice":
             self.promote_leader.disable()
             self.promote_deputy.disable()
 
@@ -524,7 +524,7 @@ class RoleScreen(Screens):
             self.switch_warrior_app.enable()
             self.switch_mediator_app.enable()
             self.switch_queen_app.enable()
-        elif self.the_cat.status == "healer apprentice":
+        elif self.the_cat.status == "medicine cat apprentice":
             self.promote_leader.disable()
             self.promote_deputy.disable()
 
@@ -613,7 +613,7 @@ class RoleScreen(Screens):
                 f"before appointment.  "
                 f"The deputy succeeds the leader if they die or retire. "
             )
-        elif self.the_cat.status == "healer":
+        elif self.the_cat.status == "medicine cat":
             output = (
                 f"{self.the_cat.name} is a <b>healer</b>. Healers are the healers of the Clan. "
                 f"They treat "
@@ -653,7 +653,7 @@ class RoleScreen(Screens):
                 f'the unpleasant and grunt tasks of Clan life. Apprentices take the suffix "paw", '
                 f"to represent the path their paws take towards adulthood. "
             )
-        elif self.the_cat.status == "healer apprentice":
+        elif self.the_cat.status == "medicine cat apprentice":
             output = (
                 f"{self.the_cat.name} is a <b>healer apprentice</b>, training to become a full healer. "
                 f"Kits can be made healer apprentices at six moons of age, where they will learn how to "

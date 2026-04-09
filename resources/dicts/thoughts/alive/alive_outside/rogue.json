@@ -20,7 +20,7 @@
         "random_status_constraint": [
             "leader",
             "deputy",
-            "healer"
+            "medicine cat"
         ],
         "main_trait_constraint": [
             "bloodthirsty"

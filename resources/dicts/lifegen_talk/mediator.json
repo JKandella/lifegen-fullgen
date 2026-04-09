@@ -103,7 +103,7 @@
             "queen",
             "deputy",
             "leader",
-            "healer",
+            "medicine cat",
             "you_blind",
             "they_blind"
         ],
@@ -164,7 +164,7 @@
     "assertive_medapp1": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "assertive",
             "unlawful",
             "silly",
@@ -178,7 +178,7 @@
     "assertiveapp_medapp3": [
         [
             "healer_apprentice",
-            "healer",
+            "medicine cat",
             "assertive",
             "silly",
             "upstanding",
@@ -488,7 +488,7 @@
             "elder",
             "deputy",
             "leader",
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "queen",
             "queen's_apprentice",
@@ -669,7 +669,7 @@
     ],
     "cool_2": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "cool",
             "introspective",
@@ -836,7 +836,7 @@
     "sweet_mediapp_11": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -852,7 +852,7 @@
     "sweet_mediapp_12": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -883,7 +883,7 @@
     ],
     "sweet_mediapp_14": [
         [
-            "healer",
+            "medicine cat",
             "sweet",
             "you_blind",
             "they_blind"

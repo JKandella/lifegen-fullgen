@@ -477,7 +477,7 @@
     ],
     "assertivekit_4": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "assertive",
             "silly",
@@ -495,7 +495,7 @@
     ],
     "assertivekit_5": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "assertive",
             "silly",
@@ -527,7 +527,7 @@
     ],
     "assertivekit_8": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "mediator_apprentice",
             "mediator",
@@ -1245,7 +1245,7 @@
     "sweet_kit_11": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet"
@@ -1260,7 +1260,7 @@
     "sweet_kit_12": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -1286,7 +1286,7 @@
     ],
     "sweet_kit_14": [
         [
-            "healer",
+            "medicine cat",
             "sweet",
             "they_blind",
             "you_blind"
@@ -1965,7 +1965,7 @@
     ],
     "broodingnewborn_9": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "brooding",
             "neutral",
@@ -2716,7 +2716,7 @@
     ],
     "neurotic_kit__24": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "neurotic",
             "they_blind",
@@ -3477,7 +3477,7 @@
     "upstanding_kit16": [
         [
             "upstanding",
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "they_blind"
         ],
@@ -5030,7 +5030,7 @@
             "they_sc",
             "littermate",
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "deputy",

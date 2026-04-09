@@ -154,7 +154,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
@@ -184,11 +184,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -243,11 +243,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -284,11 +284,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -460,11 +460,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -521,11 +521,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice"
       ],
       "life_giving": [
@@ -580,11 +580,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -641,11 +641,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -722,11 +722,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -763,11 +763,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice"
       ],
       "life_giving": [
@@ -822,11 +822,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -883,11 +883,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -944,11 +944,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen",
         "queen's apprentice"
@@ -1025,7 +1025,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1063,7 +1063,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1120,7 +1120,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1157,7 +1157,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1214,7 +1214,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1271,7 +1271,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1328,7 +1328,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1386,7 +1386,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1443,7 +1443,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1480,7 +1480,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1517,7 +1517,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1594,7 +1594,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1671,7 +1671,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1728,7 +1728,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1781,7 +1781,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1838,7 +1838,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1905,7 +1905,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -1982,7 +1982,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2019,7 +2019,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2076,7 +2076,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2186,7 +2186,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2243,7 +2243,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2300,7 +2300,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2357,7 +2357,7 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy"
@@ -2603,12 +2603,12 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "queen",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -2704,12 +2704,12 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "queen",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -2785,12 +2785,12 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "queen",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -2866,12 +2866,12 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "queen",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -2927,11 +2927,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice"
       ],
       "life_giving": [
@@ -2986,11 +2986,11 @@
       "rank": [
         "warrior",
         "elder",
-        "healer",
+        "medicine cat",
         "mediator",
         "apprentice",
         "deputy",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice"
       ],
       "life_giving": [
@@ -3169,7 +3169,7 @@
       "star_trait": [],
       "rank": [
         "apprentice",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -3195,7 +3195,7 @@
       "star_trait": [],
       "rank": [
         "apprentice",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -3221,7 +3221,7 @@
       "star_trait": [],
       "rank": [
         "apprentice",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -3294,7 +3294,7 @@
       "lead_trait": [],
       "star_trait": [],
       "rank": [
-        "healer"
+        "medicine cat"
       ],
       "life_giving": [
         {
@@ -3318,7 +3318,7 @@
       ],
       "star_trait": [],
       "rank": [
-        "healer"
+        "medicine cat"
       ],
       "life_giving": [
         {
@@ -3795,7 +3795,7 @@
       "rank": [
         "kit",
         "apprentice",
-        "healer apprentice",
+        "medicine cat apprentice",
         "mediator apprentice",
         "queen's apprentice"
       ],
@@ -3869,7 +3869,7 @@
       "rank": [
         "leader",
         "deputy",
-        "healer"
+        "medicine cat"
       ],
       "life_giving": [
         {

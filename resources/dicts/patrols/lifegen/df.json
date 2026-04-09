@@ -1440,11 +1440,11 @@
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ]

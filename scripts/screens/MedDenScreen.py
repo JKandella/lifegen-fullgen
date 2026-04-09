@@ -335,7 +335,7 @@ class MedDenScreen(Screens):
                 Cat.all_cats.values(), amount_per_med, give_clanmembers_covered=True
             )
             if len(self.meds) == 1:
-                insert = "healer"
+                insert = "medicine cat"
             else:
                 insert = "healers"
             meds_cover = f"Your {insert} can care for a Clan of up to {number} members, including themselves."
@@ -427,7 +427,7 @@ class MedDenScreen(Screens):
 
         # get the med cats
         self.meds = get_alive_status_cats(
-            Cat, ["healer", "healer apprentice"], sort=True
+            Cat, ["medicine cat", "medicine cat apprentice"], sort=True
         )
 
         if not self.meds:

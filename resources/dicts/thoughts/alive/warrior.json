@@ -70,7 +70,7 @@
             "Learned a lot while patrolling with r_c"
         ],
         "random_status_constraint": [
-            "healer"
+            "medicine cat"
         ],
         "random_living_status": [
             "living"
@@ -283,8 +283,8 @@
             "Is asking the healer for herbs that may help {PRONOUN/m_c/object} in battle"
         ],
         "random_status_constraint": [
-            "healer",
-            "healer apprentice"
+            "medicine cat",
+            "medicine cat apprentice"
         ],
         "main_trait_constraint": [
             "fierce"
@@ -581,7 +581,7 @@
       "Is helping to escort the healer to gather herbs"
     ],
     "random_status_constraint": [
-      "healer"
+      "medicine cat"
     ],
     "random_living_status": [
       "living"
@@ -887,8 +887,8 @@
       "Is asking the healer for herbs that may help {PRONOUN/m_c/object} in battle"
     ],
     "random_status_constraint": [
-      "healer",
-      "healer apprentice"
+      "medicine cat",
+      "medicine cat apprentice"
     ],
     "main_trait_constraint": [
       "fierce"

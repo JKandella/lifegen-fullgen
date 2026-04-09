@@ -196,7 +196,7 @@ class LeaderDenScreen(Screens):
             if not self.helper_cat:  # if dep is sick, med cat helps
                 meds = get_alive_status_cats(
                     Cat,
-                    get_status=["healer", "healer apprentice"],
+                    get_status=["medicine cat", "medicine cat apprentice"],
                     working=True,
                     sort=True,
                 )

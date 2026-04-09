@@ -29,7 +29,7 @@
         "You notice the queens shooing their kits away when you're nearby, their worried eyes not missing a single move you make.",
         "Your mentor often leaves you to practice alone. {PRONOUN/m_n/subject/CAP} used to be so attentive, but now {PRONOUN/m_n/poss} actions seem obligatory."
     ],
-    "healer apprentice": [
+    "medicine cat apprentice": [
         "The herbs in your den, once comforting, now feel sinister. They were supposed to heal, not to hurt. You wonder if your mentor feels the same unease around you.",
         "The cats you once treated now shrink away from your touch. Their grateful mews are replaced by fearful whispers.",
         "Your mentor refuses to teach you more about the herbs and their uses. {PRONOUN/m_n/subject/CAP} {VERB/m_n/tell/tells} you that a healer's duty is to heal, not to harm.",
@@ -85,7 +85,7 @@
         "Clan meetings are a challenge. Your contributions are often met with silence, the distrust in the air palpable.",
         "Every fresh-kill you bring back to camp is examined closely before it's accepted. As if they expect you to poison them."
     ],
-    "healer": [
+    "medicine cat": [
         "The herbs you used to find solace in seem tainted now. Every leaf you touch reminds you of your act.",
         "Cats flinch away from you when you offer treatment. Trust, once freely given, now has to be earned.",
         "You feel StarClan's eyes on you, their gaze a weight you cannot escape.",

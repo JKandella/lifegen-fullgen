@@ -153,7 +153,7 @@
     ],
     "assertive_elder_3": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "assertive",
             "you_blind",
@@ -167,7 +167,7 @@
     ],
     "assertive_elder_4": [
         [
-            "healer",
+            "medicine cat",
             "healer_apprentice",
             "assertive",
             "platonic_like",
@@ -183,7 +183,7 @@
     ],
     "assertive_elder_5": [
         [
-            "healer",
+            "medicine cat",
             "assertive",
             "platonic_like",
             "you_blind"
@@ -656,7 +656,7 @@
     ],
     "assertivemedapp_13": [
         [
-            "healer",
+            "medicine cat",
             "assertive",
             "from_your_apprentice",
             "you_blind",
@@ -670,7 +670,7 @@
     ],
     "assertivemedapp_13_2": [
         [
-            "healer",
+            "medicine cat",
             "assertive",
             "from_your_apprentice",
             "you_blind",
@@ -1119,7 +1119,7 @@
     "sweet_medapp_11": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -1135,7 +1135,7 @@
     "sweet_medapp_12": [
         [
             "warrior",
-            "healer",
+            "medicine cat",
             "mediator",
             "queen",
             "sweet",
@@ -1165,7 +1165,7 @@
     ],
     "sweet_medapp_14": [
         [
-            "healer",
+            "medicine cat",
             "sweet",
             "you_blind",
             "they_blind"
@@ -1582,7 +1582,7 @@
     "upstanding_medapp": [
         [
             "upstanding",
-            "healer",
+            "medicine cat",
             "from_your_apprentice",
             "you_blind",
             "they_blind"
@@ -1689,7 +1689,7 @@
         [
             "you_sc",
             "they_sc",
-            "healer"
+            "medicine cat"
         ],
         [
             "[It's the night of the half-moon meeting and t_c is watching the healers approach closely, tail twitching with anticipation.]",

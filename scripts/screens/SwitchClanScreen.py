@@ -213,7 +213,7 @@ class SwitchClanScreen(Screens):
                                     suffix = "kit"
                                 elif item["status"] in [
                                     "apprentice", "queen's apprentice",
-                                    "mediator apprentice", "healer apprentice"
+                                    "mediator apprentice", "medicine cat apprentice"
                                     ]:
                                     suffix = "paw"
                                 elif item["status"] == "leader":

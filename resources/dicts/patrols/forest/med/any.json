@@ -180,11 +180,11 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -295,7 +295,7 @@
                 -1,
                 -1
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -354,7 +354,7 @@
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -401,7 +401,7 @@
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -644,11 +644,11 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -756,7 +756,7 @@
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -948,7 +948,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -1024,11 +1024,11 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -1227,7 +1227,7 @@
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -1470,11 +1470,11 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -1581,7 +1581,7 @@
         "min_cats": 2,
         "max_cats": 2,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -1688,7 +1688,7 @@
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -1773,11 +1773,11 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -1855,7 +1855,7 @@
         "min_cats": 2,
         "max_cats": 2,
         "min_max_status": {
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -1935,7 +1935,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -2047,7 +2047,7 @@
         "min_cats": 2,
         "max_cats": 2,
         "min_max_status": {
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -2199,7 +2199,7 @@
                 -1,
                 -1
             ],
-            "healer": [
+            "medicine cat": [
                 1,
                 6
             ],
@@ -2377,7 +2377,7 @@
         "min_cats": 3,
         "max_cats": 3,
         "min_max_status": {
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -2529,7 +2529,7 @@
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -2683,7 +2683,7 @@
                 2,
                 5
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 1
             ],
@@ -2832,7 +2832,7 @@
                 1,
                 1
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 1
             ],
@@ -2985,7 +2985,7 @@
                 2,
                 5
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 1
             ],
@@ -3135,7 +3135,7 @@
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -3282,7 +3282,7 @@
                 1,
                 6
             ],
-            "healer apprentice": [
+            "medicine cat apprentice": [
                 1,
                 6
             ],
@@ -3420,8 +3420,8 @@
         "max_cats": 2,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer apprentice": [-1, -1],
-            "healer": [1, 1],
+            "medicine cat apprentice": [-1, -1],
+            "medicine cat": [1, 1],
             "normal adult": [1, 1]
         },
         "weight": 20,
@@ -3604,8 +3604,8 @@
         "max_cats": 2,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer apprentice": [-1, -1],
-            "healer": [2, 2]
+            "medicine cat apprentice": [-1, -1],
+            "medicine cat": [2, 2]
         },
         "weight": 20,
         "intro_text": "r_c trips over a tree root while out collecting herbs with p_l.",
@@ -3786,8 +3786,8 @@
         "max_cats": 2,
         "min_max_status": {
             "apprentice": [-1, -1],
-            "healer apprentice": [-1, -1],
-            "healer": [1, 1],
+            "medicine cat apprentice": [-1, -1],
+            "medicine cat": [1, 1],
             "normal adult": [1, 1]
         },
         "weight": 20,

@@ -181,8 +181,8 @@
 			"queen",
 			"queen's apprentice",
 			"mediator",
-			"healer apprentice",
-			"healer",
+			"medicine cat apprentice",
+			"medicine cat",
 			"deputy",
 			"leader"
 		],
@@ -248,8 +248,8 @@
 			"m_c claims to accidentally have given r_c the wrong herb."
 		],
 		"main_status_constraint": [
-			"healer apprentice",
-			"healer"
+			"medicine cat apprentice",
+			"medicine cat"
 		],
 		"reaction_random_cat": {
 			"dislike": "increase"
@@ -366,7 +366,7 @@
 			"m_c claims {PRONOUN/m_c/subject} spoke with StarClan and heard bad things about r_c."
 		],
 		"main_status_constraint": [
-			"healer",
+			"medicine cat",
 			"deputy",
 			"leader"
 		],
@@ -447,7 +447,7 @@
 		"random_status_constraint": [
 			"elder",
 			"mediator apprentice",
-			"healer apprentice",
+			"medicine cat apprentice",
 			"queen's apprentice"
 		]
 	},

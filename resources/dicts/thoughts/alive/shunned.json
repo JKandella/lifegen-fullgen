@@ -112,7 +112,7 @@
         ],
         "main_status_constraint": [
             "apprentice",
-            "healer apprentice",
+            "medicine cat apprentice",
             "mediator apprentice"
         ]
     },
@@ -135,8 +135,8 @@
             "high_sc"
         ],
         "main_status_constraint": [
-            "healer",
-            "healer apprentice"
+            "medicine cat",
+            "medicine cat apprentice"
         ]
     },
     {
@@ -160,8 +160,8 @@
             "high_df"
         ],
         "main_status_constraint": [
-            "healer",
-            "healer apprentice"
+            "medicine cat",
+            "medicine cat apprentice"
         ]
     },
     {
@@ -177,8 +177,8 @@
             "Stares at the stars above with a solemn expression"
         ],
         "main_status_constraint": [
-            "healer",
-            "healer apprentice"
+            "medicine cat",
+            "medicine cat apprentice"
         ]
     },
     {

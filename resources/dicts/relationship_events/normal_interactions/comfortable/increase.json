@@ -268,8 +268,8 @@
 			"After a rough storm gets into the medicine den, m_c helps r_c pick up herbs."
 		],
 		"random_status_constraint": [
-			"healer",
-			"healer apprentice"
+			"medicine cat",
+			"medicine cat apprentice"
 		],
 		"reaction_random_cat": {
 			"comfortable": "increase",

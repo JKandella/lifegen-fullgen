@@ -336,10 +336,6 @@ class Thoughts:
         status = main_cat.status
 
         status = status.replace(" ", "_")
-        status_aliases = {
-            "medicine_cat": "healer",
-            "medicine_cat_apprentice": "healer_apprentice",
-        }
 
         if not main_cat.dead:
             life_dir = "alive"
@@ -368,8 +364,6 @@ class Thoughts:
                     loaded_thoughts = ujson.loads(read_file.read())
             else:
                 thoughts_file = f"{base_path}{life_dir}{spec_dir}/{status}.json"
-                if not os.path.exists(thoughts_file) and status in status_aliases:
-                    thoughts_file = f"{base_path}{life_dir}{spec_dir}/{status_aliases[status]}.json"
 
                 with open(thoughts_file, 'r') as read_file:
                     thoughts = ujson.loads(read_file.read())

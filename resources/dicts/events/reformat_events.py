@@ -142,7 +142,7 @@ def reformat(path):
         if "apprentice" in path:
             new_format["m_c"]["status"].append("apprentice")
         if "healer_app" in event["tags"]:
-            new_format["m_c"]["status"].append("healer apprentice")
+            new_format["m_c"]["status"].append("medicine cat apprentice")
             event["tags"].remove("healer_app")
         if "warrior" in path:
             new_format["m_c"]["status"].append("warrior")
@@ -153,9 +153,9 @@ def reformat(path):
         if "leader" in path and "leader" not in new_format["m_c"]["status"]:
             new_format["m_c"]["status"].append("leader")
         if "medicine" in path and "healer_app" not in event["tags"]:
-            new_format["m_c"]["status"].append("healer")
-            if "healer" in event["tags"]:
-                event["tags"].remove("healer")
+            new_format["m_c"]["status"].append("medicine cat")
+            if "medicine cat" in event["tags"]:
+                event["tags"].remove("medicine cat")
         if "mediator" in path:
             new_format["m_c"]["status"].append("mediator")
             new_format["m_c"]["status"].append("mediator apprentice")
@@ -260,7 +260,7 @@ def reformat(path):
                     if "other_cat_med_app" in event["tags"]:
                         event["tags"].remove("other_cat_med_app")
                         new_format["r_c"]["status"].append(
-                            "healer apprentice")
+                            "medicine cat apprentice")
                     if "other_cat_warrior" in event["tags"]:
                         event["tags"].remove("other_cat_warrior")
                         new_format["r_c"]["status"].append("warrior")
@@ -272,7 +272,7 @@ def reformat(path):
                         new_format["r_c"]["status"].append("leader")
                     if "other_cat_med" in event["tags"]:
                         event["tags"].remove("other_cat_med")
-                        new_format["r_c"]["status"].append("healer")
+                        new_format["r_c"]["status"].append("medicine cat")
                     if "other_cat_elder" in event["tags"]:
                         event["tags"].remove("other_cat_elder")
                         new_format["r_c"]["age"].append("elder")
