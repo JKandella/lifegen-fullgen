@@ -2334,7 +2334,17 @@ class Cat:
             return
 
         injury = INJURIES[name]
-        mortality = injury["mortality"][self.age]
+        mortality_by_age = injury["mortality"]
+        mortality = mortality_by_age.get(self.age)
+        if mortality is None:
+            # Some injuries do not define every age bucket (for example, newborn).
+            # Fall back to the closest younger-age bucket used by the injury data.
+            for age_key in ("kitten", "adolescent", "young adult", "adult", "senior adult", "senior"):
+                if age_key in mortality_by_age:
+                    mortality = mortality_by_age[age_key]
+                    break
+        if mortality is None:
+            mortality = 0
         duration = injury["duration"]
         med_duration = injury["medicine_duration"]
 

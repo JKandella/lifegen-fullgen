@@ -7,7 +7,7 @@ from copy import deepcopy
 
 from scripts.cat.cats import Cat
 from scripts.cat.history import History
-from scripts.cat.genotype import Genotype
+from scripts.genemod.genetics_service import GeneticsService
 from scripts.cat.names import names, Name
 from scripts.cat_relations.relationship import Relationship
 from scripts.event_class import Single_Event
@@ -1020,11 +1020,11 @@ class Pregnancy_Events:
         blood_parent = None
         blood_parent2 = None
          
-        par2geno = Genotype(game.config['genetics_config'], game.settings["ban problem genes"])
+        par2geno = GeneticsService.generate_random_genotype()
         if cat and 'Y' in cat.genotype.sexgene:
-            par2geno.Generator('fem')
+            par2geno = GeneticsService.generate_random_genotype(gender='fem')
         elif cat:
-            par2geno.Generator('masc')
+            par2geno = GeneticsService.generate_random_genotype(gender='masc')
         ##### SELECT BACKSTORY #####
         if backkit:
             backstory = backkit

@@ -2485,9 +2485,3 @@ class Genotype:
                 return "Mutated " + alleles[self.somatic['gene']] + " on " + body[self.somatic['base']]
             except:
                 return self.somatic['gene'] + " mutated on " + body[self.somatic['base']]
-
-
-
-
-
-

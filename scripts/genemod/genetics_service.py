@@ -136,6 +136,18 @@ class GeneticsService:
         """Compute the visible traits from a genotype."""
         return GeneticsService._compute_phenotype(genotype)
 
+    @staticmethod
+    def generate_random_genotype(gender: Optional[str] = None) -> "Genotype":
+        """Generate a new random genotype, optionally constrained by sex/gender hint."""
+        from scripts.cat.genotype import Genotype
+        from scripts.game_structure.game_essentials import game
+
+        odds = game.config.get("genetics_config", {})
+        ban_genes = game.settings.get("ban problem genes", True)
+        geno = Genotype(odds, ban_genes)
+        geno.Generator(special=gender)
+        return geno
+
     # ------------------------------------------------------------------ #
     # Internal helpers                                                    #
     # ------------------------------------------------------------------ #
