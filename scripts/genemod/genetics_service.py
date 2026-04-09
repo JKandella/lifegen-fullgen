@@ -172,11 +172,15 @@ class GeneticsService:
     def _compute_phenotype(geno) -> "Phenotype":
         from scripts.cat.phenotype import Phenotype
 
-        pheno = Phenotype(geno)
-        pheno.PhenotypeOutput(geno.gender)
+        pheno = Phenotype(geno.odds, geno.ban_genes)
+        pheno.__dict__.update(geno.__dict__)
+        pheno.PhenotypeOutput(getattr(geno, "gender", getattr(geno, "sex", None)))
         if getattr(geno, "chimerageno", None):
-            chim_pheno = Phenotype(geno.chimerageno)
-            chim_pheno.PhenotypeOutput(geno.chimerageno.gender)
+            chim_pheno = Phenotype(geno.chimerageno.odds, geno.chimerageno.ban_genes)
+            chim_pheno.__dict__.update(geno.chimerageno.__dict__)
+            chim_pheno.PhenotypeOutput(
+                getattr(geno.chimerageno, "gender", getattr(geno.chimerageno, "sex", None))
+            )
             # Attach chimera phenotype to the main phenotype for callers that need it
             setattr(pheno, "chimerapheno", chim_pheno)
         return pheno

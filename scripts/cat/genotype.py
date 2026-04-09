@@ -13,6 +13,56 @@ class Genotype:
         self.ban_genes = ban_genes
         self.chimerapattern = None
 
+        # Backward compatibility for configs that omit legacy list-based keys.
+        if "longtype" not in self.odds:
+            self.odds["longtype"] = ["short", "medium", "long"]
+        if "saturation" not in self.odds:
+            self.odds["saturation"] = [0, 1, 2, 3, 4, 5]
+        if "body_ranges" not in self.odds:
+            self.odds["body_ranges"] = [1, 4, 12, 60, 12, 4, 1]
+        if "height_ranges" not in self.odds:
+            self.odds["height_ranges"] = [1, 4, 12, 60, 180, 60, 12, 2, 2, 1]
+        legacy_defaults = {
+            "X monosomy": self.odds.get("XXX/XXY", 0),
+            "black_spotting": 0,
+            "dense_blotched": 0,
+            "four_ears": 0,
+            "green": 0,
+            "het_dom_white_blue_eyes": 0,
+            "het_dom_white_one_blue_eye": 0,
+            "high_white_blue_eyes": 0,
+            "high_white_one_blue_eye": 0,
+            "homo_dom_white_blue_eyes": 0,
+            "homo_dom_white_one_blue_eye": 0,
+            "low_white_blue_eyes": 0,
+            "low_white_one_blue_eye": 0,
+            "mid_white_blue_eyes": 0,
+            "mid_white_one_blue_eye": 0,
+            "no-low_white_blue_eyes": 0,
+            "no-low_white_one_blue_eye": 0,
+            "peacock_blue": 0,
+            "polycaudal": 0,
+            "pseudo_merle": 0,
+            "rainbow_eyes": 0,
+            "random_heterochromia": 0,
+            "sectoral_heterochromia": 0,
+            "bengal": ["0"],
+            "bengal_kittypet": ["0"],
+            "rufousing": ["0"],
+            "rufousing_kittypet": ["0"],
+            "sokoke": ["0"],
+            "sokoke_kittypet": ["0"],
+            "spotted": ["0"],
+            "spotted_kittypet": ["0"],
+            "tickmod": ["0"],
+            "tickmod_kittypet": ["0"],
+            "wideband": ["0"],
+            "wideband_kittypet": ["0"],
+        }
+        for key, value in legacy_defaults.items():
+            if key not in self.odds:
+                self.odds[key] = value
+
         self.fevercoat = False
 
         self.april_fools = {}

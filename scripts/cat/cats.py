@@ -100,7 +100,15 @@ class Cat:
         "leader",
     ]
 
-    gender_tags = {'molly': 'F', 'tom': 'M', 'intersex': 'I'}
+    gender_tags = {
+        'female': 'F',
+        'male': 'M',
+        'fem': 'F',
+        'masc': 'M',
+        'molly': 'F',
+        'tom': 'M',
+        'intersex': 'I',
+    }
 
     # EX levels and ranges.
     # Ranges are inclusive to both bounds
