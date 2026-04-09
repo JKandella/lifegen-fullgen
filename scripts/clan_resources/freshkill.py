@@ -93,7 +93,6 @@ class FreshkillPile:
         """
         self.pile["expires_in_4"] += amount
         self.total_amount += amount
-        self.total_amount = round(self.total_amount, 2)
 
     def remove_freshkill(self, amount, take_random: bool = False) -> None:
         """
@@ -596,7 +595,6 @@ class FreshkillPile:
             remaining_amount = given_amount - self.pile[pile_group]
             self.total_amount -= self.pile[pile_group]
             self.pile[pile_group] = 0
-        self.total_amount = round(self.total_amount, 2)
 
         return remaining_amount
 

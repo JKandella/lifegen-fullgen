@@ -34,8 +34,8 @@ skill_list = ['teacher', 'hunter', 'fighter', 'runner', 'climber', 'swimmer', 's
               'explorer', 'tracker', 'artistan', 'guardian', 'tunneler', 'navigator', 'song', 'grace', 'clean', 'innovator', 'comforter', 'matchmaker', 'thinker', 'cooperative', 'scholar', 'time', 'treasure', 'fisher', 'language', 'sleeper']
 you_skill_list = ['you_teacher', 'you_hunter', 'you_fighter', 'you_runner', 'you_climber', 'you_swimmer', 'you_speaker', 'you_mediator', 'you_clever', 'you_insightful', 'you_sense', 'you_kit', 'you_story', 'you_lore', 'you_camp', 'you_healer', 'you_star', 'you_omen', 'you_dream', 'you_clairvoyant', 'you_prophet',
                   'you_ghost', 'you_explorer', 'you_tracker', 'you_artistan', 'you_guardian', 'you_tunneler', 'you_navigator', 'you_song', 'you_grace', 'you_clean', 'you_innovator', 'you_comforter', 'you_matchmaker', 'you_thinker', 'you_cooperative', 'you_scholar', 'you_time', 'you_treasure', 'you_fisher', 'you_language', 'you_sleeper']
-roles = ["Any", "any", "young elder", "newborn", "kitten", "apprentice", "medicine cat apprentice", "mediator apprentice", "no_kit",
-         "queen's apprentice", "warrior", "medicine cat", "mediator", "queen", "deputy", "leader", "elder", "you_any", "you_kitten"]
+roles = ["Any", "any", "young elder", "newborn", "kitten", "apprentice", "healer apprentice", "mediator apprentice", "no_kit",
+         "queen's apprentice", "warrior", "healer", "mediator", "queen", "deputy", "leader", "elder", "you_any", "you_kitten"]
 cluster_list = ["assertive", "brooding", "cool", "upstanding", "introspective",
                 "neurotic", "silly", "stable", "sweet", "unabashed", "unlawful"]
 you_cluster_list = ["you_assertive", "you_brooding", "you_cool", "you_upstanding", "you_introspective",
@@ -44,7 +44,7 @@ you_cluster_list = ["you_assertive", "you_brooding", "you_cool", "you_upstanding
 
 def process_json_data(data):
     list_of_tags = ['both_shunned', 'you_df', 'they_blind', "non-mates", 'they_kitten', 'they_starving', 'they_grieving', 'they_sc', "littermate", "mate",  "from_your_kit", "they_half-clan", "you_half-clan", "platonic_love", "has_mate", "reject", "accept", "heartbroken", "from_parent", "siblings_mate", "non-related", "murder", "war", "dead_close", "talk_dead", "hate", "romantic_like", "platonic_like", "jealousy", "dislike", "comfort", "respect", "trust",  "neutral", "insult", "flirt", "leafbare", "newleaf", "greenleaf", "leaffall", 'beach', 'forest', 'plains', 'mountainous', 'wetlands', 'desert', "you_ill", "you_injured", "they_ill", "you_grieving", "they_injured", "they_grieving", "adopted_parent", "from_mentor",
-                    "from_your_apprentice", "from_kit", "from_mate", "from_adopted_kit", "from_kit", "sibling", "half_sibling", "adopted_sibling", "parents_siblings", "cousin", "you_pregnant", "they_pregnant", "you_dftrainee", "grievingthem", 'they_adult', 'they_younger', 'you_warrior', "they_outside", "they_elder", "only_you_deaf", "they_df", "they_ur", "they_sc", "you_df", "you_ur", "you_sc", "they_medicine_cat", "from_adopted_parent", "only_they_blind", "clan_has_kits", "murderedthem", 'from_df_apprentice', 'from_df_mentor', "they_dftrainee", "you_blind", "they_loner", "they_rogue", "you_apprentice", "they_medicine_cat_apprentice", "they_warrior", "only_you_blind", "you_apprentice", "grievingyou", "they_apprentice"]
+                    "from_your_apprentice", "from_kit", "from_mate", "from_adopted_kit", "from_kit", "sibling", "half sibling", "adopted_sibling", "parents_siblings", "cousin", "you_pregnant", "they_pregnant", "you_dftrainee", "grievingthem", 'they_adult', 'they_younger', 'you_warrior', "they_outside", "they_elder", "only_you_deaf", "they_df", "they_ur", "they_sc", "you_df", "you_ur", "you_sc", "they_healer", "from_adopted_parent", "only_they_blind", "clan_has_kits", "murderedthem", 'from_df_apprentice', 'from_df_mentor', "they_dftrainee", "you_blind", "they_loner", "they_rogue", "you_apprentice", "they_healer_apprentice", "they_warrior", "only_you_blind", "you_apprentice", "grievingyou", "they_apprentice"]
     list_of_tags.extend(cluster_list + you_cluster_list + roles + their_trait_list +
                         you_trait_list + you_backstory_list + they_backstory_list + skill_list + you_skill_list)
     no_tags = set()
@@ -73,33 +73,14 @@ def find_no_roles(data):
         except:
             print(f"error with {key}")
 
-
-def read_json_files_in_folder(folder_path):
-    nono_tags = set()
-    for filename in os.listdir(folder_path):
-        if filename.endswith('.json') and filename != "choice_dialogue.json":
-            with open(os.path.join(folder_path, filename), 'r') as json_file:
-                try:
-                    data = ujson.load(json_file)
-                    find_no_roles(data)
-                    nono_tags.update(process_json_data(data))
-                except ValueError:
-                    print(f"Error reading JSON data from {filename}")
-    print(nono_tags)
-
-
-if __name__ == "__main__":
-    folder_path = "resources\dicts\lifegen_talk"
-    read_json_files_in_folder(folder_path)
-
 # cluster_list = ["assertive", "brooding", "cool", "upstanding", "introspective", "neurotic", "silly", "stable", "sweet", "unabashed", "unlawful"]
+# you_cluster_list = ["you_assertive", "you_brooding", "you_cool", "you_upstanding", "you_introspective", "you_neurotic", "you_silly", "you_stable", "you_sweet", "you_unabashed", "you_unlawful"]
 
-# cluster_dict = {}
-# for i in cluster_list:
-#     cluster_dict[i] = 0
-
-# def count_dialogue(f, data):
-#     newborn_count = 0
+# def process_json_data(data):
+#     list_of_tags = ["mate", "from_your_kit", "they_half-clan", "you_half-clan", "platonic_love", "has_mate","reject","accept","heartbroken","from_parent","siblings_mate","non-related","murder","war","dead_close","talk_dead","hate","romantic_like","platonic_like","jealousy","dislike","comfort","respect","trust","random_cat","neutral","insult", "flirt", "leafbare", "newleaf", "greenleaf", "leaffall", 'beach', 'forest', 'plains', 'mountainous', 'wetlands', 'desert', "you_ill", "you_injured", "they_ill","you_grieving", "they_injured", "they_grieving","adopted_parent","from_mentor","from_your_apprentice","from_kit","from_mate","from_adopted_kit",
+# "from_kit","sibling", "half sibling", "adopted_sibling", "parents_siblings", "cousin", "you_pregnant","they_pregnant"]
+#     list_of_tags.extend(cluster_list + you_cluster_list + roles + their_trait_list + you_trait_list + you_backstory_list + they_backstory_list + skill_list + you_skill_list)
+#     no_tags = set()
 #     for key, value in data.items():
 #         l = value["tags"] if "tags" in value else value[0]
 #         if "newborn" in l:
@@ -111,23 +92,56 @@ if __name__ == "__main__":
 #     return newborn_count
 
 # def read_json_files_in_folder(folder_path):
-
-#     print("They are role newborn: dialogue data")
-#     total_newborn_count = 0
+#     nono_tags = set()
 #     for filename in os.listdir(folder_path):
 #         if filename.endswith('.json'):
 #             with open(os.path.join(folder_path, filename), 'r') as json_file:
 #                 try:
-#                         data = ujson.load(json_file)
-#                         total_newborn_count += count_dialogue(filename, data)
+#                     data = ujson.load(json_file)
+#                     find_no_roles(data)
+#                     nono_tags.update(process_json_data(data))
 #                 except ValueError:
 #                     print(f"Error reading JSON data from {filename}")
-#     print(f"Total dialogues: {total_newborn_count}")
-#     print(cluster_dict)
-
+#     print(nono_tags)
 # if __name__ == "__main__":
 #     folder_path = "resources\dicts\lifegen_talk"
 #     read_json_files_in_folder(folder_path)
+cluster_list = ["assertive", "brooding", "cool", "upstanding", "introspective", "neurotic", "silly", "stable", "sweet", "unabashed", "unlawful"]
+
+cluster_dict = {}
+for i in cluster_list:
+    cluster_dict[i] = 0
+
+def count_dialogue(f, data):
+    newborn_count = 0
+    for key, value in data.items():
+        l = value["tags"] if "tags" in value else value[0] 
+        if "newborn" in l:
+            newborn_count += 1
+            for d in cluster_list:
+                if d in l:
+                    cluster_dict[d]+=1
+    print(f"{f} contains {newborn_count} newborn dialogues")
+    return newborn_count
+
+def read_json_files_in_folder(folder_path):
+
+    print("They are role newborn: dialogue data")
+    total_newborn_count = 0
+    for filename in os.listdir(folder_path):
+        if filename.endswith('.json'):
+            with open(os.path.join(folder_path, filename), 'r') as json_file:
+                try:
+                        data = ujson.load(json_file)
+                        total_newborn_count += count_dialogue(filename, data)
+                except ValueError:
+                    print(f"Error reading JSON data from {filename}")
+    print(f"Total dialogues: {total_newborn_count}")
+    print(cluster_dict)
+
+if __name__ == "__main__":
+    folder_path = "resources\dicts\lifegen_talk"
+    read_json_files_in_folder(folder_path)
 
 # import os
 # import ujson

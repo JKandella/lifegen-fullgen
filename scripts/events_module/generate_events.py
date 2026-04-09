@@ -392,7 +392,7 @@ class GenerateEvents:
 
             if "clan_apps" in event.tags and not get_alive_status_cats(
                     Cat_class,
-                    ["apprentice", "medicine cat apprentice", "mediator apprentice", "queen's apprentice"],
+                    ["apprentice", "healer apprentice", "mediator apprentice", "queen's apprentice"],
             ):
                 continue
 
@@ -427,7 +427,11 @@ class GenerateEvents:
             # check if already trans
             if (
                 "transition" in event.sub_type
-                and cat.gender != cat.genderalign
+                and cat.genderalign == cat.gender
+                and not (cat.genderalign.replace("intersex ", "") == 'tom'
+                and 'Y' not in cat.genotype.sexgene)
+                and not (cat.genderalign.replace("intersex ", "") == 'molly'
+                and 'Y' in cat.genotype.sexgene)
             ):
                 continue
 
@@ -741,6 +745,7 @@ class GenerateEvents:
                                 if injury == "mangled tail" and (
                                     "NOTAIL" in cat.pelt.scars
                                     or "HALFTAIL" in cat.pelt.scars
+                                    or (0 < cat.phenotype.bobtailnr < 5)
                                 ):
                                     continue
 
@@ -750,6 +755,7 @@ class GenerateEvents:
                                 if injury == "mangled tail" and (
                                     "NOTAIL" in random_cat.pelt.scars
                                     or "HALFTAIL" in random_cat.pelt.scars
+                                    or (0 < random_cat.phenotype.bobtailnr < 5)
                                 ):
                                     continue
 

@@ -190,6 +190,10 @@ class HandleShortEvents:
 
         # create new cats (must happen here so that new cats can be included in further changes)
         self.handle_new_cats()
+        
+        # give accessory
+        if self.chosen_event.new_accessory:
+            self.handle_accessories()
 
         # give accessory
         if self.chosen_event.new_accessory:
@@ -431,7 +435,7 @@ class HandleShortEvents:
                     if (
                         sub_sub[0] != sub[0]
                         and (
-                            sub_sub[0].gender == "female"
+                            'Y' not in sub_sub[0].genotype.sexgene
                             or game.clan.clan_settings["same sex birth"]
                         )
                         and sub_sub[0].ID in (sub[0].parent1, sub[0].parent2)
@@ -462,10 +466,11 @@ class HandleShortEvents:
             if acc not in ["WILD", "PLANT", "COLLAR"]:
                 acc_list.append(acc)
 
-        if hasattr(self.main_cat.pelt, "scars"):
+        if hasattr(self.main_cat.pelt, "scars") or (self.main_cat.phenotype.bobtailnr > 0 and self.main_cat.phenotype.bobtailnr < 5):
             if (
                 "NOTAIL" in self.main_cat.pelt.scars
                 or "HALFTAIL" in self.main_cat.pelt.scars
+                or (self.main_cat.phenotype.bobtailnr > 0 and self.main_cat.phenotype.bobtailnr < 5)
             ):
                 for acc in pelts.tail_accessories:
                     if acc in acc_list:
@@ -590,11 +595,18 @@ class HandleShortEvents:
                     self.main_cat
                 )  # got to include the cat that rolled for death in the first place
 
+            tnr = False
+            if 'tnr' in self.chosen_event.tags and game.clan.clan_settings['tnr_mode']:
+                if random.random() < game.config['tnr_mode']['Clan_tnr']:
+                    tnr = True
             taken_cats = []
             for kitty in self.dead_cats:
                 if "lost" in self.chosen_event.tags:
                     kitty.gone()
-                    taken_cats.append(kitty)
+                    if tnr and 'TNR' not in kitty.pelt.scars:
+                        kitty.pelt.scars.append("TNR")
+                        kitty.get_permanent_condition("infertility", False)
+                    self.dead_cats.remove(kitty)
                 self.multi_cat.append(kitty)
                 if kitty.ID not in self.involved_cats:
                     self.involved_cats.append(kitty.ID)

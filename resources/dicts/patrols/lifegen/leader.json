@@ -227,7 +227,7 @@
         "min_max_status": {},
         "weight": 20,
         "intro_text": "An epidemic has spread through the Clan and you must decide how to handle the crisis. r_m has {PRONOUN/r_m/poss} paws full enough with multiple patients and not enough herbs.",
-        "decline_text": "Recognizing your limitations in medical matters, you choose to defer to the medicine cat's judgment. The Clan appreciates your humility and trust in others.",
+        "decline_text": "Recognizing your limitations in medical matters, you choose to defer to the healer's judgment. The Clan appreciates your humility and trust in others.",
         "chance_of_success": 70,
         "success_outcomes": [
             {
@@ -238,7 +238,7 @@
         ],
         "fail_outcomes": [
             {
-                "text": "Despite your efforts, the epidemic continues to spread and the medicine cats have to work overtime regardless. This crisis tests r_m's trust in you. Failure hurts, but you can learn from this.",
+                "text": "Despite your efforts, the epidemic continues to spread and the healers have to work overtime regardless. This crisis tests r_m's trust in you. Failure hurts, but you can learn from this.",
                 "exp": 0,
                 "weight": 20
             }

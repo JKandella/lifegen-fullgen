@@ -1057,13 +1057,13 @@ class MurderScreen(Screens):
 
             if self.next_cat == 0 and check_cat.ID != self.the_cat.ID and check_cat.dead == self.the_cat.dead and \
                     check_cat.ID != game.clan.instructor.ID and not check_cat.exiled and check_cat.status in \
-                    ["apprentice", "medicine cat apprentice", "mediator apprentice", "queen's apprentice"] \
+                    ["apprentice", "healer apprentice", "mediator apprentice", "queen's apprentice"] \
                     and check_cat.df == self.the_cat.df:
                 self.previous_cat = check_cat.ID
 
             elif self.next_cat == 1 and check_cat.ID != self.the_cat.ID and check_cat.dead == self.the_cat.dead and \
                     check_cat.ID != game.clan.instructor.ID and not check_cat.exiled and check_cat.status in \
-                    ["apprentice", "medicine cat apprentice", "mediator apprentice", "queen's apprentice"] \
+                    ["apprentice", "healer apprentice", "mediator apprentice", "queen's apprentice"] \
                     and check_cat.df == self.the_cat.df:
                 self.next_cat = check_cat.ID
 
@@ -1200,7 +1200,7 @@ class MurderScreen(Screens):
         if self.method == "attack":
             chance += 5
         elif self.method == "poison":
-            if you.status not in ["medicine cat", "medicine cat apprentice"]:
+            if you.status not in ["healer", "healer apprentice"]:
                 chance += 1
         elif self.method == "accident":
             chance += 8
@@ -1332,7 +1332,7 @@ class MurderScreen(Screens):
 
             if cat_to_murder.status == "warrior" and cat_healthy:
                 chance += 15
-            if you.status in ["mediator", "mediator apprentice", "queen", "queen's apprentice", "medicine cat", "medicine cat apprentice", "kitten"]:
+            if you.status in ["mediator", "mediator apprentice", "queen", "queen's apprentice", "healer", "healer apprentice", "kitten"]:
                 chance += 10
 
             if "avid play-fighter" in their_skills:
@@ -1393,7 +1393,7 @@ class MurderScreen(Screens):
 
             if cat_to_murder.status in ["warrior", "deputy", "leader"] and cat_healthy:
                 chance += 10
-            if you.status in ["queen", "mediator", "kitten", "medicine cat", "queen's apprentice", "mediator apprentice", "medicine cat apprentice"]:
+            if you.status in ["queen", "mediator", "kitten", "healer", "queen's apprentice", "mediator apprentice", "healer apprentice"]:
                 chance += 15
 
             if "avid play-fighter" in their_skills:
@@ -1517,7 +1517,7 @@ class MurderScreen(Screens):
                         continue
 
                 elif "healer_cat" in murder_dict["your_status"]:
-                    if you.status not in ["medicine cat", "medicine cat apprentice"]:
+                    if you.status not in ["healer", "healer apprentice"]:
                         continue
                 
                 elif you.status not in murder_dict["your_status"]:
@@ -1538,7 +1538,7 @@ class MurderScreen(Screens):
                         continue
 
                 elif "healer_cat" in murder_dict["victim_status"]:
-                    if cat_to_murder.status not in ["medicine cat", "medicine cat apprentice"]:
+                    if cat_to_murder.status not in ["healer", "healer apprentice"]:
                         continue
                 
                 elif cat_to_murder.status not in murder_dict["victim_status"]:
@@ -1686,7 +1686,7 @@ class MurderScreen(Screens):
     
         medcats = []
         for cat in Cat.all_cats_list:
-            if cat.status == "medicine cat" and not cat.dead and not cat.outside and cat.status != you.status:
+            if cat.status == "healer" and not cat.dead and not cat.outside and cat.status != you.status:
                 medcats.append(cat)
 
         warriors = []
@@ -1928,7 +1928,7 @@ class MurderScreen(Screens):
             if game.clan.your_cat.dead:
                 txt = choice(self.mu_txt["murder_discovered dead general"])
             else:
-                if game.clan.your_cat.status in ['kitten', 'leader', 'deputy', 'medicine cat']:
+                if game.clan.your_cat.status in ['kitten', 'leader', 'deputy', 'healer']:
                     txt = choice(self.mu_txt["murder_discovered " + game.clan.your_cat.status])
                 else:
                     txt = choice(self.mu_txt["murder_discovered general"])
@@ -1959,15 +1959,15 @@ class MurderScreen(Screens):
             accomplice.faith -= 0.5
         
         if punishment_chance == 1 or punishment_chance == 3:
-            kit_punishment = ["You are assigned counseling by the Clan's medicine cat to help you understand the severity of your actions and to guide you to make better decisions in the future.",
+            kit_punishment = ["You are assigned counseling by the Clan's healer to help you understand the severity of your actions and to guide you to make better decisions in the future.",
                                 "You are to be kept in the nursery under the watchful eye of the queens at all times until you become an apprentice."]
-            gen_punishment = ["You are assigned counseling by the Clan's medicine cat to help you understand the severity of your actions and to guide you to make better decisions in the future.",
+            gen_punishment = ["You are assigned counseling by the Clan's healer to help you understand the severity of your actions and to guide you to make better decisions in the future.",
                                 "You will be required to take meals last and are forced to sleep in a separate den away from your clanmates.",
                                 "You are assigned to several moons of tasks that include cleaning out nests, checking elders for ticks, and other chores alongside your normal duties.",
                                 "You are assigned a mentor who will better educate you about the Warrior Code and the sacredness of life."]
             # demote_leader = ["Your lives will be stripped away and you will be demoted to a warrior, no longer trusted to be the Clan's leader."]
             # demote_deputy = ["The Clan decides that you will be demoted to a warrior, no longer trusting you as their deputy."]
-            # demote_medicine_cat = ["The Clan decides that you will be demoted to a warrior, no longer trusting you as their medicine cat."]
+            # demote_healer = ["The Clan decides that you will be demoted to a warrior, no longer trusting you as their healer."]
             # exiled = ["The Clan decides that they no longer feel safe with you as a Clanmate. You will be exiled from the Clan."]
             
             if you.status == 'kitten' or you.status == 'newborn':
@@ -1989,7 +1989,7 @@ class MurderScreen(Screens):
                         choice(gen_punishment),
                         ["alert"],
                         [game.clan.your_cat.ID]))
-            elif you.status == 'medicine cat':
+            elif you.status == 'healer':
                 lead_choice = randint(1,3)
                 if lead_choice == 1:
                     game.cur_events_list.insert(3, Single_Event(
@@ -2006,16 +2006,16 @@ class MurderScreen(Screens):
         
         if accomplice and accompliced and (punishment_chance == 2 or punishment_chance == 3):
             a_n = str(accomplice.name)
-            kit_punishment = [f"{a_n} is assigned counseling by the Clan's medicine cat to help them understand the severity of their actions and to guide them to make better decisions in the future.",
+            kit_punishment = [f"{a_n} is assigned counseling by the Clan's healer to help them understand the severity of their actions and to guide them to make better decisions in the future.",
                             f"{a_n} is to be kept in the nursery under the watchful eye of the queens at all times until they become an apprentice."]
-            gen_punishment = [f"{a_n} is assigned counseling by the Clan's medicine cat to help them understand the severity of their actions and to guide them to make better decisions in the future.",
+            gen_punishment = [f"{a_n} is assigned counseling by the Clan's healer to help them understand the severity of their actions and to guide them to make better decisions in the future.",
                                 f"{a_n} is required to take meals last and is forced to sleep in a separate den away from their clanmates.",
                                 f"{a_n} is assigned to several moons of tasks that include cleaning out nests, checking elders for ticks, and other chores alongside their normal duties.",
                                 f"{a_n} is assigned a mentor who will better educate them about the Warrior Code and the sacredness of life."]
             
             # demote_leader = [f"{a_n}'s lives will be stripped away and they will be demoted to a warrior, no longer trusted to be the Clan's leader."]
             # demote_deputy = [f"The Clan decides that {a_n} will be demoted to a warrior, no longer trusting them as their deputy."]
-            # demote_medicine_cat = [f"The Clan decides that {a_n} will be demoted to a warrior, no longer trusting them as their medicine cat."]
+            # demote_healer = [f"The Clan decides that {a_n} will be demoted to a warrior, no longer trusting them as their healer."]
             # exiled = [f"The Clan decides that they no longer feel safe with {a_n} as a Clanmate. They will be exiled from the Clan."]
 
             if accomplice.status == 'kitten' or accomplice.status == 'newborn':
@@ -2039,7 +2039,7 @@ class MurderScreen(Screens):
                         ["alert", "birth_death"],
                         [game.clan.your_cat.ID, accomplice.ID]))
                
-            elif accomplice.status == 'medicine cat':
+            elif accomplice.status == 'healer':
                 lead_choice = randint(1,3)
                 if lead_choice == 1:
                     game.cur_events_list.insert(3, Single_Event(
@@ -2098,7 +2098,7 @@ class MurderScreen(Screens):
                 chance += 8
 
             if self.method == "poison":
-                if game.clan.your_cat.status == "medicine cat":
+                if game.clan.your_cat.status == "healer":
                     chance += 0
                 else:
                     chance += 15
@@ -2115,7 +2115,7 @@ class MurderScreen(Screens):
             if self.method == "attack":
                 chance += 8
             if self.method == "poison":
-                if game.clan.your_cat.status == "medicine cat":
+                if game.clan.your_cat.status == "healer":
                     chance += 15
                 else:
                     chance += 20
@@ -2150,7 +2150,7 @@ class MurderScreen(Screens):
             if self.method == "attack":
                 chance += 30
             if self.method == "poison":
-                if game.clan.your_cat.status != "medicine cat":
+                if game.clan.your_cat.status != "healer":
                     chance += 20
             if self.method == "accident":
                 chance += 8
@@ -2248,10 +2248,10 @@ class MurderScreen(Screens):
     
     status_chances = {
         'warrior': 20,
-        'medicine cat': 20,
+        'healer': 20,
         'mediator': 17,
         'apprentice': 15,
-        'medicine cat apprentice': 13,
+        'healer apprentice': 13,
         'mediator apprentice': 10,
         "queen": 13,
         "queen's apprentice": 13,
@@ -2263,10 +2263,10 @@ class MurderScreen(Screens):
 
     skill_chances = {
         'warrior': -5,
-        'medicine cat': -5,
+        'healer': -5,
         'mediator': 0,
         'apprentice': 5,
-        'medicine cat apprentice': 5,
+        'healer apprentice': 5,
         'mediator apprentice': 5,
         "queen's apprentice": 10,
         'queen': 5,
@@ -2416,7 +2416,7 @@ class MurderScreen(Screens):
             if "campkeeper" in their_skills:
                 chance -= 15
 
-        if cat_to_murder.status in ["queen", "queen's apprentice", "medicine cat", "medicine cat apprentice", "kitten"] and self.location != "camp":
+        if cat_to_murder.status in ["queen", "queen's apprentice", "healer", "healer apprentice", "kitten"] and self.location != "camp":
             chance -= 8
 
         if cat_to_murder.history:
@@ -2465,7 +2465,7 @@ class MurderScreen(Screens):
 
             if cat_to_murder.status == "warrior":
                 chance -= 10
-            if you.status in ["mediator", "mediator apprentice", "queen", "queen's apprentice", "medicine cat", "medicine cat apprentice", "kitten"]:
+            if you.status in ["mediator", "mediator apprentice", "queen", "queen's apprentice", "healer", "healer apprentice", "kitten"]:
                 chance -= 10
             
             if "avid play-fighter" in their_skills:
@@ -2484,7 +2484,7 @@ class MurderScreen(Screens):
 
         if self.method == "poison":
             # raises chances
-            if you.status in ["medicine cat", "medicine cat apprentice"]:
+            if you.status in ["healer", "healer apprentice"]:
                 chance += 25
             if cat_to_murder.is_ill() or cat_to_murder.is_injured():
                 chance += 15
@@ -2495,11 +2495,11 @@ class MurderScreen(Screens):
                 chance += 15
 
             # lowers chances
-            if cat_to_murder.status in ["medicine cat", "medicine cat apprentice"]:
+            if cat_to_murder.status in ["healer", "healer apprentice"]:
                 chance -= 15
             if not cat_to_murder.is_ill() and not cat_to_murder.is_injured():
                 chance -= 10
-            if you.status not in ["medicine cat", "medicine cat apprentice"]:
+            if you.status not in ["healer", "healer apprentice"]:
                 chance -= 20
 
             if self.location == "border":
@@ -2524,7 +2524,7 @@ class MurderScreen(Screens):
             if any(skill in acc_skills_lvl_4 for skill in your_skills):
                 chance += 20
 
-            if cat_to_murder.status in ["kitten", "queen", "apprentice", "queen's apprentice", "medicine cat apprentice", "mediator apprentice"] and \
+            if cat_to_murder.status in ["kitten", "queen", "apprentice", "queen's apprentice", "healer apprentice", "mediator apprentice"] and \
                 not cat_to_murder.skills.meets_skill_requirement(SkillPath.EXPLORER) and\
                 not cat_to_murder.skills.meets_skill_requirement(SkillPath.NAVIGATOR) and\
                 not cat_to_murder.skills.meets_skill_requirement(SkillPath.CLIMBER):
@@ -2589,7 +2589,7 @@ class MurderScreen(Screens):
                 chance -= 10
             if cat_to_murder.status in ["warrior", "deputy", "leader"]:
                 chance -= 10
-            if you.status in ["queen", "mediator", "kitten", "medicine cat", "queen's apprentice", "mediator apprentice", "medicine cat apprentice"]:
+            if you.status in ["queen", "mediator", "kitten", "healer", "queen's apprentice", "mediator apprentice", "healer apprentice"]:
                 chance -= 15
 
             if "watchful" in their_skills:
@@ -2937,9 +2937,9 @@ class MurderScreen(Screens):
                 chance += 10
             if accomplice.relationships[you.ID].admiration > 10:
                 chance += 10
-            if you.status in ['medicine cat', 'mediator', 'deputy', 'leader']:
+            if you.status in ['healer', 'mediator', 'deputy', 'leader']:
                 chance += 10
-            if accomplice.status in ['medicine cat', 'mediator', 'deputy', 'leader']:
+            if accomplice.status in ['healer', 'mediator', 'deputy', 'leader']:
                 chance -= 20
             if accomplice.ID in game.clan.your_cat.mates:
                 chance += 50

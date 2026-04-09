@@ -117,13 +117,13 @@ def reformat(path):
 
         if "kitten" in path:
             new_format["m_c"]["age"].append("kitten")
-        if "apprentice" in path or "medicine_cat_app" in event["tags"] or "mediator" in path:
+        if "apprentice" in path or "healer_app" in event["tags"] or "mediator" in path:
             new_format["m_c"]["age"].append("adolescent")
         if "warrior" in path or "deputy" in path or "leader" in path or "mediator" in path:
             new_format["m_c"]["age"].append("young adult")
             new_format["m_c"]["age"].append("adult")
             new_format["m_c"]["age"].append("senior adult")
-        if "medicine" in path and "medicine_cat_app" not in event["tags"]:
+        if "medicine" in path and "healer_app" not in event["tags"]:
             new_format["m_c"]["age"].append("young adult")
             new_format["m_c"]["age"].append("adult")
             new_format["m_c"]["age"].append("senior adult")
@@ -141,9 +141,9 @@ def reformat(path):
             new_format["m_c"]["status"].append("kitten")
         if "apprentice" in path:
             new_format["m_c"]["status"].append("apprentice")
-        if "medicine_cat_app" in event["tags"]:
-            new_format["m_c"]["status"].append("medicine cat apprentice")
-            event["tags"].remove("medicine_cat_app")
+        if "healer_app" in event["tags"]:
+            new_format["m_c"]["status"].append("healer apprentice")
+            event["tags"].remove("healer_app")
         if "warrior" in path:
             new_format["m_c"]["status"].append("warrior")
             new_format["m_c"]["status"].append("deputy")
@@ -152,10 +152,10 @@ def reformat(path):
             new_format["m_c"]["status"].append("deputy")
         if "leader" in path and "leader" not in new_format["m_c"]["status"]:
             new_format["m_c"]["status"].append("leader")
-        if "medicine" in path and "medicine_cat_app" not in event["tags"]:
-            new_format["m_c"]["status"].append("medicine cat")
-            if "medicine_cat" in event["tags"]:
-                event["tags"].remove("medicine_cat")
+        if "medicine" in path and "healer_app" not in event["tags"]:
+            new_format["m_c"]["status"].append("healer")
+            if "healer" in event["tags"]:
+                event["tags"].remove("healer")
         if "mediator" in path:
             new_format["m_c"]["status"].append("mediator")
             new_format["m_c"]["status"].append("mediator apprentice")
@@ -260,7 +260,7 @@ def reformat(path):
                     if "other_cat_med_app" in event["tags"]:
                         event["tags"].remove("other_cat_med_app")
                         new_format["r_c"]["status"].append(
-                            "medicine cat apprentice")
+                            "healer apprentice")
                     if "other_cat_warrior" in event["tags"]:
                         event["tags"].remove("other_cat_warrior")
                         new_format["r_c"]["status"].append("warrior")
@@ -272,7 +272,7 @@ def reformat(path):
                         new_format["r_c"]["status"].append("leader")
                     if "other_cat_med" in event["tags"]:
                         event["tags"].remove("other_cat_med")
-                        new_format["r_c"]["status"].append("medicine cat")
+                        new_format["r_c"]["status"].append("healer")
                     if "other_cat_elder" in event["tags"]:
                         event["tags"].remove("other_cat_elder")
                         new_format["r_c"]["age"].append("elder")
@@ -327,10 +327,10 @@ def reformat(path):
                 info.append("status:{apprentice}")
             if "new_med_app" in event["tags"]:
                 event["tags"].remove("new_med_app")
-                info.append("status:{medicine cat apprentice}")
+                info.append("status:{healer apprentice}")
             if "new_med" in event["tags"]:
                 event["tags"].remove("new_med")
-                info.append("status:{medicine cat}")
+                info.append("status:{healer}")
 
             new_format["new_cat"].append(info)
 

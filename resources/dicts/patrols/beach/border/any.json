@@ -353,7 +353,7 @@
                 ]
             },
             {
-                "text": "s_c makes a careful judgment, and the patrol keeps going. They stick to the clifftops, avoiding the low beaches as the rain begins to pour around them.",
+                "text": "s_c makes a careful judgement, and the patrol keeps going. They stick to the clifftops, avoiding the low beaches as the rain begins to pour around them.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["CLEVER,2"],
@@ -440,7 +440,7 @@
                 ]
             },
             {
-                "text": "s_c makes a careful judgment, and the patrol keeps going. They stick to the clifftops, avoiding the low beaches as the rain begins to pour around them.",
+                "text": "s_c makes a careful judgement, and the patrol keeps going. They stick to the clifftops, avoiding the low beaches as the rain begins to pour around them.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["CLEVER,2"],
@@ -509,7 +509,7 @@
                 "weight": 5
             },
             {
-                "text": "s_c makes a careful judgment and keeps going. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stick/sticks} to the clifftops, avoiding the low beaches as the rain begins to pour around {PRONOUN/s_c/object}.",
+                "text": "s_c makes a careful judgement and keeps going. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stick/sticks} to the clifftops, avoiding the low beaches as the rain begins to pour around {PRONOUN/s_c/object}.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["CLEVER,2"]
@@ -578,7 +578,7 @@
                 "weight": 5
             },
             {
-                "text": "s_c makes a careful judgment and keeps going. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stick/sticks} to the clifftops, avoiding the low beaches as the rain begins to pour around {PRONOUN/s_c/object}.",
+                "text": "s_c makes a careful judgement and keeps going. {PRONOUN/s_c/subject/CAP} {VERB/s_c/stick/sticks} to the clifftops, avoiding the low beaches as the rain begins to pour around {PRONOUN/s_c/object}.",
                 "exp": 20,
                 "weight": 20,
                 "stat_skill": ["CLEVER,2"]
@@ -967,7 +967,7 @@
         },
         "weight": 20,
         "intro_text": "While on patrol, app1 notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/app1/subject/CAP} {VERB/app1/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/app1/subject} {VERB/app1/decide/decides} not to investigate.",
         "chance_of_success": 40,
         "success_outcomes": [
             {
@@ -1053,7 +1053,7 @@
         "min_max_status": {},
         "weight": 20,
         "intro_text": "While on patrol, r_c notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/r_c/subject/CAP} {VERB/r_c/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/r_c/subject} {VERB/r_c/decide/decides} not to investigate.",
         "chance_of_success": 40,
         "success_outcomes": [
             {
@@ -1202,7 +1202,7 @@
         "min_max_status": {},
         "weight": 20,
         "intro_text": "While on patrol, r_c notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/r_c/subject/CAP} {VERB/r_c/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/r_c/subject} {VERB/r_c/decide/decides} not to investigate.",
         "chance_of_success": 40,
         "success_outcomes": [
             {
@@ -1353,7 +1353,7 @@
         },
         "weight": 20,
         "intro_text": "While on patrol, app1 notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/app1/subject/CAP} {VERB/app1/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/app1/subject} {VERB/app1/decide/decides} not to investigate.",
         "chance_of_success": 40,
         "success_outcomes": [
             {
@@ -1428,7 +1428,7 @@
         "min_max_status": {},
         "weight": 20,
         "intro_text": "While on patrol, r_c notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/r_c/subject/CAP} {VERB/r_c/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/r_c/subject} {VERB/r_c/decide/decides} not to investigate.",
         "chance_of_success": 30,
         "success_outcomes": [
             {
@@ -1551,7 +1551,7 @@
         "min_max_status": {},
         "weight": 20,
         "intro_text": "While on patrol, r_c notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/r_c/subject/CAP} {VERB/r_c/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/r_c/subject} {VERB/r_c/decide/decides} not to investigate.",
         "chance_of_success": 30,
         "success_outcomes": [
             {
@@ -1676,7 +1676,7 @@
         },
         "weight": 20,
         "intro_text": "While on patrol, app1 notices some suspicious pawprints in the wet sand on the beach.",
-        "decline_text": "{PRONOUN/app1/subject/CAP} {VERB/app1/decide/decides} not to investigate.",
+        "decline_text": "{PRONOUN/app1/subject} {VERB/app1/decide/decides} not to investigate.",
         "chance_of_success": 30,
         "success_outcomes": [
             {

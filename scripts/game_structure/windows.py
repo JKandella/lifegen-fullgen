@@ -1580,7 +1580,6 @@ class ChangelogPopup(UIWindow):
                 self.kill()
         return super().process_event(event)
 
-
 class RelationshipLog(UIWindow):
     """This window allows the user to see the relationship log of a certain relationship."""
 
@@ -1935,7 +1934,7 @@ class PickPath(UIWindow):
             "",
             object_id="#med",
             container=self,
-            tool_tip_text='Choose to become a medicine cat apprentice'
+            tool_tip_text='Choose to become a healer apprentice'
         )
         self.not_yet_button = UIImageButton(
             ui_scale(pygame.Rect((110, 80), (75, 75))),
@@ -1984,9 +1983,9 @@ class PickPath(UIWindow):
                 if event.ui_element == self.begin_anew_button:
                     game.switches['window_open'] = False
                     if game.clan.your_cat.moons < 12:
-                        status = 'medicine cat apprentice'
+                        status = 'healer apprentice'
                     else:
-                        status = 'medicine cat'
+                        status = 'healer'
                 elif event.ui_element == self.not_yet_button:
                     game.switches['window_open'] = False
                     if game.clan.your_cat.moons < 12:
@@ -2008,9 +2007,9 @@ class PickPath(UIWindow):
                 elif event.ui_element == self.random_button:
                     game.switches['window_open'] = False
                     if game.clan.your_cat.moons < 12:
-                        status = random.choice(['mediator apprentice','apprentice','medicine cat apprentice', "queen's apprentice"])
+                        status = random.choice(['mediator apprentice','apprentice','healer apprentice', "queen's apprentice"])
                     else:
-                        status = random.choice(['mediator','warrior','medicine cat', "queen"])
+                        status = random.choice(['mediator','warrior','healer', "queen"])
                 
                 if status:
                     game.clan.your_cat.status_change(status)

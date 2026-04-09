@@ -13,8 +13,9 @@ jobs:
       - name: Install poetry
         uses: abatilo/actions-poetry@v3
         with:
-          poetry-version: latest
+          poetry-version: 1.5.1
       - name: install dependencies
         run: poetry install --with test
       - name: Run Pylint
         run: poetry run pylint --recursive=y --errors-only "$PWD"
+            

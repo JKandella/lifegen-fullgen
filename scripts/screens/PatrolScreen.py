@@ -206,7 +206,7 @@ class PatrolScreen(Screens):
                     able_no_med = [
                         cat
                         for cat in self.able_cats
-                        if cat.status not in ["medicine cat", "medicine cat apprentice"]
+                        if cat.status not in ["healer", "healer apprentice"]
                     ]
                     if len(able_no_med) == 0:
                         able_no_med = self.able_cats
@@ -226,7 +226,7 @@ class PatrolScreen(Screens):
                     able_no_med = [
                         cat
                         for cat in self.able_cats
-                        if cat.status not in ["medicine cat", "medicine cat apprentice"]
+                        if cat.status not in ["healer", "healer apprentice"]
                     ]
                     if len(able_no_med) < 3:
                         able_no_med = self.able_cats
@@ -241,7 +241,7 @@ class PatrolScreen(Screens):
                     able_no_med = [
                         cat
                         for cat in self.able_cats
-                        if cat.status not in ["medicine cat", "medicine cat apprentice"]
+                        if cat.status not in ["healer", "healer apprentice"]
                     ]
                     if len(able_no_med) < 6:
                         able_no_med = self.able_cats
@@ -449,7 +449,7 @@ class PatrolScreen(Screens):
             # making sure meds don't get the option for other patrols
             if any(
                 (
-                    cat.status in ["medicine cat", "medicine cat apprentice"]
+                    cat.status in ["healer", "healer apprentice"]
                     for cat in self.current_patrol
                 )
             ):
@@ -472,10 +472,10 @@ class PatrolScreen(Screens):
             # clearing the text before displaying new text
             self.elements['info'].kill()
 
-            if self.patrol_type != 'med' and self.current_patrol:
-                self.elements['herb'].disable()
-                if self.patrol_type == 'med':
-                    self.patrol_type = 'general'
+            # if self.patrol_type != 'med' and self.current_patrol:
+            #     self.elements['herb'].disable()
+            #     if self.patrol_type == 'med':
+            #         self.patrol_type = 'general'
             
             if game.switches["patrol_category"] == "lifegen":
                 text = "lifegen"
@@ -484,11 +484,18 @@ class PatrolScreen(Screens):
             elif game.switches["patrol_category"] == "date":
                 text = "date"
             else:
-                text = ""
-
-            if game.switches['patrol_category'] == 'clangen':
-                if self.patrol_type == 'general':
-                    text = 'random patrol type'
+                text = "random patrol type"
+                # gm
+                has_healer = any((cat.status in ['healer', 'healer apprentice'] for cat in self.current_patrol)) and self.current_patrol
+                if not has_healer:
+                    self.elements["herb"].disable()
+                    if self.patrol_type == "med":
+                        self.patrol_type = "general"
+                if self.patrol_type == "general":
+                    if has_healer and game.clan.clan_settings["patrol_lock_meds"]:
+                        text = "herb gathering"
+                        self.patrol_type = "med"
+                # ---
                 elif self.patrol_type == 'training':
                     text = 'training'
                 elif self.patrol_type == 'border':
@@ -497,12 +504,10 @@ class PatrolScreen(Screens):
                     text = 'hunting'
                 elif self.patrol_type == 'med':
                     if self.current_patrol:
-                        text = 'herb gathering'
                         self.elements['mouse'].disable()
                         self.elements['claws'].disable()
                         self.elements['paw'].disable()
-                    else:
-                        text = 'herb gathering'
+                    text = 'herb gathering'
                 else:
                     text = ""
 
@@ -516,7 +521,7 @@ class PatrolScreen(Screens):
             able_no_med = [
                 cat
                 for cat in self.able_cats
-                if cat.status not in ["medicine cat", "medicine cat apprentice"]
+                if cat.status not in ["healer", "healer apprentice"]
             ]
             if game.clan.clan_settings["random med cat"]:
                 able_no_med = self.able_cats
@@ -1448,7 +1453,7 @@ class PatrolScreen(Screens):
             # Draw mentor or apprentice
             relation = "should not display"
             if (
-                self.selected_cat.status in ["medicine cat apprentice", "apprentice"]
+                self.selected_cat.status in ["healer apprentice", "apprentice"]
                 or self.selected_cat.apprentice != []
             ):
                 self.elements["app_mentor_frame"] = pygame_gui.elements.UIImage(
@@ -1459,7 +1464,7 @@ class PatrolScreen(Screens):
 
                 if (
                     self.selected_cat.status
-                    in ["medicine cat apprentice", "apprentice"]
+                    in ["healer apprentice", "apprentice"]
                     and self.selected_cat.mentor is not None
                 ):
                     self.app_mentor = Cat.fetch_cat(self.selected_cat.mentor)

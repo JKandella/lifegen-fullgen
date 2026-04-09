@@ -216,7 +216,6 @@
             "Is debating if {PRONOUN/m_c/subject} should declare a war with another Clan",
             "Is wondering if {PRONOUN/m_c/subject} could hold apprentice ceremonies 2 moons earlier",
             "Hopes to postpone the retirement of {PRONOUN/m_c/poss} Clanmates",
-            "Asks the medicine cats to have a stock of deathberries at {PRONOUN/m_c/poss} disposal",
             "Doesn't understand StarClan's resentment towards {PRONOUN/m_c/object}",
             "Is thinking about taking kits from another Clan",
             "Encourages warriors to destroy other Clans' herb supplies",
@@ -347,7 +346,7 @@
         "thoughts": [
             "Was practicing pulling off dangerous tricks and battle moves",
             "Is puffing out {PRONOUN/m_c/poss} chest, admiring the Clan",
-            "Is in the medicine den thanks to a failed trick",
+            "Is in the healer den thanks to a failed trick",
             "Nearly had a whisker sliced off dodging a recently awaken badger",
             "Accepted a challenge, leaping across the highest points in the camp",
             "Is being cheeky during {PRONOUN/m_c/poss} Clan announcements",
@@ -453,7 +452,7 @@
             "Knows wars are inevitable",
             "Is still trying to find out why and how {PRONOUN/m_c/subject} became leader",
             "Is scared of losing all of {PRONOUN/m_c/poss} lives at once",
-            "Repeatedly asks the medicine cat about if StarClan was lying about giving {PRONOUN/m_c/poss} nine lives",
+            "Repeatedly asks the healer about if StarClan was lying about giving {PRONOUN/m_c/poss} nine lives",
             "Can't help but envision {PRONOUN/m_c/poss} leadership is distressing to {PRONOUN/m_c/poss} Clanmates",
             "Has difficult moments trying to find {PRONOUN/m_c/poss} voice in Clan meetings",
             "Is finding leadership burdensome, but is trying {PRONOUN/m_c/poss} best for c_n",
@@ -577,7 +576,7 @@
             "Is concealing more knowledge than what {PRONOUN/m_c/subject} show",
             "Is digging up long-forgotten knowledge about c_n's history",
             "Has been sneaking out of the camp more often lately...",
-            "Coerces the medicine cat to reveal every omen to {PRONOUN/m_c/object} only",
+            "Coerces the healer to reveal every omen to {PRONOUN/m_c/object} only",
             "Tricked a pair of rogues living in the Clan's territory with a clever attack",
             "Lied in a Clan meeting to not share information",
             "Was found speaking to an unknown cat near the border alone",
@@ -687,8 +686,7 @@
             "Trusts r_c to continue to keep the Clan in line",
             "Threatens to drag r_c to the Dark Forest with {PRONOUN/m_c/object}",
             "Is teaching r_c how to rat out spies and dissenting warriors",
-            "Shows r_c how to lead by pain and suffering",
-            "Sadistically debating with r_c on whether to exile or publicly kill disloyal cats"
+            "Shows r_c how to lead by pain and suffering"
         ],
         "random_status_constraint": [
             "deputy"
@@ -716,12 +714,12 @@
             "Instructs r_c to let a sick cat die",
             "Is telling r_c to make a poultice with deathberries",
             "Tells r_c to fake a sign from StarClan to prepare the Clan for war",
-            "Is pleased with having a like-minded medicine cat like r_c",
+            "Is pleased with having a like-minded healer like r_c",
             "Is listening to r_c explain the pointlessness of treating weak or old cats",
             "Asks r_c to construct a myriad of fake omens and signs to keep {PRONOUN/m_c/object} in power"
         ],
         "random_status_constraint": [
-            "medicine cat"
+            "healer"
         ],
         "random_living_status": [
             "living"

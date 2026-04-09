@@ -207,7 +207,7 @@ class ClanScreen(Screens):
         )
         self.med_den_label = UISurfaceImageButton(
             ui_scale(pygame.Rect(self.layout["medicine den"], (151, 28))),
-            "medicine cat den",
+            "healer den",
             get_button_dict(ButtonStyles.ROUNDED_RECT, (151, 28)),
             object_id=ObjectID(class_id="@buttonstyles_rounded_rect", object_id=None),
             starting_height=2,
@@ -475,7 +475,7 @@ class ClanScreen(Screens):
                 Cat.all_cats[x].placement = self.choose_nonoverlapping_positions(
                     first_choices, all_dens, [60, 8, 1, 1, 1, 1, 1]
                 )
-            elif Cat.all_cats[x].status in ["medicine cat apprentice", "medicine cat"]:
+            elif Cat.all_cats[x].status in ["healer apprentice", "healer"]:
                 Cat.all_cats[x].placement = self.choose_nonoverlapping_positions(
                     first_choices, all_dens, [20, 20, 20, 400, 1, 1, 1]
                 )

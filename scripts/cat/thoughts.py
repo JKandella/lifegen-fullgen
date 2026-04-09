@@ -335,15 +335,6 @@ class Thoughts:
         status = main_cat.status
 
         status = status.replace(" ", "_")
-        # match status:
-        #     case "medicine cat apprentice":
-        #         status = "medicine_cat_apprentice"
-        #     case "mediator apprentice":
-        #         status = "mediator_apprentice"
-        #     case "medicine cat":
-        #         status = "medicine_cat"
-        #     case 'former Clancat':
-        #         status = 'former_Clancat'
 
         if not main_cat.dead:
             life_dir = "alive"
@@ -380,8 +371,9 @@ class Thoughts:
             final_thoughts = Thoughts.create_thoughts(loaded_thoughts, main_cat, other_cat, game_mode, biome,
                                                       season, camp)
             return final_thoughts
-        except IOError:
-            print("ERROR: loading thoughts")
+        except IOError as e:
+            print("ERROR: loading thoughts for", main_cat.name)
+            print(e)
 
     @staticmethod
     def get_chosen_thought(main_cat, other_cat, game_mode, biome, season, camp):
@@ -414,9 +406,9 @@ class Thoughts:
         base_path = f"resources/dicts/thoughts/ondeath"
         if darkforest is False:
             spec_dir = "/starclan"
-        elif darkforest:
+        else:
             spec_dir = "/darkforest"
-        THOUGHTS: []
+        THOUGHTS = []
         try:
             if lives_left > 0:
                 with open(f"{base_path}{spec_dir}/leader_life.json", 'r') as read_file:
@@ -442,9 +434,9 @@ class Thoughts:
             spec_dir = "/unknownresidence"
         elif darkforest is False:
             spec_dir = "/starclan"
-        elif darkforest:
+        else:
             spec_dir = "/darkforest"
-        THOUGHTS: []
+        THOUGHTS = []
         try:
             with open(f"{base_path}{spec_dir}/general.json", 'r') as read_file:
                 THOUGHTS = ujson.loads(read_file.read())
