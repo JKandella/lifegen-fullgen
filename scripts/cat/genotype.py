@@ -11,6 +11,8 @@ class Genotype:
     def __init__(self, odds, ban_genes=True, spec=None):
         self.odds = odds
         self.ban_genes = ban_genes
+        self.chimera = False
+        self.chimerageno = None
         self.chimerapattern = None
 
         # Backward compatibility for configs that omit legacy list-based keys.
