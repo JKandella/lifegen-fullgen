@@ -4531,7 +4531,7 @@ class MakeClanScreen(Screens):
             game.clan = Clan(name = self.clan_name,
                             leader = self.leader,
                             deputy = self.deputy,
-                            healer = self.med_cat,
+                            medicine_cat = self.med_cat,
                             biome = self.biome_selected,
                             camp_bg = convert_camp[self.selected_camp_tab],
                             symbol=self.symbol_selected,

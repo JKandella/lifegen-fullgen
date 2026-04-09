@@ -712,7 +712,6 @@ class ChooseMentorScreen(Screens):
 
             return valid_warrior_mentors
 
-
         elif self.the_cat.status == "medicine cat apprentice":
             for cat in potential_medcat_mentors:
                 is_valid = True

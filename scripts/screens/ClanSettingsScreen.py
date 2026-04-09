@@ -447,8 +447,8 @@ class ClanSettingsScreen(Screens):
         f"StarClan Cats: {starclan}\n" \
         f"Dark Forest Cats: {df}\n" \
         f"Unknown Residence Cats: {ur}\n" \
-        f"healers: {med_cats}\n" \
-        f"healer Apprentices: {med_cat_apprentices}\n" \
+        f"Medicine Cats: {med_cats}\n" \
+        f"Medicine Cat Apprentices: {med_cat_apprentices}\n" \
         f"Warriors: {warriors}\n" \
         f"Warrior Apprentices: {warrior_apprentices}\n" \
         f"Mediators: {mediators}\n" \

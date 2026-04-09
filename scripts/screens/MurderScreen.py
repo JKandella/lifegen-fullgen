@@ -1959,15 +1959,15 @@ class MurderScreen(Screens):
             accomplice.faith -= 0.5
         
         if punishment_chance == 1 or punishment_chance == 3:
-            kit_punishment = ["You are assigned counseling by the Clan's healer to help you understand the severity of your actions and to guide you to make better decisions in the future.",
+            kit_punishment = ["You are assigned counseling by the Clan's medicine cat to help you understand the severity of your actions and to guide you to make better decisions in the future.",
                                 "You are to be kept in the nursery under the watchful eye of the queens at all times until you become an apprentice."]
-            gen_punishment = ["You are assigned counseling by the Clan's healer to help you understand the severity of your actions and to guide you to make better decisions in the future.",
+            gen_punishment = ["You are assigned counseling by the Clan's medicine cat to help you understand the severity of your actions and to guide you to make better decisions in the future.",
                                 "You will be required to take meals last and are forced to sleep in a separate den away from your clanmates.",
                                 "You are assigned to several moons of tasks that include cleaning out nests, checking elders for ticks, and other chores alongside your normal duties.",
                                 "You are assigned a mentor who will better educate you about the Warrior Code and the sacredness of life."]
             # demote_leader = ["Your lives will be stripped away and you will be demoted to a warrior, no longer trusted to be the Clan's leader."]
             # demote_deputy = ["The Clan decides that you will be demoted to a warrior, no longer trusting you as their deputy."]
-            # demote_healer = ["The Clan decides that you will be demoted to a warrior, no longer trusting you as their healer."]
+            # demote_medicine_cat = ["The Clan decides that you will be demoted to a warrior, no longer trusting you as their medicine cat."]
             # exiled = ["The Clan decides that they no longer feel safe with you as a Clanmate. You will be exiled from the Clan."]
             
             if you.status == 'kitten' or you.status == 'newborn':
@@ -2006,16 +2006,16 @@ class MurderScreen(Screens):
         
         if accomplice and accompliced and (punishment_chance == 2 or punishment_chance == 3):
             a_n = str(accomplice.name)
-            kit_punishment = [f"{a_n} is assigned counseling by the Clan's healer to help them understand the severity of their actions and to guide them to make better decisions in the future.",
+            kit_punishment = [f"{a_n} is assigned counseling by the Clan's medicine cat to help them understand the severity of their actions and to guide them to make better decisions in the future.",
                             f"{a_n} is to be kept in the nursery under the watchful eye of the queens at all times until they become an apprentice."]
-            gen_punishment = [f"{a_n} is assigned counseling by the Clan's healer to help them understand the severity of their actions and to guide them to make better decisions in the future.",
+            gen_punishment = [f"{a_n} is assigned counseling by the Clan's medicine cat to help them understand the severity of their actions and to guide them to make better decisions in the future.",
                                 f"{a_n} is required to take meals last and is forced to sleep in a separate den away from their clanmates.",
                                 f"{a_n} is assigned to several moons of tasks that include cleaning out nests, checking elders for ticks, and other chores alongside their normal duties.",
                                 f"{a_n} is assigned a mentor who will better educate them about the Warrior Code and the sacredness of life."]
             
             # demote_leader = [f"{a_n}'s lives will be stripped away and they will be demoted to a warrior, no longer trusted to be the Clan's leader."]
             # demote_deputy = [f"The Clan decides that {a_n} will be demoted to a warrior, no longer trusting them as their deputy."]
-            # demote_healer = [f"The Clan decides that {a_n} will be demoted to a warrior, no longer trusting them as their healer."]
+            # demote_medicine_cat = [f"The Clan decides that {a_n} will be demoted to a warrior, no longer trusting them as their medicine cat."]
             # exiled = [f"The Clan decides that they no longer feel safe with {a_n} as a Clanmate. They will be exiled from the Clan."]
 
             if accomplice.status == 'kitten' or accomplice.status == 'newborn':

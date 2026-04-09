@@ -9,7 +9,7 @@ import itertools
 import os.path
 import sys
 from random import choice, randint, sample, random, getrandbits, randrange
-from typing import Dict, List, Any, Callable, Optional
+from typing import Dict, List, Any, Callable
 
 import ujson  # type: ignore
 
@@ -17,7 +17,6 @@ from .names import Name
 from .pelts import Pelt
 
 from scripts.game_structure.game_essentials import game
-from scripts.genemod.genetics_service import GeneticsService
 from scripts.cat_relations.relationship import Relationship
 from scripts.game_structure import image_cache
 from scripts.event_class import Single_Event
@@ -100,15 +99,7 @@ class Cat:
         "leader",
     ]
 
-    gender_tags = {
-        'female': 'F',
-        'male': 'M',
-        'fem': 'F',
-        'masc': 'M',
-        'molly': 'F',
-        'tom': 'M',
-        'intersex': 'I',
-    }
+    gender_tags = {"female": "F", "male": "M"}
 
     # EX levels and ranges.
     # Ranges are inclusive to both bounds
@@ -165,8 +156,6 @@ class Cat:
         backstory="clanborn",
         parent1=None,
         parent2=None,
-        extrapar=None,
-        kittypet=False,
         adoptive_parents=None,
         suffix=None,
         specsuffix_hidden=False,
@@ -175,10 +164,7 @@ class Cat:
         example=False,
         faded=False,
         skill_dict=None,
-        pelt: Optional[Pelt] = None,
-        genotype=None,
-        white_patterns=None,
-        chim_white=None,
+        pelt: Pelt = None,
         loading_cat=False,  # Set to true if you are loading a cat at start-up.
         **kwargs,
     ):
@@ -228,23 +214,8 @@ class Cat:
         )
         self.parent1 = parent1
         self.parent2 = parent2
-
-        self.genotype, self.phenotype = GeneticsService.init_cat(
-            genotype_json=genotype,
-            white_patterns=white_patterns,
-            chim_white=chim_white,
-            parent1=parent1,
-            parent2=parent2,
-            extrapar=extrapar,
-            kittypet=kittypet,
-            gender=self.gender,
-            status=status,
-        )
-        if getattr(self.phenotype, "chimerapheno", None):
-            self.chimerapheno = self.phenotype.chimerapheno
-
         self.adoptive_parents = adoptive_parents if adoptive_parents else []
-        self.pelt = pelt if pelt else Pelt(genotype=self.genotype, phenotype=self.phenotype)
+        self.pelt = pelt if pelt else Pelt()
         self.former_mentor = []
         self.patrol_with_mentor = 0
         self.apprentice = []
@@ -2334,17 +2305,7 @@ class Cat:
             return
 
         injury = INJURIES[name]
-        mortality_by_age = injury["mortality"]
-        mortality = mortality_by_age.get(self.age)
-        if mortality is None:
-            # Some injuries do not define every age bucket (for example, newborn).
-            # Fall back to the closest younger-age bucket used by the injury data.
-            for age_key in ("kitten", "adolescent", "young adult", "adult", "senior adult", "senior"):
-                if age_key in mortality_by_age:
-                    mortality = mortality_by_age[age_key]
-                    break
-        if mortality is None:
-            mortality = 0
+        mortality = injury["mortality"][self.age]
         duration = injury["duration"]
         med_duration = injury["medicine_duration"]
 
@@ -4118,20 +4079,6 @@ class Cat:
     def is_baby(self):
         return self.age in ["kitten", "newborn"]
 
-    @property
-    def mate(self):
-        # Compatibility alias used by GeneMod-derived modules.
-        return self.mates
-
-    @mate.setter
-    def mate(self, value):
-        if value is None:
-            self.mates = []
-        elif isinstance(value, list):
-            self.mates = value
-        else:
-            self.mates = [value]
-
     def get_save_dict(self, faded=False):
         if faded:
             return {
@@ -4179,13 +4126,6 @@ class Cat:
                 "no_mates": self.no_mates,
                 "exiled": self.exiled,
                 "driven_out": self.driven_out,
-                "genotype": GeneticsService.to_json(self.genotype),
-                "white_pattern": self.genotype.white_pattern,
-                "chim_white": (
-                    self.genotype.chimerageno.white_pattern
-                    if self.genotype.chimerageno
-                    else None
-                ),
                 "pelt_name": self.pelt.name,
                 "pelt_color": self.pelt.colour,
                 "pelt_length": self.pelt.length,

@@ -1580,6 +1580,7 @@ class ChangelogPopup(UIWindow):
                 self.kill()
         return super().process_event(event)
 
+
 class RelationshipLog(UIWindow):
     """This window allows the user to see the relationship log of a certain relationship."""
 
@@ -1934,7 +1935,7 @@ class PickPath(UIWindow):
             "",
             object_id="#med",
             container=self,
-            tool_tip_text='Choose to become a healer apprentice'
+            tool_tip_text='Choose to become a medicine cat apprentice'
         )
         self.not_yet_button = UIImageButton(
             ui_scale(pygame.Rect((110, 80), (75, 75))),

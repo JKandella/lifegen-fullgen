@@ -95,62 +95,41 @@ def json_load():
                 cat["accessories"].remove("RAINCOAT")
                 cat["accessories"].append("YELLOWRAINCOAT")
 
-            try:
-                new_cat = Cat(
-                    ID=cat["ID"],
-                    prefix=cat["name_prefix"],
-                    suffix=cat["name_suffix"],
-                    specsuffix_hidden=(
-                        cat["specsuffix_hidden"] if "specsuffix_hidden" in cat else False
-                    ),
-                    gender=cat["gender"],
-                    status=cat["status"],
-                    parent1=cat["parent1"],
-                    parent2=cat["parent2"],
-                    moons=cat["moons"],
-                    genotype=cat["genotype"] if "genotype" in cat else None,
-                    white_patterns=cat["white_pattern"] if "white_pattern" in cat else None,
-                    chim_white=cat["chim_white"] if "chim_white" in cat else None,
-                    loading_cat=True,
-                )
-            except Exception:
-                # Fallback for older saves with missing or malformed genetics payloads.
-                new_cat = Cat(
-                    ID=cat["ID"],
-                    prefix=cat["name_prefix"],
-                    suffix=cat["name_suffix"],
-                    specsuffix_hidden=(
-                        cat["specsuffix_hidden"] if "specsuffix_hidden" in cat else False
-                    ),
-                    gender=cat["gender"],
-                    status=cat["status"],
-                    parent1=cat["parent1"],
-                    parent2=cat["parent2"],
-                    moons=cat["moons"],
-                    loading_cat=True,
-                )
+            new_cat = Cat(
+                ID=cat["ID"],
+                prefix=cat["name_prefix"],
+                suffix=cat["name_suffix"],
+                specsuffix_hidden=(
+                    cat["specsuffix_hidden"] if "specsuffix_hidden" in cat else False
+                ),
+                gender=cat["gender"],
+                status=cat["status"],
+                parent1=cat["parent1"],
+                parent2=cat["parent2"],
+                moons=cat["moons"],
+                eye_colour=cat["eye_colour"],
+                loading_cat=True,
+            )
             
-            if "eye_colour" in cat:
-                if cat["eye_colour"] == "BLUE2":
-                    cat["eye_colour"] = "COBALT"
-                if cat["eye_colour"] in ["BLUEYELLOW", "BLUEGREEN"]:
-                    if cat["eye_colour"] == "BLUEYELLOW":
-                        cat["eye_colour2"] = "YELLOW"
-                    elif cat["eye_colour"] == "BLUEGREEN":
-                        cat["eye_colour2"] = "GREEN"
-                    cat["eye_colour"] = "BLUE"
-            if "eye_colour2" in cat and cat["eye_colour2"] == "BLUE2":
-                cat["eye_colour2"] = "COBALT"
+            if cat["eye_colour"] == "BLUE2":
+                cat["eye_colour"] = "COBALT"
+            if cat["eye_colour"] in ["BLUEYELLOW", "BLUEGREEN"]:
+                if cat["eye_colour"] == "BLUEYELLOW":
+                    cat["eye_colour2"] = "YELLOW"
+                elif cat["eye_colour"] == "BLUEGREEN":
+                    cat["eye_colour2"] = "GREEN"
+                cat["eye_colour"] = "BLUE"
+            if "eye_colour2" in cat:
+                if cat["eye_colour2"] == "BLUE2":
+                    cat["eye_colour2"] = "COBALT"
 
             new_cat.pelt = Pelt(
-                genotype=new_cat.genotype,
-                phenotype=new_cat.phenotype,
-                name=cat["pelt_name"] if "pelt_name" in cat else new_cat.pelt.name,
-                length=cat["pelt_length"] if "pelt_length" in cat else new_cat.pelt.length,
-                colour=cat["pelt_color"] if "pelt_color" in cat else new_cat.pelt.colour,
-                eye_color=cat["eye_colour"] if "eye_colour" in cat else new_cat.pelt.eye_colour,
+                name=cat["pelt_name"],
+                length=cat["pelt_length"],
+                colour=cat["pelt_color"],
+                eye_color=cat["eye_colour"],
                 eye_colour2=cat["eye_colour2"] if "eye_colour2" in cat else None,
-                paralyzed=cat["paralyzed"] if "paralyzed" in cat else False,
+                paralyzed=cat["paralyzed"],
                 kitten_sprite=(
                     cat["sprite_kitten"]
                     if "sprite_kitten" in cat
@@ -174,23 +153,23 @@ def json_load():
                 para_adult_sprite=(
                     cat["sprite_para_adult"] if "sprite_para_adult" in cat else None
                 ),
-                reverse=cat["reverse"] if "reverse" in cat else False,
+                reverse=cat["reverse"],
                 vitiligo=cat["vitiligo"] if "vitiligo" in cat else None,
                 points=cat["points"] if "points" in cat else None,
                 white_patches_tint=(
                     cat["white_patches_tint"]
                     if "white_patches_tint" in cat
-                    else cat["white_tint"] if "white_tint" in cat else "offwhite"
+                    else "offwhite"
                 ),
-                white_patches=cat["white_patches"] if "white_patches" in cat else None,
-                tortiebase=cat["tortie_base"] if "tortie_base" in cat else None,
-                tortiecolour=cat["tortie_color"] if "tortie_color" in cat else None,
-                tortiepattern=cat["tortie_pattern"] if "tortie_pattern" in cat else None,
-                pattern=cat["pattern"] if "pattern" in cat else None,
-                skin=cat["skin"] if "skin" in cat else "BLACK",
+                white_patches=cat["white_patches"],
+                tortiebase=cat["tortie_base"],
+                tortiecolour=cat["tortie_color"],
+                tortiepattern=cat["tortie_pattern"],
+                pattern=cat["pattern"],
+                skin=cat["skin"],
                 tint=cat["tint"] if "tint" in cat else "none",
                 scars=cat["scars"] if "scars" in cat else [],
-                accessory=cat["accessory"] if "accessory" in cat else None,
+                accessory=cat["accessory"],
                 opacity=cat["opacity"] if "opacity" in cat else 100,
                 accessories=cat["accessories"] if "accessories" in cat else [],
                 inventory = cat["inventory"] if "inventory" in cat else []

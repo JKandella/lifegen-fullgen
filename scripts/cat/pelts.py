@@ -1,14 +1,9 @@
 import random
 from random import choice
 from re import sub
-from typing import TYPE_CHECKING
 
 from scripts.cat.sprites import sprites
 from scripts.game_structure.game_essentials import game
-
-if TYPE_CHECKING:
-    from .genotype import Genotype
-    from .phenotype import Phenotype
 
 
 class Pelt:
@@ -184,8 +179,6 @@ class Pelt:
     """Holds all appearance information for a cat. """
 
     def __init__(self,
-                 genotype: "Genotype" = None,
-                 phenotype: "Phenotype" = None,
                  name: str = "SingleColour",
                  length: str = "short",
                  colour: str = "WHITE",
@@ -212,10 +205,8 @@ class Pelt:
                  para_adult_sprite: int = None,
                  reverse: bool = False,
                  accessories:list=None,
-                 inventory:list=None
+                 inventory:list=[]
                  ) -> None:
-        self.genotype = genotype
-        self.phenotype = phenotype
         self.name = name
         self.colour = colour
         self.white_patches = white_patches
@@ -226,7 +217,7 @@ class Pelt:
         self.tortiepattern = tortiepattern
         self.tortiecolour = tortiecolour
         self.vitiligo = vitiligo
-        self.length = self._resolve_length(length)
+        self.length = length
         self.points = points
         self.accessory = accessory
         self.accessories = accessories if accessories is not None else []
@@ -271,37 +262,9 @@ class Pelt:
         else:
             self.inventory = inventory
 
-    def _resolve_length(self, default_length: str) -> str:
-        if not self.genotype or not self.phenotype:
-            return default_length
-
-        if (
-            self.phenotype.length == "longhaired"
-            and self.genotype.longtype == "long"
-            and self.genotype.cornish[0] == "R"
-            and self.genotype.lykoi[0] == "Ly"
-            and self.genotype.sedesp[0] != "re"
-            and "brush" not in self.phenotype.furtype
-        ):
-            return "long"
-
-        if self.phenotype.length == "hairless":
-            return "hairless"
-
-        if self.phenotype.length == "mediumhaired":
-            return "medium"
-
-        return "short"
-
     @staticmethod
-    def generate_new_pelt(
-        gender=None,
-        parents=(),
-        age: str = "adult",
-        genotype: "Genotype" = None,
-        phenotype: "Phenotype" = None,
-    ):
-        new_pelt = Pelt(genotype=genotype, phenotype=phenotype)
+    def generate_new_pelt(gender: str, parents: tuple = (), age: str = "adult"):
+        new_pelt = Pelt()
 
         pelt_white = new_pelt.init_pattern_color(parents, gender)
         new_pelt.init_white_patches(pelt_white, parents)
@@ -790,14 +753,6 @@ class Pelt:
         else:
             self.accessory = None
 
-        # Feather tail accessories clash with short/absent tails in genetics mode.
-        if (
-            self.phenotype
-            and 0 < self.phenotype.bobtailnr < 5
-            and self.accessory in ['RED FEATHERS', 'BLUE FEATHERS', 'JAY FEATHERS']
-        ):
-            self.accessory = None
-
     def init_pattern(self):
         if self.name in Pelt.torties:
             if not self.tortiebase:
@@ -1013,21 +968,8 @@ class Pelt:
         # PELT TINT
         # Basic tints as possible for all colors.
         base_tints = sprites.cat_tints["possible_tints"]["basic"]
-        tint_colour_key = self.colour
-        if self.phenotype and self.genotype:
-            if self.genotype.white[0] == "W":
-                tint_colour_key = "WHITE"
-            elif (
-                'point' in self.phenotype.point
-                or 'silver' in self.phenotype.silvergold
-                or (self.genotype.dilute[0] == 'd' and self.genotype.pinkdilute[0] == "dp")
-            ):
-                tint_colour_key = "PALE"
-            elif 'gold' in self.phenotype.silvergold or 'sunshine' in self.phenotype.silvergold:
-                tint_colour_key = "GOLDEN"
-
-        if tint_colour_key in sprites.cat_tints["colour_groups"]:
-            color_group = sprites.cat_tints["colour_groups"].get(tint_colour_key, "warm")
+        if self.colour in sprites.cat_tints["colour_groups"]:
+            color_group = sprites.cat_tints["colour_groups"].get(self.colour, "warm")
             color_tints = sprites.cat_tints["possible_tints"][color_group]
         else:
             color_tints = []
@@ -1041,8 +983,8 @@ class Pelt:
         if self.white_patches or self.points:
             # Now for white patches
             base_tints = sprites.white_patches_tints["possible_tints"]["basic"]
-            if tint_colour_key in sprites.cat_tints["colour_groups"]:
-                color_group = sprites.white_patches_tints["colour_groups"].get(tint_colour_key, "white")
+            if self.colour in sprites.cat_tints["colour_groups"]:
+                color_group = sprites.white_patches_tints["colour_groups"].get(self.colour, "white")
                 color_tints = sprites.white_patches_tints["possible_tints"][color_group]
             else:
                 color_tints = []

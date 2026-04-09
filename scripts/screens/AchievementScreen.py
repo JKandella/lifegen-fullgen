@@ -41,6 +41,7 @@ from ..housekeeping.version import get_version_info
 from scripts.utility import get_text_box_theme, ui_scale, ui_scale_blit, ui_scale_offset
 from scripts.game_structure.screen_settings import MANAGER
 
+
 logger = logging.getLogger(__name__)
 has_checked_for_update = False
 update_available = False

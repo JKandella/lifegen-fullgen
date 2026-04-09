@@ -461,8 +461,6 @@ class Condition_Events:
             "one bad eye",
             "partial hearing loss",
             "deaf",
-            "partial hearing loss in one ear",
-            "deaf in one ear",
             "constant joint pain",
             "constantly dizzy",
             "recurring shock",
@@ -754,7 +752,9 @@ class Condition_Events:
                     # choose event string and ensure Clan's med cat number aligns with event text
                     random_index = random.randrange(0, len(possible_string_list))
 
-                    med_list = get_alive_status_cats(Cat, ["medicine cat", "medicine cat apprentice"], working=True)
+                    med_list = get_alive_status_cats(
+                        Cat, ["medicine cat", "medicine cat apprentice"], working=True
+                    )
                     # If the cat is a med cat, don't consider them as one for the event.
 
                     if cat in med_list:
@@ -814,9 +814,6 @@ class Condition_Events:
             "one bad eye": "failing eyesight",
             "failing eyesight": "blind",
             "partial hearing loss": "deaf",
-            "partial hearing loss in one ear" : "deaf in one ear",
-            "partial hearing loss in one ear" : "partial hearing loss",
-            "deaf in one ear" : "deaf"
         }
 
         conditions = deepcopy(cat.permanent_condition)
@@ -847,7 +844,7 @@ class Condition_Events:
                 continue
 
             # revealing perm condition
-            if status == 'reveal' and condition not in ['infertility', 'manx syndrome']:
+            if status == "reveal":
                 # gather potential event strings for gotten risk
                 possible_string_list = (
                     Condition_Events.CONGENITAL_CONDITION_GOT_STRINGS[condition]
@@ -855,7 +852,12 @@ class Condition_Events:
 
                 # choose event string and ensure Clan's med cat number aligns with event text
                 random_index = int(random.random() * len(possible_string_list))
-                med_list = get_alive_status_cats(Cat, ["medicine cat", "medicine cat apprentice"], working=True, sort=True)
+                med_list = get_alive_status_cats(
+                    Cat,
+                    ["medicine cat", "medicine cat apprentice"],
+                    working=True,
+                    sort=True,
+                )
                 med_cat = None
                 has_parents = False
                 if cat.parent1 is not None and cat.parent2 is not None:
@@ -930,23 +932,9 @@ class Condition_Events:
         if game.clan.clan_settings["retirement"] or cat.no_retire:
             return
 
-        if (
-            not triggered
-            and not cat.dead
-            and cat.status
-            not in [
-                "leader",
-                "medicine cat",
-                "kitten",
-                "newborn",
-                "medicine cat apprentice",
-                "mediator",
-                "mediator apprentice",
-                "queen",
-                "queen's apprentice",
-                "elder",
-            ]
-        ):
+        if not triggered and not cat.dead and cat.status not in \
+                ['leader', 'medicine cat', 'kitten', 'newborn', 'medicine cat apprentice', 'mediator',
+                 'mediator apprentice', "queen", "queen's apprentice", 'elder']:
             for condition in cat.permanent_condition:
                 if cat.permanent_condition[condition]["severity"] not in [
                     "major",
@@ -1042,7 +1030,7 @@ class Condition_Events:
                 Cat.all_cats.values(), get_amount_cat_for_one_medic(game.clan)
             ):
                 chance += 10  # lower risk if enough meds
-            if game.clan.healer is None and chance != 0:
+            if game.clan.medicine_cat is None and chance != 0:
                 chance = int(
                     chance * 0.75
                 )  # higher risk if no meds and risk chance wasn't 0
@@ -1111,7 +1099,12 @@ class Condition_Events:
 
                     # choose event string and ensure Clan's med cat number aligns with event text
                     random_index = int(random.random() * len(possible_string_list))
-                    med_list = get_alive_status_cats(Cat, ["medicine cat", "medicine cat apprentice"], working=True, sort=True)
+                    med_list = get_alive_status_cats(
+                        Cat,
+                        ["medicine cat", "medicine cat apprentice"],
+                        working=True,
+                        sort=True,
+                    )
                     if len(med_list) == 0:
                         if random_index == 0:
                             random_index = 1

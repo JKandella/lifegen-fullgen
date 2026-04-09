@@ -66,7 +66,7 @@ def download_file(url: str):
 
 def get_update_url():
     if get_update_url.value is None:
-        fetch_url = "https://raw.githubusercontent.com/Thlumyn/clangen/development/verification/update_api_url.txt"
+        fetch_url = "https://raw.githubusercontent.com/ClanGenOfficial/clangen/development/verification/update_api_url.txt"
         result = configured_get_request(fetch_url)
         get_update_url.value = result.text
     return get_update_url.value

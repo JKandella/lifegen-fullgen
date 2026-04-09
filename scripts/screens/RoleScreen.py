@@ -431,7 +431,6 @@ class RoleScreen(Screens):
             self.switch_warrior_app.disable()
             self.switch_mediator_app.disable()
             self.switch_queen_app.disable()
-
         elif self.the_cat.status == "medicine cat":
             self.promote_leader.disable()
             self.promote_deputy.disable()
@@ -507,7 +506,6 @@ class RoleScreen(Screens):
             self.switch_warrior_app.disable()
             self.switch_mediator_app.disable()
             self.switch_queen_app.disable()
-
         elif self.the_cat.status == "medicine cat apprentice":
             self.promote_leader.disable()
             self.promote_deputy.disable()
@@ -524,7 +522,7 @@ class RoleScreen(Screens):
             self.switch_warrior_app.enable()
             self.switch_mediator_app.enable()
             self.switch_queen_app.enable()
-        elif self.the_cat.status == "medicine cat apprentice":
+        elif self.the_cat.status == "queen's apprentice":
             self.promote_leader.disable()
             self.promote_deputy.disable()
 
@@ -615,10 +613,10 @@ class RoleScreen(Screens):
             )
         elif self.the_cat.status == "medicine cat":
             output = (
-                f"{self.the_cat.name} is a <b>healer</b>. Healers are the healers of the Clan. "
+                f"{self.the_cat.name} is a <b>medicine cat</b>. Medicine cats are the healers of the Clan. "
                 f"They treat "
-                f"injuries and illnesses with herbal remedies. Unlike warriors, healers are not expected "
-                f"to hunt and fight for the Clan. In addition to their healing duties, healers also have "
+                f"injuries and illnesses with herbal remedies. Unlike warriors, medicine cats are not expected "
+                f"to hunt and fight for the Clan. In addition to their healing duties, medicine cats also have "
                 f"a special connection to StarClan. Every half-moon, they travel to their Clan's holy place "
                 f"to commune with StarClan. "
             )
@@ -642,7 +640,7 @@ class RoleScreen(Screens):
                 f"many moons of rest. Elders are essential to passing down the oral tradition of the Clan. "
                 f"Sometimes, cats may retire due to disability or injury. Whatever the "
                 f"circumstance of their retirement, elders are held in high esteem in the Clan, and always eat "
-                f"before Warriors and healers. "
+                f"before Warriors and Medicine Cats. "
             )
         elif self.the_cat.status == "apprentice":
             output = (
@@ -655,9 +653,9 @@ class RoleScreen(Screens):
             )
         elif self.the_cat.status == "medicine cat apprentice":
             output = (
-                f"{self.the_cat.name} is a <b>healer apprentice</b>, training to become a full healer. "
-                f"Kits can be made healer apprentices at six moons of age, where they will learn how to "
-                f"heal their Clanmates and commune with StarClan. Healer apprentices are typically chosen "
+                f"{self.the_cat.name} is a <b>medicine cat apprentice</b>, training to become a full medicine cat. "
+                f"Kits can be made medicine cat apprentices at six moons of age, where they will learn how to "
+                f"heal their Clanmates and commune with StarClan. Medicine cat apprentices are typically chosen "
                 f"for their interest in healing and/or their connecting to StarClan. Apprentices take the suffix "
                 f"-paw, to represent the path their paws take towards adulthood."
             )

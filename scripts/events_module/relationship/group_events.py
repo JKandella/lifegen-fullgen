@@ -13,7 +13,6 @@ from scripts.cat_relations.interaction import (
 )
 from scripts.event_class import Single_Event
 from scripts.game_structure.game_essentials import game
-from scripts.cat_relations.relationship import Relationship
 from scripts.utility import change_relationship_values, process_text
 
 

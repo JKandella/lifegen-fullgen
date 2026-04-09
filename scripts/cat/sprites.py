@@ -52,23 +52,7 @@ class Sprites:
         a_file -- Path to the file to create a spritesheet from.
         name -- Name to call the new spritesheet.
         """
-        try:
-            self.spritesheets[name] = pygame.image.load(a_file).convert_alpha()
-            return
-        except FileNotFoundError:
-            logger.warning("Missing spritesheet %s for '%s'; using placeholder", a_file, name)
-
-        placeholder_path = "sprites/error_placeholder.png"
-        try:
-            self.spritesheets[name] = pygame.image.load(placeholder_path).convert_alpha()
-            return
-        except Exception:
-            # Last resort: a transparent sheet prevents load-thread crashes.
-            # Any out-of-range sprite slice falls back to blank_sprite in make_group.
-            fallback_size = int(self.size) if self.size else 50
-            self.spritesheets[name] = pygame.Surface(
-                (fallback_size, fallback_size), pygame.HWSURFACE | pygame.SRCALPHA
-            )
+        self.spritesheets[name] = pygame.image.load(a_file).convert_alpha()
 
     def make_group(
         self, spritesheet, pos, name, sprites_x=3, sprites_y=7, no_index=False
