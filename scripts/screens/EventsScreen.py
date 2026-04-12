@@ -1,45 +1,67 @@
+from math import ceil
 from typing import Dict
 
+import i18n
 import pygame
 import pygame_gui
 
 from scripts.cat.cats import Cat
-from scripts.event_class import Single_Event
-from scripts.events import events_class
-from scripts.game_structure import image_cache
-from scripts.game_structure.game_essentials import game
-from scripts.game_structure.screen_settings import MANAGER
-from scripts.game_structure.ui_elements import (
-    UIModifiedScrollingContainer,
-    IDImageButton,
-    UISurfaceImageButton,
-    CatButton,
+from scripts import events
+from scripts.events import Single_Event
+from scripts.game_structure import image_cache, constants
+from scripts.game_structure.game.settings import game_setting_get
+from scripts.game_structure.game.switches import (
+    Switch,
+    switch_get_value,
+    switch_set_value,
+    switch_set_dict_value,
 )
-from scripts.game_structure.windows import GameOver
+from scripts.game_structure import game
+from scripts.game_structure.screen_settings import MANAGER
+from scripts.ui.elements.modified_scrolling_container import (
+    UIModifiedScrollingContainer,
+)
+from scripts.ui.elements.id_image_button import IDImageButton
+from scripts.ui.elements.cat_button import CatButton
+from scripts.ui.elements.surface_image_button import UISurfaceImageButton
+from scripts.ui.elements.sprite_button import UISpriteButton
+from scripts.screens.screens_core.screens_core import rebuild_moon_n_season_indicator
+from scripts.ui.elements.save_button import UISaveButton
+from scripts.ui.elements.image_button import UIImageButton
+from scripts.ui.windows.game_over import GameOverWindow
 from scripts.screens.Screens import Screens
+from scripts.screens.enums import GameScreen
 from scripts.ui.generate_box import BoxStyles, get_box
 from scripts.ui.generate_button import get_button_dict, ButtonStyles
 from scripts.ui.icon import Icon
-from scripts.utility import (
+from scripts.clan_package.clan_symbols import clan_symbol_sprite
+from scripts.ui.theme import get_text_box_theme
+from scripts.events_module.text_adjust import shorten_text_to_fit
+from scripts.ui.scale import (
     ui_scale,
-    clan_symbol_sprite,
-    get_text_box_theme,
-    shorten_text_to_fit,
-    get_living_clan_cat_count,
     ui_scale_dimensions,
     ui_scale_value,
-    ui_scale_offset,
+    ui_scale_offset
 )
  
 # LG
-from scripts.game_structure.ui_elements import UIImageButton, UIModifiedScrollingContainer, IDImageButton, UISpriteButton
+from scripts.cat.enums import CatRank
 import random
-from scripts.game_structure.windows import GameOver, DeathScreen, PickPath
+
+from scripts.ui.windows.death_window import DeathScreen
+from scripts.ui.windows.pick_path import PickPath
+from scripts.ui.windows.choose_deputy import ChooseDeputyWindow
+
+from scripts.clan_package.get_clan_cats import get_living_clan_cat_count
 
 
 class EventsScreen(Screens):
     current_display = "all events"
     selected_display = "all events"
+
+    current_page = 1
+    current_page_amount = 0
+    page_chunks = []
 
     all_events = ""
     ceremony_events = ""
@@ -73,6 +95,7 @@ class EventsScreen(Screens):
         self.full_event_display_container = None
         self.events_frame = None
         self.event_buttons = {}
+        self.page_control = {}
         self.alert = {}
 
         self.event_display = None
@@ -89,6 +112,9 @@ class EventsScreen(Screens):
         self.death_button = None
 
         self.filters_open = False
+
+        self.faith_toggle = False
+        self.faith_toggle_button = None
 
         # i dont wanna split them into different dicts or anything
         self.all_filters = [
@@ -157,25 +183,52 @@ class EventsScreen(Screens):
                 # ensure we can't run the same timeskip multiple times
                 if self.events_thread is not None and self.events_thread.is_alive():
                     return
-                if game.clan.your_cat.dead_for >= 2 and not game.switches['continue_after_death']:
+                if (
+                    game.clan.your_cat.dead and
+                    game.clan.your_cat.ID in game.just_died and
+                    not switch_get_value(Switch.continue_after_death)
+                    ):
                     DeathScreen('events screen')
                     return
                 elif (game.clan.your_cat.moons == 5
-                        and not game.clan.your_cat.outside
-                        and not game.clan.your_cat.dead
-                        and game.clan.your_cat.status == "kitten"
-                        ) or not game.clan.your_cat.status:
+                        and game.clan.your_cat.status.alive_in_player_clan
+                        and game.clan.your_cat.status.rank == CatRank.KITTEN
+                        ):
                     PickPath('events screen')
-                elif game.clan.your_cat.status:
-                    self.events_thread = self.loading_screen_start_work(
-                        events_class.one_moon
+                elif (
+                    game.clan.leader and
+                    game.clan.leader.ID == game.clan.your_cat.ID and
+                    not game.clan.your_cat.status.is_shunned() and
+                    (
+                        not game.clan.deputy or
+                        (
+                            game.clan.deputy and not game.clan.deputy.status.alive_in_player_clan
+                        )
                     )
+                    ):
+                    print(game.clan.deputy)
+                    ChooseDeputyWindow('events screen')
+                else:
+                    self.timeskip_button.disable()
+                    self.events_thread = self.loading_screen_start_work(events.one_moon)
+                    rebuild_moon_n_season_indicator(change_moon=True, visible=True)
+                    self.save_button.reset_save()
+
             elif self.death_button and event.ui_element == self.death_button:
                 DeathScreen('events screen')
                 return
             elif element == self.you:
-                game.switches['cat'] = game.clan.your_cat.ID
-                self.change_screen("profile screen")
+                switch_set_value(Switch.cat, game.clan.your_cat.ID)
+                self.change_screen(GameScreen.PROFILE)
+            
+            elif element == self.faith_toggle_button:
+                if self.faith_toggle is True:
+                    self.faith_toggle = False
+                else:
+                    self.faith_toggle = True
+
+                self.update_events_display()
+                self.update_display_events_lists()
 
             elif "cat_icon" in self.fave_filter_elements and element == self.fave_filter_elements["cat_icon"]:
                 if self.filters_open is True:
@@ -193,6 +246,7 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["yourcat_filter_selected"].show()
                 self.selected_fave_filter.append("yourcat_filter")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
             elif (
                 "yourcat_filter_selected" in self.fave_filter_elements and
                 element == self.fave_filter_elements["yourcat_filter_selected"]
@@ -201,6 +255,7 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["yourcat_filter_selected"].hide()
                 self.selected_fave_filter.remove("yourcat_filter")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
 
             elif (
                 "fave_group_1" in self.fave_filter_elements and
@@ -210,6 +265,7 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["fave_group_1_selected"].show()
                 self.selected_fave_filter.append("fave_group_1")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
             elif (
                 "fave_group_1_selected" in self.fave_filter_elements and
                 element == self.fave_filter_elements["fave_group_1_selected"]
@@ -227,6 +283,7 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["fave_group_2_selected"].show()
                 self.selected_fave_filter.append("fave_group_2")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
             elif (
                 "fave_group_2_selected" in self.fave_filter_elements and
                 element == self.fave_filter_elements["fave_group_2_selected"]
@@ -235,6 +292,7 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["fave_group_2_selected"].hide()
                 self.selected_fave_filter.remove("fave_group_2")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
 
             elif (
                 "fave_group_3" in self.fave_filter_elements and
@@ -244,6 +302,7 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["fave_group_3_selected"].show()
                 self.selected_fave_filter.append("fave_group_3")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
             elif (
                 "fave_group_3_selected" in self.fave_filter_elements and
                 element == self.fave_filter_elements["fave_group_3_selected"]
@@ -252,42 +311,68 @@ class EventsScreen(Screens):
                 self.fave_filter_elements["fave_group_3_selected"].hide()
                 self.selected_fave_filter.remove("fave_group_3")
                 self.place_fave_filters()
+                self.handle_tab_switch("all events")
 
+                
+            elif event.ui_element == self.save_button.unsaved_state:
+                self.save_button.save_game(current_screen=self)
+            elif element in self.page_control.values():
+                if element == self.page_control["first"]:
+                    self.current_page = 1
+                elif element == self.page_control["previous"]:
+                    self.current_page -= 1
+                elif element == self.page_control["next"]:
+                    self.current_page += 1
+                elif element == self.page_control["last"]:
+                    self.current_page = self.current_page_amount
+                self.update_events_display(is_page_update=True)
             elif element in self.involved_cat_buttons:
                 self.make_cat_buttons(element)
             
             elif element in self.cat_profile_buttons:
-                self.save_scroll_position()
-                game.switches["cat"] = element.cat_id
-                self.change_screen("profile screen")
+                self.save_scroll_and_page_position()
+                switch_set_value(Switch.cat, element.cat_id)
+                self.change_screen(GameScreen.PROFILE)
             else:
-                self.save_scroll_position()
+                self.save_scroll_and_page_position()
                 self.menu_button_pressed(event)
 
         # KEYBIND CONTROLS
-        elif game.settings["keybinds"]:
+        elif game_setting_get("keybinds"):
             # ON PRESSING A KEY
             if event.type == pygame.KEYDOWN:
                 # LEFT ARROW
                 if event.key == pygame.K_LEFT:
-                    self.change_screen("patrol screen")
+                    self.change_screen(GameScreen.PATROL)
                 # RIGHT ARROW
                 elif event.key == pygame.K_RIGHT:
-                    self.change_screen("camp screen")
+                    self.change_screen(GameScreen.CAMP)
                 # DOWN AND UP ARROW
                 elif event.key == pygame.K_DOWN or event.key == pygame.K_UP:
                     self.handle_tab_select(event.key)
+                # RETURN
                 elif event.key == pygame.K_RETURN:
                     self.handle_tab_switch(self.selected_display)
+                # SPACE
+                elif event.key == pygame.K_SPACE:
+                    self.save_button.save_game(current_screen=self)
 
-    def save_scroll_position(self):
+    def save_scroll_and_page_position(self):
         """
-        adds current event display vert scroll bar position to game.switches["saved_scroll_positions"] dict
+        Adds current event display vert scroll bar position to switches.saved_scroll_positions dict and adds current page to switches.saved_page_positions dict
+
         """
         if self.event_display.vert_scroll_bar:
-            game.switches["saved_scroll_positions"][self.current_display] = (
+            position = (
                 self.event_display.vert_scroll_bar.scroll_position
                 / self.event_display.vert_scroll_bar.scrollable_height
+            )
+            switch_set_dict_value(
+                Switch.saved_scroll_positions, self.current_display, position
+            )
+        if self.page_control:
+            switch_set_dict_value(
+                Switch.saved_page_positions, self.current_display, self.current_page
             )
 
     def handle_tab_select(self, event):
@@ -327,7 +412,7 @@ class EventsScreen(Screens):
         saves current tab scroll position, removes alert, and then switches to the new tab
         """
         if not is_rescale:
-            self.save_scroll_position()
+            self.save_scroll_and_page_position()
 
         self.current_display = display_type
         self.update_list_buttons()
@@ -351,6 +436,7 @@ class EventsScreen(Screens):
 
         self.place_fave_filters()
         self.update_events_display()
+        self.update_display_events_lists()
 
     def screen_switches(self):
         super().screen_switches()
@@ -366,13 +452,22 @@ class EventsScreen(Screens):
             starting_height=1,
             manager=MANAGER,
         )
+        # LG
+        self.you = UISpriteButton(
+            ui_scale(pygame.Rect((560, 100), (120, 120))),
+            game.clan.your_cat.sprite,
+            cat_id=game.clan.your_cat.ID,
+            manager=MANAGER
+            )
+        if game.clan.your_cat.moons < 0:
+            self.you.hide()
 
         self.clan_info["symbol"] = pygame_gui.elements.UIImage(
-            ui_scale(pygame.Rect((137, 105), (100, 100))),
+            ui_scale(pygame.Rect((117, 120), (100, 100))),
             pygame.transform.scale(
                 clan_symbol_sprite(game.clan), ui_scale_dimensions((100, 100))
             ),
-            object_id=f"clan_symbol",
+            object_id="clan_symbol",
             starting_height=1,
             container=self.event_screen_container,
             manager=MANAGER,
@@ -394,6 +489,7 @@ class EventsScreen(Screens):
             starting_height=1,
             container=self.event_screen_container,
             manager=MANAGER,
+            text_kwargs={"season": i18n.t(game.clan.current_season)},
         )
         self.clan_info["age"] = pygame_gui.elements.UITextBox(
             "",
@@ -402,23 +498,22 @@ class EventsScreen(Screens):
             starting_height=1,
             container=self.event_screen_container,
             manager=MANAGER,
+            text_kwargs={"count": game.clan.age},
         )
 
-        # Set text for Clan age
-        if game.clan.age == 1:
-            self.clan_info["age"].set_text(f"Clan age: {game.clan.age} moon")
-        if game.clan.age != 1:
-            self.clan_info["age"].set_text(f"Clan age: {game.clan.age} moons")
-
         self.timeskip_button = UISurfaceImageButton(
-            ui_scale(pygame.Rect((310, 218), (180, 30))),
-            "Timeskip One Moon",
+            ui_scale(pygame.Rect((248, 223), (180, 30))),
+            "screens.events.timeskip_button",
             get_button_dict(ButtonStyles.SQUOVAL, (180, 30)),
             object_id="@buttonstyles_squoval",
             starting_height=1,
             container=self.event_screen_container,
             manager=MANAGER,
             sound_id="timeskip",
+        )
+        self.save_button = UISaveButton(
+            position=(438, 223),
+            container=self.event_screen_container,
         )
 
         height = 32
@@ -488,10 +583,25 @@ class EventsScreen(Screens):
             container=self.event_screen_container
             )
         
+        if self.faith_toggle is True:
+            icon = Icon.CAT_HEAD
+        else:
+            icon = Icon.STARCLAN
+        self.faith_toggle_button = UISurfaceImageButton(
+            ui_scale(pygame.Rect((30, 440), (25, 25))),
+            icon,
+            get_button_dict(ButtonStyles.ICON, (25, 25)),
+            object_id="@buttonstyles_icon",
+            starting_height=1,
+            container=self.event_screen_container,
+            manager=MANAGER
+        )
+        if self.current_display != "relationships":
+            self.faith_toggle_button.hide()
 
         # lifegen continue after death button
         self.death_button = UIImageButton(
-            ui_scale(pygame.Rect((500, 218), (34, 34))),
+            ui_scale(pygame.Rect((700, 218), (34, 34))),
             "",
             object_id="#warrior",
             tool_tip_text="Revive",
@@ -499,7 +609,7 @@ class EventsScreen(Screens):
         )
         self.death_button.hide()
 
-        if game.switches['continue_after_death']:
+        if switch_get_value(Switch.continue_after_death):
             self.death_button.show()
 
         self.full_event_display_container = pygame_gui.core.UIContainer(
@@ -520,7 +630,7 @@ class EventsScreen(Screens):
         for event_type in self.tabs:
             self.event_buttons[f"{event_type}"] = UISurfaceImageButton(
                 ui_scale(pygame.Rect((16, 19 + y_pos), (150, 30))),
-                event_type,
+                f"screens.events.{event_type}",
                 get_button_dict(ButtonStyles.VERTICAL_TAB, (150, 30)),
                 object_id="@buttonstyles_vertical_tab",
                 starting_height=1,
@@ -549,15 +659,117 @@ class EventsScreen(Screens):
 
         self.make_event_scrolling_container()
         self.open_involved_cat_button = None
+        self.update_display_events_lists()
         self.update_events_display()
 
         # Draw and disable the correct menu buttons.
-        self.set_disabled_menu_buttons(["events_screen"])
-        self.update_heading_text(f"{game.clan.name}Clan")
+        self.set_disabled_menu_buttons(["events"])
+        # LG EDIT
+        self.update_heading_text(game.clan.your_cat.status.get_group_heading_text())
+        # ---
         self.show_menu_buttons()
 
+    def reset_page_buttons(self, is_page_update=False):
+        """
+        Resets page button and page counter states
+        :param is_page_update: Set True if page buttons do not need to be recreated.
+        """
+        if self.page_control and not is_page_update:
+            for ele in self.page_control.values():
+                ele.kill()
+            self.page_control.clear()
+
+        if self.current_page_amount == 1:
+            # we don't need any page controls if there's only one page
+            return
+
+        if not is_page_update:
+            x_pos = -14
+            self.page_control["first"] = UISurfaceImageButton(
+                ui_scale(pygame.Rect((370, x_pos), (34, 34))),
+                Icon.ARROW_DOUBLELEFT,
+                get_button_dict(ButtonStyles.ICON, (34, 34)),
+                object_id="@buttonstyles_icon",
+                starting_height=1,
+                container=self.event_screen_container,
+                anchors={"top_target": self.events_frame},
+                manager=MANAGER,
+            )
+            self.page_control["previous"] = UISurfaceImageButton(
+                ui_scale(pygame.Rect((-10, x_pos), (34, 34))),
+                Icon.ARROW_LEFT,
+                get_button_dict(ButtonStyles.ICON, (34, 34)),
+                object_id="@buttonstyles_icon",
+                starting_height=1,
+                container=self.event_screen_container,
+                anchors={
+                    "top_target": self.events_frame,
+                    "left_target": self.page_control["first"],
+                },
+                manager=MANAGER,
+            )
+
+            # page number
+            self.page_control["number"] = pygame_gui.elements.UITextBox(
+                f"{self.current_page}/{self.current_page_amount}",
+                ui_scale(pygame.Rect((10, x_pos + 2), (-1, -1))),
+                starting_height=1,
+                container=self.event_screen_container,
+                object_id=(
+                    get_text_box_theme("#text_box_30_horizleft")
+                    if not game_setting_get("dark mode")
+                    else "#text_box_30_horizleft_light"
+                ),
+                anchors={
+                    "top_target": self.events_frame,
+                    "left_target": self.page_control["previous"],
+                },
+                manager=MANAGER,
+            )  # Text will be filled in later
+
+            self.page_control["next"] = UISurfaceImageButton(
+                ui_scale(pygame.Rect((10, x_pos), (34, 34))),
+                Icon.ARROW_RIGHT,
+                get_button_dict(ButtonStyles.ICON, (34, 34)),
+                object_id="@buttonstyles_icon",
+                starting_height=2,
+                container=self.event_screen_container,
+                anchors={
+                    "top_target": self.events_frame,
+                    "left_target": self.page_control["number"],
+                },
+                manager=MANAGER,
+            )
+
+            self.page_control["last"] = UISurfaceImageButton(
+                ui_scale(pygame.Rect((-10, x_pos), (34, 34))),
+                Icon.ARROW_DOUBLERIGHT,
+                get_button_dict(ButtonStyles.ICON, (34, 34)),
+                object_id="@buttonstyles_icon",
+                starting_height=1,
+                container=self.event_screen_container,
+                anchors={
+                    "top_target": self.events_frame,
+                    "left_target": self.page_control["next"],
+                },
+                manager=MANAGER,
+            )
+        self.page_control["number"].set_text(
+            f"{self.current_page}/{self.current_page_amount}"
+        )
+        self.page_control["first"].enable()
+        self.page_control["previous"].enable()
+        self.page_control["next"].enable()
+        self.page_control["last"].enable()
+        if self.current_page == 1:
+            self.page_control["first"].disable()
+            self.page_control["previous"].disable()
+        elif self.current_page == self.current_page_amount:
+            self.page_control["next"].disable()
+            self.page_control["last"].disable()
+
     def display_change_save(self) -> Dict:
-        self.save_scroll_position()
+        self.save_scroll_and_page_position()
         variable_dict = super().display_change_save()
 
         variable_dict["current_display"] = self.current_display
@@ -576,10 +788,14 @@ class EventsScreen(Screens):
         self.handle_tab_switch(self.current_display, is_rescale=True)
         MANAGER.update(1)
 
-        if game.switches["saved_scroll_positions"].get(self.current_display):
+        if switch_get_value(Switch.saved_scroll_positions).get(self.current_display):
             self.event_display.vert_scroll_bar.set_scroll_from_start_percentage(
-                game.switches["saved_scroll_positions"][self.current_display]
+                switch_get_value(Switch.saved_scroll_positions)[self.current_display]
             )
+        if switch_get_value(Switch.saved_page_positions).get(self.current_display):
+            self.current_page = switch_get_value(Switch.saved_page_positions)[
+                self.current_display
+            ]
 
     def make_event_scrolling_container(self):
         """
@@ -701,10 +917,10 @@ class EventsScreen(Screens):
                         object_id="#events_cat_profile_button",
                         starting_height=1,
                         manager=MANAGER,
-                        anchors=anchor
+                        anchors=anchor,
                     )
                     self.cat_profile_buttons.append(cat_profile_button)
-                anchor = { "left_target": cat_profile_button }
+                anchor = {"left_target": cat_profile_button}
         else:
             anchor = {"right": "right"}
             rect = ui_scale(pygame.Rect((0, 0), (120, 34)))
@@ -727,7 +943,7 @@ class EventsScreen(Screens):
                         anchors=anchor,
                     )
                     self.cat_profile_buttons.append(cat_profile_button)
-                anchor = { "left_target": cat_profile_button }
+                anchor = {"left_target": cat_profile_button}
         del rect
         self.involved_cat_container.set_view_container_dimensions(
             (
@@ -862,8 +1078,9 @@ class EventsScreen(Screens):
             for btn in self.fave_filter_elements:
                 self.fave_filter_elements[btn].hide()
 
-        self.update_display_events_lists()
         self.update_events_display()
+
+        self.update_display_events_lists()
 
     def update_display_events_lists(self):
         """
@@ -871,7 +1088,7 @@ class EventsScreen(Screens):
         """
 
         self.all_events = [
-            x for x in game.cur_events_list if "interaction" not in x.types
+            x for x in game.cur_events_list if "interaction" not in x.types and "faith" not in x.types
         ]
 
          # LIFEGEN: changing all events based on fave filters
@@ -885,6 +1102,7 @@ class EventsScreen(Screens):
 
             fav_cats = []
             fav_events = []
+
 
             for kitty in Cat.all_cats_list:
                 for num in fnumlist:
@@ -908,31 +1126,32 @@ class EventsScreen(Screens):
         # ----------------------------------------------------------------
 
         self.ceremony_events = [
-            x for x in game.cur_events_list if "ceremony" in x.types
+            x for x in game.cur_events_list if "ceremony" in x.types and x.text
         ]
         self.birth_death_events = [
-            x for x in game.cur_events_list if "birth_death" in x.types
+            x for x in game.cur_events_list if "birth_death" in x.types and x.text
         ]
         self.relation_events = [
-            x for x in game.cur_events_list if "relation" in x.types
+            x for x in game.cur_events_list if "relation" in x.types and x.text
         ]
-        self.health_events = [x for x in game.cur_events_list if "health" in x.types]
+        self.health_events = [x for x in game.cur_events_list if "health" in x.types and x.text]
         self.other_clans_events = [
             x for x in game.cur_events_list if "other_clans" in x.types
         ]
-        self.misc_events = [x for x in game.cur_events_list if "misc" in x.types]
+        self.misc_events = [x for x in game.cur_events_list if "misc" in x.types and x.text]
 
-    def update_events_display(self):
+    def update_events_display(self, is_page_update=False):
         """
         Kills and recreates the event display, updates the clan info, sets the event display scroll position if it was
         previously saved
+        :param is_page_update: Set to True if we don't need to recreate the page buttons
         """
 
         if not game.clan.your_cat:
             print(
                 "Are you playing a normal ClanGen save? Switch to a LifeGen save or create a new cat!")
             print("Choosing random cat to play...")
-            game.clan.your_cat = Cat.all_cats[random.choice(game.clan.clan_cats)]
+            game.clan.your_cat = random.choice(Cat.all_cats_list)
             print("Chose " + str(game.clan.your_cat.name))
         # UPDATE CLAN INFO
         # self.clan_info["season"].set_text(f"Current season: {game.clan.current_season}")
@@ -944,6 +1163,33 @@ class EventsScreen(Screens):
             self.clan_info["age"].set_text(f'Your age: {game.clan.your_cat.moons} moons')
         elif game.clan.your_cat.moons == 1:
             self.clan_info["age"].set_text(f'Your age: {game.clan.your_cat.moons} moon')
+
+        # SET UP PAGES
+        if not is_page_update:
+            self.current_page_amount = (
+                int(ceil(len(self.display_events) / constants.EVENTS_PER_PAGE))
+                if len(self.display_events)
+                else 1
+            )
+            if switch_get_value(Switch.saved_page_positions).get(self.current_display):
+                self.current_page = switch_get_value(Switch.saved_page_positions)[
+                    self.current_display
+                ]
+            else:
+                self.current_page = 1
+            if self.current_page > self.current_page_amount:
+                self.current_page = self.current_page_amount
+            elif self.current_page < 1:
+                self.current_page = 1
+
+            self.page_chunks = [
+                self.display_events[x : x + constants.EVENTS_PER_PAGE]
+                for x in range(0, len(self.display_events), constants.EVENTS_PER_PAGE)
+            ]
+        else:
+            switch_set_value(Switch.saved_scroll_positions, {})
+
+        self.reset_page_buttons(is_page_update=is_page_update)
 
         self.make_event_scrolling_container()
 
@@ -967,9 +1213,44 @@ class EventsScreen(Screens):
         if game.clan.age == 0:
             return
         
-        # LIFEGEN: This has to be here to update fave filtered events
+        if not self.display_events:
+            return
+
+        # LIFEGEN: this updates events for filters + faith toggle
         if self.current_display == "all events":
             self.display_events = self.all_events
+        if self.current_display == "relationships":
+            if self.faith_toggle is True:
+                self.display_events = [
+                    x for x in game.cur_events_list if "faith" in x.types
+                ]
+            else:
+                self.display_events = [
+                    x for x in game.cur_events_list if "interaction" in x.types
+                ]
+
+        # and faith toggle button
+        if self.faith_toggle is True:
+            icon = Icon.CAT_HEAD
+        else:
+            icon = Icon.STARCLAN
+
+        self.faith_toggle_button.kill()
+        del self.faith_toggle_button
+        self.faith_toggle_button = UISurfaceImageButton(
+            ui_scale(pygame.Rect((30, 440), (25, 25))),
+            icon,
+            get_button_dict(ButtonStyles.ICON, (25, 25)),
+            object_id="@buttonstyles_icon",
+            starting_height=1,
+            container=self.event_screen_container,
+            manager=MANAGER
+        )
+
+        if self.current_display != "relationships":
+            self.faith_toggle_button.hide()
+        else:
+            self.faith_toggle_button.show()
         # -----------------------------------------------------------
 
         default_rect = pygame.Rect(
@@ -987,11 +1268,13 @@ class EventsScreen(Screens):
 
         anchor = {"top": "top"}
 
-        alternate_color = (pygame.Color(87, 76, 55)
-                    if game.settings["dark mode"]
-                    else pygame.Color(167, 148, 111))
+        alternate_color = (
+            pygame.Color(87, 76, 55)
+            if game_setting_get("dark mode")
+            else pygame.Color(167, 148, 111)
+        )
 
-        for i, event_object in enumerate(self.display_events):
+        for i, event_object in enumerate(self.page_chunks[self.current_page - 1]):
             if not isinstance(event_object.text, str):
                 print(
                     f"Incorrectly Formatted Event: {event_object.text}, {type(event_object)}"
@@ -1005,7 +1288,7 @@ class EventsScreen(Screens):
                 MANAGER,
                 container=self.event_display,
                 element_id="event_panel",
-                object_id="#dark" if game.settings["dark mode"] else None,
+                object_id="#dark" if game_setting_get("dark mode") else None,
                 margins={"top": 0, "bottom": 0, "left": 0, "right": 0},
                 anchors=anchor,
             )
@@ -1024,6 +1307,7 @@ class EventsScreen(Screens):
                 starting_height=1,
                 container=display_element_container,
                 manager=MANAGER,
+                text_kwargs=getattr(event_object, "cat_dict"),
                 anchors={"left": "left", "right": "right"},
             )
 
@@ -1079,21 +1363,26 @@ class EventsScreen(Screens):
         )
 
         # set saved scroll position
-        if game.switches["saved_scroll_positions"].get(self.current_display):
+        if switch_get_value(Switch.saved_scroll_positions).get(self.current_display):
             self.event_display.vert_scroll_bar.set_scroll_from_start_percentage(
-                game.switches["saved_scroll_positions"][self.current_display]
+                switch_get_value(Switch.saved_scroll_positions)[self.current_display]
             )
 
         if self.you:
             self.you.kill()
+        game.clan.your_cat.pelt.rebuild_sprite = True
         if game.clan.your_cat.moons != -1:
             self.you = UISpriteButton(
-                ui_scale(pygame.Rect((570, 100), (120, 120))),
+                ui_scale(pygame.Rect((560, 100), (120, 120))),
                 game.clan.your_cat.sprite,
                 cat_id=game.clan.your_cat.ID,
                 manager=MANAGER
                 )
-        if game.switches['continue_after_death'] and game.clan.your_cat.moons >= 0:
+        if (
+            game.clan.your_cat.dead and
+            game.clan.your_cat.ID not in game.just_died and
+            game.clan.your_cat.moons >= 0
+            ):
             self.death_button.show()
         else:
             self.death_button.hide()
@@ -1114,10 +1403,11 @@ class EventsScreen(Screens):
     def timeskip_done(self):
         """Various sorting and other tasks that must be done with the timeskip is over."""
 
-        game.switches["saved_scroll_positions"] = {}
+        switch_set_value(Switch.saved_scroll_positions, {})
+        switch_set_value(Switch.saved_page_positions, {})
 
         if get_living_clan_cat_count(Cat) == 0:
-            GameOver("events screen")
+            GameOverWindow(GameScreen.EVENTS)
 
         self.update_display_events_lists()
 
@@ -1129,9 +1419,7 @@ class EventsScreen(Screens):
                 self.event_buttons[tab].enable()
 
         if not self.all_events:
-            self.all_events.append(
-                Single_Event("Nothing interesting happened this moon.")
-            )
+            self.all_events.append(Single_Event(i18n.t("screens.events.no_events")))
 
         self.display_events = self.all_events
 

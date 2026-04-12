@@ -1,28 +1,25 @@
 import pygame.transform
 import pygame_gui.elements
-from random import choice, randint
-import ujson
 
-from scripts.cat_relations.inheritance import Inheritance
-from scripts.cat.history import History
-from scripts.event_class import Single_Event
-from scripts.events import events_class
 from .Screens import Screens
+from scripts.screens.enums import GameScreen
+from ..cat.enums import CatAge
 
-from scripts.utility import get_personality_compatibility, get_text_box_theme, shorten_text_to_fit
 from scripts.cat.cats import Cat
 from scripts.game_structure import image_cache
-from scripts.cat.pelts import Pelt
-from scripts.game_structure.windows import GameOver, PickPath, DeathScreen
-from scripts.game_structure.game_essentials import game
-from scripts.game_structure.windows import RelationshipLog
-from scripts.game_structure.propagating_thread import PropagatingThread
-from scripts.game_structure.ui_elements import UIImageButton, UITextBoxTweaked, UISpriteButton, UISurfaceImageButton
+
+from scripts.game_structure import game
+
+from ..ui.elements.surface_image_button import UISurfaceImageButton
+from ..ui.elements.sprite_button import UISpriteButton
+
 from ..ui.generate_box import BoxStyles, get_box
-from scripts.utility import get_text_box_theme, ui_scale, ui_scale_blit, ui_scale_offset
+
+from scripts.ui.theme import get_text_box_theme
+from scripts.ui.scale import ui_scale
+
 from scripts.game_structure.screen_settings import MANAGER
 from ..ui.generate_button import get_button_dict, ButtonStyles
-from ..ui.get_arrow import get_arrow
 from ..ui.icon import Icon
 
 
@@ -44,8 +41,6 @@ class NameKitsScreen(Screens):
         self.current_mentor_warning = None
         self.confirm_mentor = None
         self.back_button = None
-        self.next_cat_button = None
-        self.previous_cat_button = None
         self.mentor_icon = None
         self.app_frame = None
         self.mentor_frame = None
@@ -65,40 +60,29 @@ class NameKitsScreen(Screens):
             elif event.ui_element == self.confirm_mentor and self.selected_cat:
                 if not self.selected_cat.dead:
                     # self.update_selected_cat()
-                    self.change_cat(self.selected_cat)
-                    if "mentor_name" in self.selected_details:
-                        self.selected_details['mentor_name'].kill()
+                    self.change_cat()
+                    if "kit_name" in self.selected_details:
+                        self.selected_details['kit_name'].kill()
                     name = str(self.selected_cat.name)  # get name
                     if self.selected_cat.name.prefix != "":
                         if 11 <= len(name):  # check name length
                             short_name = str(name)[0:9]
                             name = short_name + '...'
-                        self.selected_details["mentor_name"] = pygame_gui.elements.ui_label.UILabel(
+                        self.selected_details["kit_name"] = pygame_gui.elements.ui_label.UILabel(
                             ui_scale(pygame.Rect((345, 115), (110, 30))),
                             name,
                             object_id="#text_box_34_horizcenter", manager=MANAGER)
                     # self.update_buttons()
             elif event.ui_element == self.back_button:
                 for cat in Cat.all_cats_list:
-                    if not cat.dead and not cat.outside and cat.age == 'newborn' and cat.ID in game.clan.your_cat.inheritance.get_children() and cat.name.prefix.strip() == "":
+                    if (
+                        cat.status.alive_in_player_clan and
+                        cat.age == CatAge.NEWBORN and
+                        cat.ID in game.clan.your_cat.inheritance.get_children() and
+                        cat.name.prefix.strip() == ""
+                        ):
                         cat.name.give_prefix(cat.pelt.eye_colour, cat.pelt.colour, game.clan.biome)
-                self.change_screen('events screen')
-            elif event.ui_element == self.next_cat_button:
-                if isinstance(Cat.fetch_cat(self.next_cat), Cat):
-                    game.switches['cat'] = self.next_cat
-                    self.update_cat_list()
-                    self.update_selected_cat()
-                    # self.update_buttons()
-                else:
-                    print("invalid next cat", self.next_cat)
-            elif event.ui_element == self.previous_cat_button:
-                if isinstance(Cat.fetch_cat(self.previous_cat), Cat):
-                    game.switches['cat'] = self.previous_cat
-                    self.update_cat_list()
-                    self.update_selected_cat()
-                    # self.update_buttons()
-                else:
-                    print("invalid previous cat", self.previous_cat)
+                self.change_screen(GameScreen.EVENTS)
             elif event.ui_element == self.next_page_button:
                 self.current_page += 1
                 self.update_cat_list()
@@ -138,8 +122,8 @@ class NameKitsScreen(Screens):
             manager=MANAGER)
        
         self.back_button = UISurfaceImageButton(
-            ui_scale(pygame.Rect((25, 25), (105, 30))),
-            get_arrow(2) + " Back",
+            ui_scale(pygame.Rect((25, 60), (105, 30))),
+            "buttons.back",
             get_button_dict(ButtonStyles.SQUOVAL, (105, 30)),
             object_id="@buttonstyles_squoval",
             manager=MANAGER,
@@ -207,45 +191,7 @@ class NameKitsScreen(Screens):
         self.list_frame.kill()
         del self.list_frame
 
-
-   
-    def find_next_previous_cats(self):
-        """Determines where the previous and next buttons lead"""
-        is_instructor = False
-        if self.the_cat.dead and game.clan.instructor.ID == self.the_cat.ID:
-            is_instructor = True
-
-        self.previous_cat = 0
-        self.next_cat = 0
-        if self.the_cat.dead and not is_instructor and not self.the_cat.df:
-            self.previous_cat = game.clan.instructor.ID
-
-        if is_instructor:
-            self.next_cat = 1
-
-        for check_cat in Cat.all_cats_list:
-            if check_cat.ID == self.the_cat.ID:
-                self.next_cat = 1
-
-            if self.next_cat == 0 and check_cat.ID != self.the_cat.ID and check_cat.dead == self.the_cat.dead and \
-                    check_cat.ID != game.clan.instructor.ID and not check_cat.exiled and check_cat.status in \
-                    ["newborn"] \
-                    and check_cat.df == self.the_cat.df:
-                self.previous_cat = check_cat.ID
-
-            elif self.next_cat == 1 and check_cat.ID != self.the_cat.ID and check_cat.dead == self.the_cat.dead and \
-                    check_cat.ID != game.clan.instructor.ID and not check_cat.exiled and check_cat.status in \
-                    ["newborn"] \
-                    and check_cat.df == self.the_cat.df:
-                self.next_cat = check_cat.ID
-
-            elif int(self.next_cat) > 1:
-                break
-
-        if self.next_cat == 1:
-            self.next_cat = 0
-
-    def change_cat(self, new_mentor=None):
+    def change_cat(self):
         self.selected_cat.name.prefix = self.selected_details["name_entry"].get_text().strip()
 
     def update_selected_cat(self):
@@ -261,7 +207,7 @@ class NameKitsScreen(Screens):
                 if 11 <= len(name):  # check name length
                     short_name = str(name)[0:9]
                     name = short_name + '...'
-                self.selected_details["mentor_name"] = pygame_gui.elements.ui_label.UILabel(
+                self.selected_details["kit_name"] = pygame_gui.elements.ui_label.UILabel(
                     ui_scale(pygame.Rect((345, 115), (110, 30))),
                     name,
                     object_id="#text_box_34_horizcenter", manager=MANAGER)
@@ -271,7 +217,7 @@ class NameKitsScreen(Screens):
                     self.selected_cat.sprite,
                     (150, 150)), manager=MANAGER)
 
-            info = self.selected_cat.status + "\n" + \
+            info = self.selected_cat.status.rank + "\n" + \
                    self.selected_cat.genderalign + "\n" + self.selected_cat.personality.trait + "\n"
 
             if self.selected_cat.moons < 1:
@@ -352,7 +298,11 @@ class NameKitsScreen(Screens):
         valid_mentors = []
 
         for cat in Cat.all_cats_list:
-            if not cat.dead and not cat.outside and cat.age == 'newborn' and cat.ID in game.clan.your_cat.inheritance.get_children():
+             if (
+                cat.status.alive_in_player_clan and
+                cat.age == CatAge.NEWBORN and
+                cat.ID in game.clan.your_cat.inheritance.get_children()
+                ):
                 valid_mentors.append(cat)
                 cat.name.prefix = ""
         

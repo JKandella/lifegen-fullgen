@@ -1,13 +1,45 @@
 <strong>v0.7.6: </strong>
+
+Changes/Additions:
+- Dialogue formatting change: writers now have creative freedom in what dialogue affects/gives
+- Refreshed Menu art
+
+New Features:
+- Elder Stories: Your elders can tell stories to your Clanmates to affect their faith.
+- Faith Events: See how the faith of your Clanmates' is affected each moon.
+- Dead LifeGen Patrols: Explore your afterlife after death.
+- Multi-Cat Dialogue: Cats will now butt into your conversations!
+- Dark Forest Graduation: Cats who are experienced enough may graduate the DF and have their own apprentices
+
+New Writing:
+- New exclusive minor condition dialogue
+- New dialogue for kit-specific traits
+
+New Art:
+- New accessory: Moonhat
+- New patrol art
+
 Bugfixes:
-May not crash when talking to cats
+- Meowbugs & Typos
+- Affairs are now usable! :tada:
+- "Indexerror: list index out of range" crashes
+- Customizer fixes
+- Clan abbrevs appearing in events
+- Reduced long loading times when continuing with a new MC via "start a new life"
+- Renaming cats no longer risks duplicate names (ex: Moonmoon) on Clan creation 
+- LADYBUG tooltip is no longer bugged
+- Game will no longer risk generating starclan guide as main character when converting saves
+- Customiser given accessories should no longer vanish into the void after being taken off
+- Starclan cats won't be dragged down to the dark forest for the sake of patrols
+- Newborns shouldn't Theodore Pembroke III when speaking to their littermates
+- More
 
 
 <strong>v0.7.5: </strong>
 
 New Features:
 New and Improved MC customizer
-Stricter limitation on healers, mediators and queens when generating a new clan
+Stricter limitation on medicine cats, mediators and queens when generating a new clan
 Silly overhaul! Sam has gone through and retagged some dialogues and removed the silly tags from dialogues xe did not see fit for the cluster.
 Fixed grieving cats mentioning random dead cats instead of the one they're grieving
 Relationship events are now included in "all events" tab when a filter is applied
@@ -109,7 +141,7 @@ Lots more
 - You can now talk to UR (Unknown Residence) cats when dead, or with the GHOST skill
 - Switch MCs to a dead cat
 - You can now have a Dark Forest mentor and trainees
-- healers from other clans will greet you when visiting the Moonplace
+- Medicine cats from other clans will greet you when visiting the Moonplace
 - There are now specific names for the Moonplace depending on biome
 - More descriptive Meow! errors
 - You can now move any cat to the Unknown Residence
@@ -126,7 +158,7 @@ Lots more
 - New menu art
 
 <strong>v0.7.0: StarClan's Guidance</strong>
-- Visit the Moonplace as a healer
+- Visit the Moonplace as a medicine cat
 - Learn prophecies and omens
 - Continue as a StarClan or Dark Forest cat
 - Talk to dead cats when you are dead
@@ -183,7 +215,7 @@ Lots more
 <strong>v0.6.4: </strong>
 - Choose Clan age
 - Customize your cat
-- Warriors are now able to choose to become a healer/queen
+- Warriors are now able to choose to become a medicine cat/queen
 - Affairs result in pregnancy
 - Add some new text
 - Fix bugs
@@ -355,7 +387,7 @@ Lots more
 - Fixed several bugs/typos
 
 <strong>v0.2.0: Choose your Path</strong>
-- Added healer, mediator, deputy, and leader paths
+- Added medicine cat, mediator, deputy, and leader paths
 - New apprentice icons by jesmar!
 - Many new events and patrols
 - New menus
