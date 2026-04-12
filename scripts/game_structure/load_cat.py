@@ -23,6 +23,10 @@ from ..cat.personality import Personality
 from ..cat.skills import CatSkills
 from ..cat.status import StatusDict
 from ..housekeeping.datadir import get_save_dir
+from scripts.genemod.integration import (
+    load_genotype_from_json,
+    apply_genetics_to_pelt,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -376,6 +380,28 @@ def json_load():
             new_cat.df_join_moon = cat["df_join_moon"] if "df_join_moon" in cat else 0
             new_cat.df_patrols = cat["df_patrols"] if "df_patrols" in cat else 0
             new_cat.graduated_df = cat["graduated_df"] if "graduated_df" in cat else False
+
+            # Load genetics (genemod)
+            genetics_config = constants.CONFIG.get("genetics_config")
+            if genetics_config and "genotype" in cat and cat["genotype"]:
+                try:
+                    new_cat.genotype, new_cat.phenotype = load_genotype_from_json(
+                        genetics_config, cat["genotype"]
+                    )
+                    # Restore white pattern
+                    if "white_pattern" in cat and cat["white_pattern"]:
+                        new_cat.genotype.white_pattern = cat["white_pattern"]
+                    if "chim_white" in cat and cat["chim_white"] and new_cat.genotype.chimerageno:
+                        new_cat.genotype.chimerageno.white_pattern = cat["chim_white"]
+                    # Set chimera phenotype
+                    if new_cat.genotype.chimera and new_cat.genotype.chimerageno:
+                        from scripts.genemod.phenotype import Phenotype as GenPhenotype
+                        new_cat.chimerapheno = GenPhenotype(new_cat.genotype.chimerageno)
+                        new_cat.chimerapheno.PhenotypeOutput()
+                    # Apply genetics to loaded pelt
+                    apply_genetics_to_pelt(new_cat.pelt, new_cat.genotype, new_cat.phenotype)
+                except Exception as e:
+                    logger.warning(f"Failed to load genetics for cat {cat.get('ID', '?')}: {e}")
 
             if "died_by" in cat or "scar_event" in cat or "mentor_influence" in cat:
                 new_cat.convert_history(

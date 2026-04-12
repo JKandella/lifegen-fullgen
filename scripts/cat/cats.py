@@ -64,6 +64,15 @@ from scripts.events_module.event_filters import get_personality_compatibility
 from scripts.clan_package.get_clan_cats import find_alive_cats_with_rank
 
 from scripts.lifegen_utility import get_cluster
+from scripts.genemod.integration import (
+    generate_cat_genetics,
+    generate_kit_genetics,
+    load_genotype_from_json,
+    apply_genetics_to_pelt,
+    get_gender_from_genotype,
+    check_viability,
+    get_genetic_conditions,
+)
 
 import scripts.game_structure.screen_settings
 
@@ -237,6 +246,11 @@ class Cat:
 
         self.dark_forest_affinity = 0
         self.starclan_affinity = 0
+
+        # Genemod genetics
+        self.genotype = None
+        self.phenotype = None
+        self.chimerapheno = None
 
         # Various behavior toggles
         self.no_kits = False
@@ -475,12 +489,50 @@ class Cat:
 
         # PRONOUNS AUTO-GENERATE WHEN REQUIRED
 
+        # GENETICS (genemod)
+        genetics_config = constants.CONFIG.get("genetics_config")
+        if genetics_config and not disable_random:
+            try:
+                from scripts.game_structure.game.settings import game_setting_get
+                ban_genes = game_setting_get("ban problem genes", default=True)
+            except Exception:
+                ban_genes = True
+            parents = [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i]
+
+            if len(parents) >= 1 and parents[0] and parents[0].genotype:
+                # Breed from parent genetics
+                par1_geno = parents[0].genotype
+                par2_geno = parents[1].genotype if len(parents) > 1 and parents[1] and parents[1].genotype else None
+                self.genotype, self.phenotype = generate_kit_genetics(
+                    genetics_config, par1_geno, par2_geno, ban_genes
+                )
+            else:
+                # Generate from scratch
+                self.genotype, self.phenotype = generate_cat_genetics(
+                    genetics_config, self.gender, ban_genes
+                )
+
+            # Set gender from genetics
+            genetic_gender = get_gender_from_genotype(self.genotype)
+            if genetic_gender:
+                self.gender = genetic_gender
+
+            # Set chimera phenotype 
+            if self.genotype.chimera and self.genotype.chimerageno:
+                from scripts.genemod.phenotype import Phenotype as GenPhenotype
+                self.chimerapheno = GenPhenotype(self.genotype.chimerageno)
+                self.chimerapheno.PhenotypeOutput()
+
         # APPEARANCE
         self.pelt = Pelt.generate_new_pelt(
             self.gender,
             [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i],
             self.age,
         )
+
+        # Apply genetics to pelt if available
+        if self.genotype and self.phenotype:
+            apply_genetics_to_pelt(self.pelt, self.genotype, self.phenotype)
 
         # Personality
         if disable_random:
@@ -2231,6 +2283,15 @@ class Cat:
         self.get_injured(injury, event_triggered=True)
 
     def congenital_condition(self, cat):
+        # Check genetic conditions first (genemod)
+        if self.genotype and self.phenotype:
+            genetic_conds = get_genetic_conditions(self.genotype, self.phenotype)
+            for gcond in genetic_conds:
+                if gcond == "deaf" and "deaf" not in self.permanent_condition:
+                    self.get_permanent_condition("deaf", born_with=True)
+                elif gcond == "joint pain" and "joint pain" not in self.permanent_condition:
+                    self.get_permanent_condition("joint pain", born_with=True)
+
         possible_conditions = []
 
         for condition in PERMANENT:
@@ -3967,7 +4028,10 @@ class Cat:
                 "df_patrols": self.df_patrols if self.df_patrols else 0,
                 "df_join_moon": self.df_join_moon if self.df_join_moon else 0,
                 "graduated_df": self.graduated_df if self.graduated_df else False,
-                "old_status": self.old_status if self.old_status else ""
+                "old_status": self.old_status if self.old_status else "",
+                "genotype": self.genotype.toJSON() if self.genotype else None,
+                "white_pattern": self.genotype.white_pattern if self.genotype else None,
+                "chim_white": self.genotype.chimerageno.white_pattern if (self.genotype and self.genotype.chimerageno) else None,
             }
 
     def determine_next_and_previous_cats(

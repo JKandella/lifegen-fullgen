@@ -33,6 +33,8 @@ from scripts.events_module.event_filters import (
 )
 from scripts.clan_package.get_clan_cats import find_alive_cats_with_rank
 
+from scripts.genemod.integration import check_viability
+
 from scripts.game_structure.game.switches import (
     switch_set_value,
     switch_get_value,
@@ -938,6 +940,12 @@ class Pregnancy_Events:
             # Prevent duplicate prefixes in the same litter
             while kit.name.prefix in [kitty.name.prefix for kitty in all_kitten]:
                 kit.name = Name("newborn")
+
+            # Genetic viability check (genemod) - lethal gene combinations
+            if kit.genotype and not check_viability(kit.genotype):
+                kit.dead = True
+                from scripts.cat.history import History
+                History.add_death(kit, str(kit.name) + " was stillborn.")
 
             all_kitten.append(kit)
             # adoptive parents are set at the end, when everything else is decided

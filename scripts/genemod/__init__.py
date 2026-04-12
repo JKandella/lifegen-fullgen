@@ -41,4 +41,5 @@ __all__ = [
     "Phenotype",
     "breed_functions",
     "find_my_breed",
+    "integration",
 ]

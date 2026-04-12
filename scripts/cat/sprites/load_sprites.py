@@ -561,6 +561,13 @@ class Sprites:
 # CREATE INSTANCE
 sprites = Sprites()
 
+# Load genemod sprites if available
+try:
+    from scripts.genemod.sprites import load_genemod_sprites
+    load_genemod_sprites(sprites)
+except Exception as e:
+    logging.getLogger(__name__).warning(f"Failed to load genemod sprites: {e}")
+
 
 def subtract_lineart(surface, mask_surf, bg_color):
     """
