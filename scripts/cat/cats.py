@@ -491,6 +491,11 @@ class Cat:
 
         # GENETICS (genemod)
         genetics_config = constants.CONFIG.get("genetics_config")
+        if genetics_config:
+            # Merge april fools genes into genetics config
+            af_genes = constants.CONFIG.get("april_fools_genes")
+            if af_genes:
+                genetics_config = {**genetics_config, **af_genes}
         if genetics_config and not disable_random:
             try:
                 from scripts.game_structure.game.settings import game_setting_get
@@ -517,11 +522,14 @@ class Cat:
             if genetic_gender:
                 self.gender = genetic_gender
 
-            # Set chimera phenotype 
-            if self.genotype.chimera and self.genotype.chimerageno:
-                from scripts.genemod.phenotype import Phenotype as GenPhenotype
-                self.chimerapheno = GenPhenotype(self.genotype.chimerageno)
-                self.chimerapheno.PhenotypeOutput()
+            # Chimera: randomly create a second genotype/phenotype
+            if genetics_config.get("chimera", 0) > 0:
+                from random import randint as _ri
+                if _ri(1, genetics_config["chimera"]) == 1:
+                    from scripts.genemod.phenotype import Phenotype as GenPhenotype
+                    self.chimerapheno = GenPhenotype(genetics_config, ban_genes)
+                    self.chimerapheno.Generator(special="masc" if self.gender == "male" else "fem" if self.gender == "female" else None)
+                    self.chimerapheno.PhenotypeOutput(chimera=True)
 
         # APPEARANCE
         self.pelt = Pelt.generate_new_pelt(
@@ -4031,7 +4039,7 @@ class Cat:
                 "old_status": self.old_status if self.old_status else "",
                 "genotype": self.genotype.toJSON() if self.genotype else None,
                 "white_pattern": self.genotype.white_pattern if self.genotype else None,
-                "chim_white": self.genotype.chimerageno.white_pattern if (self.genotype and self.genotype.chimerageno) else None,
+                "chim_white": self.chimerapheno.white_pattern if (self.chimerapheno and hasattr(self.chimerapheno, 'white_pattern')) else None,
             }
 
     def determine_next_and_previous_cats(

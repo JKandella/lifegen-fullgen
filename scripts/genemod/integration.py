@@ -332,41 +332,53 @@ def map_pelt_length(phenotype):
 # --------------------------------------------------------------------------- #
 
 def create_genotype(genetics_config, ban_genes=True):
-    """Create a new random genotype with default genetics."""
-    genotype = Genotype(genetics_config, ban_genes)
-    return genotype
+    """Create a new random genotype with default genetics.
+
+    Returns a Phenotype object (which inherits from Genotype, so it
+    functions as both).
+    """
+    pheno = Phenotype(genetics_config, ban_genes)
+    return pheno
 
 
 def generate_cat_genetics(genetics_config, gender, ban_genes=True):
-    """Generate a new cat's genotype + phenotype from scratch."""
-    genotype = Genotype(genetics_config, ban_genes)
+    """Generate a new cat's genotype + phenotype from scratch.
+
+    Phenotype inherits from Genotype, so a single object serves as both.
+    Returns (phenotype, phenotype) for backward compatibility with callers
+    that unpack into (genotype, phenotype).
+    """
+    pheno = Phenotype(genetics_config, ban_genes)
     special = None
     if gender == "male":
         special = "masc"
     elif gender == "female":
         special = "fem"
-    genotype.Generator(special)
-    phenotype = Phenotype(genotype)
-    phenotype.PhenotypeOutput(gender)
-    return genotype, phenotype
+    pheno.Generator(special=special)
+    pheno.PhenotypeOutput()
+    return pheno, pheno
 
 
 def generate_kit_genetics(genetics_config, parent1_genotype, parent2_genotype=None, ban_genes=True):
-    """Generate genetics for a kit from parent genotypes."""
-    genotype = Genotype(genetics_config, ban_genes)
-    genotype.KitGenerator(parent1_genotype, parent2_genotype)
-    phenotype = Phenotype(genotype)
-    phenotype.PhenotypeOutput()
-    return genotype, phenotype
+    """Generate genetics for a kit from parent genotypes.
+
+    Returns (phenotype, phenotype) for backward compatibility.
+    """
+    pheno = Phenotype(genetics_config, ban_genes)
+    pheno.KitGenerator(parent1_genotype, parent2_genotype)
+    pheno.PhenotypeOutput()
+    return pheno, pheno
 
 
 def load_genotype_from_json(genetics_config, json_data, ban_genes=True):
-    """Load a genotype from saved JSON data."""
-    genotype = Genotype(genetics_config, ban_genes)
-    genotype.fromJSON(json_data)
-    phenotype = Phenotype(genotype)
-    phenotype.PhenotypeOutput()
-    return genotype, phenotype
+    """Load a genotype from saved JSON data.
+
+    Returns (phenotype, phenotype) for backward compatibility.
+    """
+    pheno = Phenotype(genetics_config, ban_genes)
+    pheno.fromJSON(json_data)
+    pheno.PhenotypeOutput()
+    return pheno, pheno
 
 
 def apply_genetics_to_pelt(pelt, genotype, phenotype):

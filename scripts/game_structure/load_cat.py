@@ -383,6 +383,10 @@ def json_load():
 
             # Load genetics (genemod)
             genetics_config = constants.CONFIG.get("genetics_config")
+            if genetics_config:
+                af_genes = constants.CONFIG.get("april_fools_genes")
+                if af_genes:
+                    genetics_config = {**genetics_config, **af_genes}
             if genetics_config and "genotype" in cat and cat["genotype"]:
                 try:
                     new_cat.genotype, new_cat.phenotype = load_genotype_from_json(
@@ -391,13 +395,8 @@ def json_load():
                     # Restore white pattern
                     if "white_pattern" in cat and cat["white_pattern"]:
                         new_cat.genotype.white_pattern = cat["white_pattern"]
-                    if "chim_white" in cat and cat["chim_white"] and new_cat.genotype.chimerageno:
-                        new_cat.genotype.chimerageno.white_pattern = cat["chim_white"]
-                    # Set chimera phenotype
-                    if new_cat.genotype.chimera and new_cat.genotype.chimerageno:
-                        from scripts.genemod.phenotype import Phenotype as GenPhenotype
-                        new_cat.chimerapheno = GenPhenotype(new_cat.genotype.chimerageno)
-                        new_cat.chimerapheno.PhenotypeOutput()
+                    if "chim_white" in cat and cat["chim_white"] and hasattr(new_cat, 'chimerapheno') and new_cat.chimerapheno:
+                        new_cat.chimerapheno.white_pattern = cat["chim_white"]
                     # Apply genetics to loaded pelt
                     apply_genetics_to_pelt(new_cat.pelt, new_cat.genotype, new_cat.phenotype)
                 except Exception as e:
