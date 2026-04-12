@@ -8,6 +8,7 @@ import os
 import ujson
 
 from scripts.game_structure.game_essentials import game
+from scripts.genemod.sprites import load_genemod_sprites
 
 
 class Sprites:
@@ -153,138 +154,8 @@ class Sprites:
             else:
                 self.spritesheet(f"sprites/{x}.png", x)
 
-        for x in os.listdir("sprites/genemod/borders"):
-            sprites.spritesheet("sprites/genemod/borders/"+x, 'genemod/'+x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/Base Colours"):
-            sprites.spritesheet("sprites/genemod/Base Colours/"+x, 'base/'+x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/points"):
-            sprites.spritesheet("sprites/genemod/points/"+x, x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/New Tabbies"):
-            sprites.spritesheet("sprites/genemod/New Tabbies/"+x, 'Tabby/'+x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/extra"):
-            sprites.spritesheet("sprites/genemod/extra/"+x, 'Other/'+x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/effects"):
-            sprites.spritesheet("sprites/genemod/effects/"+x, 'Other/'+x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/somatic"):
-            sprites.spritesheet("sprites/genemod/somatic/"+x, 'Somatic/'+x.replace('.png', ""))
-            self.make_group('Somatic/'+x.replace('.png', ""), (0, 0), "Somatic/"+x.replace('.png', ""))
-        
-        
-        for x in os.listdir("sprites/genemod/white"):
-            sprites.spritesheet("sprites/genemod/white/"+x, 'White/'+x.replace('.png', ""))
-            self.make_group('White/'+x.replace('.png', ""), (0, 0), x.replace('.png', ""))
-        for x in os.listdir("sprites/genemod/break white"):
-            sprites.spritesheet("sprites/genemod/break white/"+x, 'Break/'+x.replace('.png', ""))
-            self.make_group('Break/'+x.replace('.png', ""), (0, 0), 'break/'+x.replace('.png', ""))
-
-        # ...idk what to call these
-
-        self.make_group('genemod/normal border', (0, 0), 'normbord')
-        self.make_group('genemod/foldborder', (0, 0), 'foldbord')
-        self.make_group('genemod/curlborder', (0, 0), 'curlbord')
-        self.make_group('genemod/foldlineart', (0, 0), 'foldlines')
-        self.make_group('genemod/fold_curllineart', (0, 0), 'fold_curllines')
-        self.make_group('genemod/curllineart', (0, 0), 'curllines')
-        self.make_group('genemod/foldlineartdf', (0, 0), 'foldlineartdf')
-        self.make_group('genemod/fold_curllineartdf', (0, 0), 'fold_curllineartdf')
-        self.make_group('genemod/curllineartdf', (0, 0), 'curllineartdf')
-        self.make_group('genemod/foldlineartdead', (0, 0), 'foldlineartdead')
-        self.make_group('genemod/fold_curllineartdead', (0, 0), 'fold_curllineartdead')
-        self.make_group('genemod/curllineartdead', (0, 0), 'curllineartdead')
-
-        self.make_group('genemod/isolateears', (0, 0), 'isolateears')
-        self.make_group('genemod/noears', (0, 0), 'noears')
-        
-        self.make_group('genemod/rexlines', (0, 0), 'rexlineart')
-        self.make_group('genemod/rexlinesdead', (0, 0), 'rexlineartdead')
-        self.make_group('genemod/rexlinesdf', (0, 0), 'rexlineartdf')
-        self.make_group('genemod/rexborder', (0, 0), 'rexbord')
-
-        for a, x in enumerate(range(1, 6)):
-            self.make_group('genemod/bobtails', (a, 0), f'bobtail{x}')
-
-        # genemod base colours
-
-        self.make_group('base/bases', (0, 0), 'basecolours', sprites_x=6, sprites_y=4)
-        self.make_group('base/lightbases', (0, 0), 'lightbasecolours', sprites_x=4, sprites_y=1)
-
-        # genemod tabby bases
-
-        for x in ["black", "blue", "dove", "platinum",
-                  "chocolate", "lilac", "champagne", "lavender",
-                  "cinnamon", "fawn", "buff", "beige",
-                  "red", "cream", "honey", "ivory"]:
-            for a, i in enumerate(['rufousedlow', 'rufousedmedium', 'rufousedhigh', 'rufousedshaded', 'rufousedchinchilla']):
-                self.make_group('Tabby/'+x, (a, 0), f'{x}{i}', sprites_x=1, sprites_y=1)
-            for a, i in enumerate(['mediumlow', 'mediummedium', 'mediumhigh', 'mediumshaded', 'mediumchinchilla']):
-                self.make_group('Tabby/'+x, (a, 1), f'{x}{i}', sprites_x=1, sprites_y=1)
-            for a, i in enumerate(['lowlow', 'lowmedium', 'lowhigh', 'lowshaded', 'lowchinchilla']):
-                self.make_group('Tabby/'+x, (a, 2), f'{x}{i}', sprites_x=1, sprites_y=1)
-            for a, i in enumerate(['silverlow', 'silvermedium', 'silverhigh', 'silvershaded', 'silverchinchilla']):
-                self.make_group('Tabby/'+x, (a, 3), f'{x}{i}', sprites_x=1, sprites_y=1)
-        for a, x in enumerate(['low', 'medium', 'high', 'shaded', 'chinchilla']):
-            self.make_group('Tabby/shading', (a, 0), f'{x}shading')
-        self.make_group('Tabby/unders', (0, 0), f'Tabby_unders')
-
-        # genemod tabby patterns
-
-        for a, i in enumerate(['mackerel', 'brokenmack', 'spotted', 'classic', 'fullbar']):
-            self.make_group('Other/tabbypatterns', (a, 0), f'{i}')
-        for a, i in enumerate(['braided', 'brokenbraid', 'rosetted', 'marbled', 'redbar']):
-            self.make_group('Other/tabbypatterns', (a, 1), f'{i}')
-        for a, i in enumerate(['pinstripe', 'brokenpins', 'servaline', 'fullbarc', 'agouti']):
-            self.make_group('Other/tabbypatterns', (a, 2), f'{i}')
-        for a, i in enumerate(['pinsbraided', 'brokenpinsbraid', 'leopard', 'redbarc', 'charcoal']):
-            self.make_group('Other/tabbypatterns', (a, 3), f'{i}')
-        
-        #genemod point markings
-
-        self.make_group('points_spring', (0, 0), 'pointsm')
-        self.make_group('points_summer', (0, 0), 'pointsl')
-        self.make_group('points_winter', (0, 0), 'pointsd')
-        self.make_group('mocha_spring', (0, 0), 'mocham')
-        self.make_group('mocha_summer', (0, 0), 'mochal')
-        self.make_group('mocha_winter', (0, 0), 'mochad')
-
-        #genemod karpati
-        for a, x in enumerate(['hetkarpatiwinter', 'hetkarpatispring', 'hetkarpatisummer']):
-            self.make_group('Other/karpati', (a, 0), x)
-        for a, x in enumerate(['homokarpatiwinter', 'homokarpatispring', 'homokarpatisummer']):
-            self.make_group('Other/karpati', (a, 1), x)
-
-        #genemod effects
-        self.make_group('Other/bimetal', (0, 0), 'bimetal')
-        self.make_group('Other/ghosting', (0, 0), 'ghost')
-        self.make_group('Other/tabbyghost', (0, 0), 'tabbyghost')
-        self.make_group('Other/grizzle', (0, 0), 'grizzle')
-        self.make_group('Other/smoke', (0, 0), 'smoke')
-        self.make_group('Other/bleach', (0, 0), 'bleach')
-        self.make_group('Other/lykoi', (0, 0), 'lykoi')
-        self.make_group('Other/hairless', (0, 0), 'hairless')
-        self.make_group('Other/donskoy', (0, 0), 'donskoy')
-        self.make_group('Other/furpoint', (0, 0), 'furpoint')
-        self.make_group('Other/caramel', (0, 0), 'caramel', 1, 1)
-        self.make_group('Other/satin', (0, 0), 'satin', 1, 1)
-        self.make_group('Other/salmiak', (0, 0), 'salmiak')
-
-
-        #genemod extra
-        self.make_group('Other/ears', (0, 0), 'ears')
-        # self.make_group('Other/albino_skin', (0, 0), 'albino') # in old ver, not in merge. here just in case
-        self.make_group('Other/noses', (0, 0), 'nose')
-        self.make_group('Other/nose_colours', (0, 0), 'nosecolours', sprites_y=5)
-        self.make_group('Other/paw_pads', (0, 0), 'pads')
-
-        #genemod eyes
-
-        for i, x in enumerate(['left', 'right', 'sectoral1', 'sectoral2', 'sectoral3', 'sectoral4', 'sectoral5', 'sectoral6']):
-            self.make_group('Other/eyebase', (i, 0), x, sprites_y=6)
-        
-        for b, x in enumerate(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino']):
-            for a, y in enumerate(range(1, 12)):
-                self.make_group('Other/eyes_full', (a, b), f'R{y} ; {x}/', sprites_y=6)
-        
-        self.make_group('Other/red_pupils', (0, 0), 'redpupils')
+        # Load all genemod sprites (extracted to scripts/genemod/sprites.py)
+        load_genemod_sprites(self)
 
         # Line art
         self.make_group('lineart', (0, 0), 'lines')
