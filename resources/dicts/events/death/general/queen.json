@@ -82,7 +82,7 @@
                 "cats": [
                     "r_c"
                 ],
-                "reg_death": "m_c dies from an injury sustained during war."
+                "reg_death": "r_c dies from an injury sustained during war."
             }
         ]
     },

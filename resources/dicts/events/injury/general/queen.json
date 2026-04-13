@@ -334,7 +334,7 @@
                 ]
             }
         ],
-        "history:": {
+        "history": {
             "scar": "{VERB/m_c/were/was} hurt while protecting r_c from an enemy cat.",
             "reg_death": "m_c was killed while protecting r_c from an enemy cat."
         }
