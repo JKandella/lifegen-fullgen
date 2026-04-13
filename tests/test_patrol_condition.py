@@ -96,13 +96,13 @@ class TestCondition(unittest.TestCase):
                 "weight": 20,
             },
             {
-                "text": "Not only does r_c end up soaked to the skin, they can't even find any dandelions"
+                "text": "Not only does p_l end up soaked to the skin, they can't even find any dandelions"
                 " under the snow, and they're left shivering violently by the time they return to camp.",
                 "exp": 0,
                 "weight": 10,
                 "injury": [
                     {
-                        "cats": ["r_c"],
+                        "cats": ["p_l"],
                         "injuries": ["cold_injury"],
                         "scars": ["FROSTFACE"],
                     }

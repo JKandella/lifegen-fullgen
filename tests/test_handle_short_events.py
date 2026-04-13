@@ -39,7 +39,7 @@ class TestHandleEvent(unittest.TestCase):
         )
 
         # r_c specified
-        self.chosen_event.r_c = {"age": "any"}
+        self.chosen_event.r_c = {"age": "any", "dies": False}
         self.chosen_event.execute_event()
         self.assertTrue(
             self.chosen_event.random_cat.ID in self.chosen_event.all_involved_cat_ids
@@ -47,7 +47,7 @@ class TestHandleEvent(unittest.TestCase):
 
     def test_rc_exclusion(self):
         # remove if excluded
-        self.chosen_event.r_c = {"age": "any"}
+        self.chosen_event.r_c = {"age": "any", "dies": False}
         self.chosen_event.exclude_involved = ["r_c"]
         self.chosen_event.execute_event()
         self.assertFalse(

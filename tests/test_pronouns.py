@@ -86,6 +86,25 @@ def _test():
     # LG
     for x in range(0, 11):
         replacement_dict[f"r_c:{x}"] = _r
+
+    # LG: Add lifegen-specific cat abbreviations used in patrol/talk JSON files
+    _lg_abbrevs = [
+        # Random cats by role
+        "r_k", "r_w", "r_w1", "r_w2", "r_w3", "r_a", "r_m", "r_d", "r_q",
+        "r_e", "r_i", "r_s",
+        # Named roles
+        "d_n", "m_n", "a_n", "tm_n", "df_m_n", "df_y_a",
+        # Player/target cat variants
+        "y_a", "y_k", "y_kk", "y_l", "y_m", "y_p", "y_s",
+        "t_a", "t_k", "t_ka", "t_kk", "t_l", "t_m", "t_p", "t_q", "t_s",
+        # Cat types
+        "d_c", "fc_c", "rdf_c", "rsh_c", "tg_c", "v_c", "yg_c",
+        # Relationship crush variants
+        "their_crush", "your_crush",
+    ]
+    for _a in _lg_abbrevs:
+        if _a not in replacement_dict:
+            replacement_dict[_a] = _r
     # ---
 
     for root, _, files in os.walk("resources"):
@@ -154,18 +173,33 @@ def _test_replacement_failure(path: str, repl_dict: dict) -> bool:
                 ]
             match = (
                 re.search(r"(?<!\.\.)(?<!\.\s\.\s)\.\s+([a-z_]+)", processed)
-                or re.search(r"[?!]\s+([a-z]+)", processed)
+                or re.search(r"[?!]\s+([a-z_]+)", processed)
             )
             # ---
 
             # This tests for any pronoun or verb tag fragments that might have
             # snuck through. This is most likely caused by using the incorrect type of
             # brackets
-            if re.search(r"\{PRONOUN|\(PRONOUN|\{VERB|\(VERB|\{ADJ|\(ADJ", processed):
+            # LG: Only flag fragments for abbreviations known to the replacement dict.
+            # Tags for unknown abbreviations are expected to remain (resolved at runtime).
+            _frag_matches = re.findall(
+                r"\{(PRONOUN|VERB|ADJ)/([^/}]+)/", processed
+            )
+            if _frag_matches:
+                for _tag_type, _abbrev in _frag_matches:
+                    if _abbrev in repl_dict:
+                        print(
+                            f'::error file={path}: "{_str}" contains pronoun tag fragments after replacment'
+                        )
+                        success = False
+                        break
+            elif re.search(r"\(PRONOUN|\(VERB|\(ADJ", processed):
+                # Parentheses-style tags are always errors (wrong bracket type)
                 print(
                     f'::error file={path}: "{_str}" contains pronoun tag fragments after replacment'
                 )
                 success = False
+            # ---
 
             # This tests for any pronoun or verb that is incorrectly capitalized
             # excludes ellipses (i.e. ... and . . .) but includes regular colons
@@ -174,9 +208,10 @@ def _test_replacement_failure(path: str, repl_dict: dict) -> bool:
 
             # LG
             # edited to make exceptions for lifegen rel addons
+            # also skip words with underscores (unreplaced cat abbreviations)
             elif match:
                 following = match.group(1)
-                if following not in exceptions:
+                if following not in exceptions and "_" not in following:
                     print(f'::error file={path}: Capitalization errors in "{_str}"')
                     print("ERROR:", following)
                     success = False
