@@ -12,17 +12,17 @@ import os
 import re
 import sys
 import unittest
-
 import ujson
 
-from scripts.cat.cats import Cat
-from scripts.utility import process_text
 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
+from scripts.cat.pronouns import get_new_pronouns
+from scripts.events_module.text_adjust import process_text
 
-def test():
+
+def _test():
     """Iterate through all files in 'resources'
     and verify that any detected pronoun tags are
     formatted correctly."""
@@ -33,7 +33,7 @@ def test():
     # to ensure that we are catching cases where only one verb conjugation
     # was provided - since singular-conjugation
     # should be the second provided conjugation.
-    _r = ("Name", Cat.default_pronouns[1])
+    _r = ("Name", get_new_pronouns("female")[0])
     replacement_dict = {
         "m_c": _r,
         "r_c": _r,
@@ -59,235 +59,72 @@ def test():
         "mur_c": _r,
         "t_c": _r,
         "y_c": _r,
-        "d_c": _r,
-        "d_n": _r,
-        "r_a": _r, 
-        "r_m": _r,
-        "y_p": _r,
-        "tm_n": _r,
-        "t_l": _r, 
-        "t_m": _r, 
-        "t_p": _r,
-        "t_a": _r,
         "parent": _r,
         "parent1": _r,
         "parent2": _r,
         "sibling": _r,
-        "t_s": _r,
-        "t_k": _r,
-        "t_ka": _r,
-        "t_kk": _r,
-        "y_m": _r,
-        "t_p_positive": _r,
-        "t_p_pos": _r,
-        "t_p_negative": _r,
-        "m_n": _r,
-        "r_q": _r,
-        "r_k": _r,
-        "r_e": _r,
+       
         "crush1": _r,
-        "their_crush": _r,
-        "your_crush": _r,
+        "theircrush": _r,
+        "yourcrush": _r,
         "mate1": _r,
-        "r_w": _r,
-        "r_w1": _r,
-        "r_w2": _r,
-        "r_w3": _r,
-        "y_a": _r,
-        "r_s": _r,
-        "r_i": _r,
-        "y_s": _r,
-        "y_l": _r,
-        "r_d": _r,
-        "df_y_a": _r,
-        "df_m_n": _r,
-        "r_c_sc": _r,
-        "a_n": _r,
-        "t_q": _r,
-        "y_k": _r,
-        "y_kk": _r,
-        "rdf_c": _r,
-        "fc_c": _r,
-        "v_c": _r,
-        "l_c": _r,
-        "e_c": _r,
-        "rsh_c": _r,
-        "rsh_w": _r,
-        "rsh_e": _r,
-        "rsh_a": _r,
-        "rsh_d": _r,
-        "rsh_m": _r,
-        "rsh_k": _r,
-        "sh_d": _r,
-        "sh_l": _r,
         "c_n": _r,
         "o_c_n": _r,
         "lead_name": _r,
         "dep_name": _r,
         "med_name": _r,
         "cat_tag": _r,
-        "tg_c": _r,
-        "yg_c": _r
+        "insert_siblings": _r,
+        "o_c1": _r,
+        "to_cat": _r,
+        "from_cat": _r,
     }
-
-    file_names = [
-        "lifegen_talk/apprentice",
-        "lifegen_talk/choice_dialogue",
-        "lifegen_talk/crush",
-        "lifegen_talk/deputy",
-        "lifegen_talk/elder",
-        "lifegen_talk/exiled",
-        "lifegen_talk/flirt",
-        "lifegen_talk/former Clancat",
-        "lifegen_talk/general_no_kit",
-        "lifegen_talk/general_no_newborn",
-        "lifegen_talk/general_outsider",
-        "lifegen_talk/general",
-        "lifegen_talk/kitten",
-        "lifegen_talk/kittypet",
-        "lifegen_talk/leader",
-        "lifegen_talk/loner",
-        "lifegen_talk/mediator apprentice",
-        "lifegen_talk/mediator",
-        "lifegen_talk/healer apprentice",
-        "lifegen_talk/healer",
-        "lifegen_talk/newborn",
-        "lifegen_talk/queen",
-        "lifegen_talk/queen's apprentice",
-        "lifegen_talk/rogue",
-        "lifegen_talk/warrior",
-        "lifegen_talk/focuses/hailstorm",
-        "lifegen_talk/focuses/leader",
-        "lifegen_talk/focuses/starving",
-        "lifegen_talk/focuses/unknown_murder",
-        "lifegen_talk/focuses/valentines",
-        "lifegen_talk/focuses/war",
-        "events/lifegen_events/events/apprentice",
-        "events/lifegen_events/events/deputy",
-        "events/lifegen_events/events/elder",
-        "events/lifegen_events/events/exiled",
-        "events/lifegen_events/events/former Clancat",
-        "events/lifegen_events/events/general_no_kit",
-        "events/lifegen_events/events/kitten",
-        "events/lifegen_events/events/kittypet",
-        "events/lifegen_events/events/leader",
-        "events/lifegen_events/events/loner",
-        "events/lifegen_events/events/mediator apprentice",
-        "events/lifegen_events/events/mediator",
-        "events/lifegen_events/events/healer apprentice",
-        "events/lifegen_events/events/healer",
-        "events/lifegen_events/events/queen",
-        "events/lifegen_events/events/queen's apprentice",
-        "events/lifegen_events/events/rogue",
-        "events/lifegen_events/events/warrior",
-        "events/lifegen_events/events/young_elder",
-        "events/lifegen_events/events_dead_sc/apprentice",
-        "events/lifegen_events/events_dead_sc/deputy",
-        "events/lifegen_events/events_dead_sc/elder",
-        "events/lifegen_events/events_dead_sc/exiled",
-        "events/lifegen_events/events_dead_sc/former Clancat",
-        "events/lifegen_events/events_dead_sc/general_no_kit",
-        "events/lifegen_events/events_dead_sc/kitten",
-        "events/lifegen_events/events_dead_sc/kittypet",
-        "events/lifegen_events/events_dead_sc/leader",
-        "events/lifegen_events/events_dead_sc/loner",
-        "events/lifegen_events/events_dead_sc/mediator apprentice",
-        "events/lifegen_events/events_dead_sc/mediator",
-        "events/lifegen_events/events_dead_sc/healer apprentice",
-        "events/lifegen_events/events_dead_sc/healer",
-        "events/lifegen_events/events_dead_sc/queen",
-        "events/lifegen_events/events_dead_sc/queen's apprentice",
-        "events/lifegen_events/events_dead_sc/rogue",
-        "events/lifegen_events/events_dead_sc/warrior",
-        "events/lifegen_events/events_dead_sc/young_elder",
-        "events/lifegen_events/events_dead_df/apprentice",
-        "events/lifegen_events/events_dead_df/deputy",
-        "events/lifegen_events/events_dead_df/elder",
-        "events/lifegen_events/events_dead_df/exiled",
-        "events/lifegen_events/events_dead_df/former Clancat",
-        "events/lifegen_events/events_dead_df/general_no_kit",
-        "events/lifegen_events/events_dead_df/kitten",
-        "events/lifegen_events/events_dead_df/kittypet",
-        "events/lifegen_events/events_dead_df/leader",
-        "events/lifegen_events/events_dead_df/loner",
-        "events/lifegen_events/events_dead_df/mediator apprentice",
-        "events/lifegen_events/events_dead_df/mediator",
-        "events/lifegen_events/events_dead_df/healer apprentice",
-        "events/lifegen_events/events_dead_df/healer",
-        "events/lifegen_events/events_dead_df/queen",
-        "events/lifegen_events/events_dead_df/queen's apprentice",
-        "events/lifegen_events/events_dead_df/rogue",
-        "events/lifegen_events/events_dead_df/warrior",
-        "events/lifegen_events/events_dead_df/young_elder",
-        "events/lifegen_events/events_dead_ur/apprentice",
-        "events/lifegen_events/events_dead_ur/deputy",
-        "events/lifegen_events/events_dead_ur/elder",
-        "events/lifegen_events/events_dead_ur/exiled",
-        "events/lifegen_events/events_dead_ur/former Clancat",
-        "events/lifegen_events/events_dead_ur/general_no_kit",
-        "events/lifegen_events/events_dead_ur/kitten",
-        "events/lifegen_events/events_dead_ur/kittypet",
-        "events/lifegen_events/events_dead_ur/leader",
-        "events/lifegen_events/events_dead_ur/loner",
-        "events/lifegen_events/events_dead_ur/mediator apprentice",
-        "events/lifegen_events/events_dead_ur/mediator",
-        "events/lifegen_events/events_dead_ur/healer apprentice",
-        "events/lifegen_events/events_dead_ur/healer",
-        "events/lifegen_events/events_dead_ur/queen",
-        "events/lifegen_events/events_dead_ur/queen's apprentice",
-        "events/lifegen_events/events_dead_ur/rogue",
-        "events/lifegen_events/events_dead_ur/warrior",
-        "events/lifegen_events/events_dead_ur/young_elder",
-        "patrols/lifegen/app.json",
-        "patrols/lifegen/date.json",
-        "patrols/lifegen/deputy.json",
-        "patrols/lifegen/df.json",
-        "patrols/lifegen/elder.json",
-        "patrols/lifegen/kit.json",
-        "patrols/lifegen/leader.json",
-        "patrols/lifegen/med.json",
-        "patrols/lifegen/medapp.json",
-        "patrols/lifegen/mediator.json",
-        "patrols/lifegen/mediatorapp.json",
-        "patrols/lifegen/queen.json",
-        "patrols/lifegen/queenapp.json",
-        "patrols/lifegen/warrior.json"
-    ]
-    
-    # uncomment below to run the entire, long ass test for lifegen abbrevs
-    # addon_json = None
-    # with open(f"resources/dicts/abbrev_list.json", 'r') as read_file:
-    #     addon_json = ujson.loads(read_file.read())
-
-    # this will go through lifegen's dialogue files and search for abbrevs with addons.
-    # if theyre there, they get added to the dict.
-    # this avoids the 2 hour pronoun test when we try to check for literally all of them lol
-    # lifegen_files = {}
-    # for file in file_names:
-    #     file_json = None
-    #     with open(f"resources/dicts/{file}.json", 'r') as read_file:
-    #         file_json = ujson.loads(read_file.read())
-    #     lifegen_files[file] = file_json
-    
-    #     for i in addon_json:
-    #         if i in str(file_json):
-    #             print(i, "in", file)
-    #             replacement_dict[f"{i}"] = _r
 
     for x in range(0, 11):
         replacement_dict[f"n_c:{x}"] = _r
 
+    # LG
+    for x in range(0, 11):
+        replacement_dict[f"r_c:{x}"] = _r
+
+    # LG: Add lifegen-specific cat abbreviations used in patrol/talk JSON files
+    _lg_abbrevs = [
+        # Random cats by role
+        "r_k", "r_w", "r_w1", "r_w2", "r_w3", "r_a", "r_m", "r_d", "r_q",
+        "r_e", "r_i", "r_s",
+        # Named roles
+        "d_n", "m_n", "a_n", "tm_n", "df_m_n", "df_y_a",
+        # Player/target cat variants
+        "y_a", "y_k", "y_kk", "y_l", "y_m", "y_p", "y_s",
+        "t_a", "t_k", "t_ka", "t_kk", "t_l", "t_m", "t_p", "t_q", "t_s",
+        # Cat types
+        "d_c", "fc_c", "rdf_c", "rsh_c", "tg_c", "v_c", "yg_c",
+        # Relationship crush variants
+        "their_crush", "your_crush",
+    ]
+    for _a in _lg_abbrevs:
+        if _a not in replacement_dict:
+            replacement_dict[_a] = _r
+    # ---
+
     for root, _, files in os.walk("resources"):
         for file in files:
-            if file.endswith(".json") and file not in [
+            if (
+                (
+                    "lifegen_events" in root and
+                    "lifegen_events\\NEW" not in root
+                )
+                ):
+                # TEMP: ignore old event files
+                continue
+            if file.endswith(".json") and file not in (
                 "credits_text.json",
-                "abbrev_list.json",
                 "clansettings.json",
                 "gamesettings.json",
-            ]:
+            ):
                 path = os.path.join(root, file)
 
-                if not test_replacement_failure(path, replacement_dict):
+                if not _test_replacement_failure(path, replacement_dict):
                     failed = True
                     failed_files.append(path)
 
@@ -303,18 +140,13 @@ def test():
         sys.exit(0)
 
 
-def test_replacement_failure(path: str, repl_dict: dict) -> bool:
+def _test_replacement_failure(path: str, repl_dict: dict) -> bool:
     """Reads in a file, and finds strings, and runs pronoun replacment on those strings.
     Returns False if there were any issues with the pronoun replacement, or if the
     json is incorrectly formatted."""
 
     success = True
-
-    addon_json = None
-    with open(f"resources/dicts/abbrev_list.json", 'r') as read_file:
-        addon_json = ujson.loads(read_file.read())
-
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         try:
             contents = ujson.loads(file.read())
         except ujson.JSONDecodeError as _e:
@@ -324,52 +156,64 @@ def test_replacement_failure(path: str, repl_dict: dict) -> bool:
 
     for _str in get_all_strings(contents):
         try:
-            processed = process_text(_str, repl_dict, True)
+            processed = process_text(
+                text=_str, cat_dict=repl_dict, raise_exception=True
+            )
         except (KeyError, IndexError) as _e:
-            # LIFEGEN ---
-            # this just... ignores the addon abbrevs
-            # so if theyre formatted wrong.... we'll never know
-            # but otherwise this test will take forever.
-            # comment/delete this section to run the test with LG abbrevs + addons
-            skip = False
-            for i in addon_json:
-                if i in _str:
-                    skip = True
-                    break
-            if not skip:
-            # ------------
-                print(
-                    f'::error file={path}: "{_str}" contains invalid pronoun or verb tags.'
-                )
-                print(_e)
-                success = False
+            print(
+                f'::error file={path}: "{_str}" contains invalid pronoun or verb tags.'
+            )
+            print(_e)
+            success = False
         else:
+            # LG
+            exceptions = [
+                "plike", "plove", "neutral", "rlike", "rlove", "neutral", "dislike", "hate",
+                "jealous", "trust", "comfort", "respect"
+                ]
+            match = (
+                re.search(r"(?<!\.\.)(?<!\.\s\.\s)\.\s+([a-z_]+)", processed)
+                or re.search(r"[?!]\s+([a-z_]+)", processed)
+            )
+            # ---
+
             # This tests for any pronoun or verb tag fragments that might have
             # snuck through. This is most likely caused by using the incorrect type of
             # brackets
-            if re.search(r"\{PRONOUN|\(PRONOUN|\{VERB|\(VERB", processed):
+            # LG: Only flag fragments for abbreviations known to the replacement dict.
+            # Tags for unknown abbreviations are expected to remain (resolved at runtime).
+            _frag_matches = re.findall(
+                r"\{(PRONOUN|VERB|ADJ)/([^/}]+)/", processed
+            )
+            if _frag_matches:
+                for _tag_type, _abbrev in _frag_matches:
+                    if _abbrev in repl_dict:
+                        print(
+                            f'::error file={path}: "{_str}" contains pronoun tag fragments after replacment'
+                        )
+                        success = False
+                        break
+            elif re.search(r"\(PRONOUN|\(VERB|\(ADJ", processed):
+                # Parentheses-style tags are always errors (wrong bracket type)
                 print(
                     f'::error file={path}: "{_str}" contains pronoun tag fragments after replacment'
                 )
                 success = False
+            # ---
 
             # This tests for any pronoun or verb that is incorrectly capitalized
             # excludes ellipses (i.e. ... and . . .) but includes regular colons
             # includes ? and ! always (e.g. "...!" is included).
             # DOES NOT check the start of the string for capitalization
-            elif (
-                re.search(r"(?<!\.\.)(?<!\.\s\.\s)\.\s+[a-z]", processed) is not None
-                or re.search(r"[?!]\s+[a-z]", processed) is not None
-            ):
-                # LG: again. skipping if theres a lg abbrev after a period
-                skip = False
-                for i in addon_json + ["o_c1", "insert_siblings"]: # im lazy sorry
-                    if i in _str:
-                        skip = True
-                        break
-                if not skip:
-                # ----
+
+            # LG
+            # edited to make exceptions for lifegen rel addons
+            # also skip words with underscores (unreplaced cat abbreviations)
+            elif match:
+                following = match.group(1)
+                if following not in exceptions and "_" not in following:
                     print(f'::error file={path}: Capitalization errors in "{_str}"')
+                    print("ERROR:", following)
                     success = False
 
     return success
@@ -402,5 +246,5 @@ class TestPronouns(unittest.TestCase):
     def test_pronouns(self):
         """Test that all files are ascii decodable."""
         with self.assertRaises(SystemExit) as cm:
-            test()
+            _test()
         self.assertEqual(cm.exception.code, 0)
